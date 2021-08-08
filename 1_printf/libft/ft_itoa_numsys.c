@@ -62,5 +62,5 @@ char	*ft_itoa_numsys(long num, int numsys)
 // #include "stdio.h"
 // int main(void)
 // {
-// 	printf("%s\n", (ft_itoa_numsys(8, 8)));
+// 	printf("%s\n", (ft_itoa_numsys((long unsigned int)0, 10)));
 // }

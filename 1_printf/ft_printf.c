@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printf.c                                           :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/25 16:09:54 by sbienias          #+#    #+#             */
-/*   Updated: 2021/06/25 16:09:54 by sbienias         ###   ########.fr       */
+/*   Created: 2021/08/06 11:57:44 by sbienias          #+#    #+#             */
+/*   Updated: 2021/08/06 11:57:44 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,22 @@ static char	*numtostr(long int number, int size, int makeunsign, int isadr)
 {
 	char			*string;
 	unsigned int	umax;
+	char			*temp;
 
 	umax = -1;
-	if (makeunsign == 1)
+	if (makeunsign == 1 && number < 0 && !isadr)
 		number = number + umax + 1;
 	if (isadr)
-		ft_putstr_fd("0x", 1);
+	{
+		if (!number)
+			string = ft_strdup("0");
+		else
+			string = itoa_unsign((long unsigned int) number);
+		temp = ft_strjoin("0x", string);
+		free(string);
+		string = temp;
+		return (string);
+	}
 	string = ft_itoa_numsys((long unsigned int) number, size);
 	return (string);
 }
@@ -32,7 +42,7 @@ static int	advformats(const char **format, va_list args, char *string)
 
 	counter = -1;
 	if (*(*format) == 'p')
-		string = numtostr((long unsigned int)(va_arg(args, void *)), 16, 0, 1);
+		string = numtostr((long unsigned int)(va_arg(args, void *)), 16, 1, 1);
 	else if (*(*format) == 'd')
 		string = numtostr((long int)(va_arg(args, int)), 10, 0, 0);
 	else if (*(*format) == 'u')
@@ -40,22 +50,36 @@ static int	advformats(const char **format, va_list args, char *string)
 	else if (*(*format) == 'x')
 		string = numtostr((long unsigned int)(va_arg(args, int)), 16, 1, 0);
 	else if (*(*format) == 'X')
-	{
 		string = numtostr((long unsigned int)(va_arg(args, int)), 16, 1, 0);
-		while (*(string + ++counter))
-			*(string + counter) = ft_toupper(*(string + counter));
-	}
 	else
 		return (0);
 	if (string)
 	{
+		if (*(*format) == 'X')
+			while (*(string + ++counter))
+				*(string + counter) = ft_toupper(*(string + counter));
 		counter = ft_strlen(string);
-		if (*(*format) == 'p')
-			counter += 2;
 		ft_putstr_fd(string, 1);
 		free(string);
 	}
 	return (counter);
+}
+
+static int	handlestring(char *string)
+{
+	int		strlen;
+
+	if (!string)
+	{
+		ft_putstr_fd("(null)", 1);
+		strlen = 6;
+	}
+	else
+	{
+		strlen = ft_strlen(string);
+		ft_putstr_fd(string, 1);
+	}
+	return (strlen);
 }
 
 static int	printformat(const char **format, va_list args)
@@ -69,11 +93,9 @@ static int	printformat(const char **format, va_list args)
 	if (*(*format) == 'i')
 		rst = ft_itoa(va_arg(args, int));
 	else if (*(*format) == 'c')
-	{
 		ft_putchar_fd((char) va_arg(args, int), 1);
-	}
 	else if (*(*format) == 's')
-		rst = (char *)va_arg(args, void *);
+		strlen = handlestring((char *)va_arg(args, void *));
 	else if (*(*format) == '%')
 		ft_putchar_fd('%', 1);
 	else
@@ -82,8 +104,7 @@ static int	printformat(const char **format, va_list args)
 	{
 		strlen = ft_strlen(rst);
 		ft_putstr_fd(rst, 1);
-		if (*(*format) != 's')
-			free(rst);
+		free(rst);
 	}
 	return (strlen);
 }
@@ -106,5 +127,6 @@ int	ft_printf(const char *format, ...)
 			strlen += printformat(&format, strings);
 		format++;
 	}
+	va_end(strings);
 	return (strlen);
 }

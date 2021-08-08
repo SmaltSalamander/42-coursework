@@ -12,7 +12,7 @@
 
 CC = gcc
 
-SRC = ft_printf.c
+SRC = ft_printf.c ft_printf_util.c
 
 #BONUS =
 
@@ -21,16 +21,17 @@ OBJSBONUS = $(BONUS:.c=.o)
 TEST = test.c
 CFLAGS = -Wall -Werror -Wextra
 LIBFTPATH = ./libft
-DEPS = libftprintf.h
+DEPS = ft_printf.h
 NAME = libftprintf.a
+LIBRARY = libft.a
 
-all: lib $(NAME)
+all: $(NAME)
 
-lib:
+$(LIBRARY):
 	make -C $(LIBFTPATH)
 	cp ./libft/libft.a $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(LIBRARY)
 	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
 
@@ -38,16 +39,16 @@ olib: $(SRC) $(DEPS)
 	$(CC) -c $(CFLAGS) $(SRC)
 
 archive:
-	ar rc $(NAME) *.o
+	ar rc $(NAME) $(OBJS)
 
-debug: $(SRC) $(TEST) lib
+debug: $(SRC) $(TEST) $(LIBRARY)
 	$(CC) -g -o a.out $(CFLAGS) $(TEST) $(SRC) $(NAME)
 
 bonus: $(OBJSBONUS)
 	ar rc $(NAME) $(OBJSBONUS)
 
 clean:
-	/bin/rm -f *.o *.so a.out *.debug
+	/bin/rm -f $(OBJS) a.out
 
 fclean: clean
 	/bin/rm -f $(NAME)

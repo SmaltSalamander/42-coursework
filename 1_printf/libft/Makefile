@@ -40,8 +40,7 @@ debug: $(SRC) $(TEST)
 	$(CC) -g -o $(NAME).debug $(CFLAGS) $(TEST) $(SRC) -lbsd
 
 clean:
-	/bin/rm -f *.o *.so a.out *.debug
-
+	/bin/rm -f $(OBJS) $(OBJSBONUS) a.out
 fclean: clean
 	/bin/rm -f $(NAME)
 

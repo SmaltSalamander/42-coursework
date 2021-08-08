@@ -15,6 +15,7 @@
 # include <stdarg.h>
 # include "./libft/libft.h"
 
-int	ft_printf(const char *format, ...);
+int		ft_printf(const char *format, ...);
+char	*itoa_unsign(unsigned long num);
 
 #endif
