@@ -41,11 +41,13 @@ void	ft_swapping(int **arr, int **wrkngstck, int *wrkbegin)
 void	ft_pushing(int **arr, int **wrkngstck, int *wrkbegin, int direction)
 {
 	int counter;
+	int	wkstcklen;
 
+	wkstcklen = *wrkngstck - wrkbegin;
 	counter = 0;
 	if (direction == 0)
 	{
-		while (*(wrkngstck - counter) > wrkbegin)
+		while (counter < wkstcklen)
 		{
 			*(*wrkngstck - counter + 1) = *(*wrkngstck - counter);
 			counter++;
@@ -56,8 +58,7 @@ void	ft_pushing(int **arr, int **wrkngstck, int *wrkbegin, int direction)
 	else
 	{
 		ft_printf("debug1\n");
-		*arr = *arr - 1;
-		*wrkngstck = *wrkngstck - 1;
+		*arr = *(arr - sizeof(int));
 		**arr = **wrkngstck;
 		ft_printf("debug2\n");
 		while (*(wrkngstck - counter) > wrkbegin)
@@ -66,7 +67,7 @@ void	ft_pushing(int **arr, int **wrkngstck, int *wrkbegin, int direction)
 			counter++;
 		}
 		**wrkngstck = 0;
-		*wrkngstck = *wrkngstck - 1;
+		*wrkngstck = *(wrkngstck - sizeof(int));
 		ft_putstr_fd("pa\n", 1);
 	}
 }
@@ -75,17 +76,22 @@ void	issue_commands(int **arr, int **wrkngstck, int *wrkbegin, int *arrlen)
 {
 	if ((**arr) > (*(*arr + 1)))
 		ft_swapping(arr, wrkngstck, wrkbegin);
-	else if ((**arr) < *(*arr + 1))
+	else if (*wrkbegin)
 	{
-		if (*arrlen == 1)
+		if (**arr < *wrkbegin)
+			ft_pushing(arr, wrkngstck, wrkbegin, 1);
+	}
+	if ((**arr) < *(*arr + 1))
+	{
+		if (*arrlen <= 2)
 		{
 			ft_pushing(arr, wrkngstck, wrkbegin, 1);
 			*arrlen = *arrlen + 1;
 			return ;
 		}
 		ft_pushing(arr, wrkngstck, wrkbegin, 0);
-		*arr = *(arr + 1);
-		*wrkngstck = *(wrkngstck + 1);
+		*arr = *(arr + sizeof(int));
+		*wrkngstck = *(wrkngstck + sizeof(int));
 		*arrlen = *arrlen - 1;
 	}
 }
