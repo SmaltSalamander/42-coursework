@@ -60,26 +60,44 @@ int	ft_check_order(int *arr, int arrlen)
 char	ft_sort(int *arr, int arrlen)
 {
 	int	*workingstack;
-	int	*arrstart;
 	int	*wrkstckstart;
 	int lencpy;
 
 	lencpy = arrlen;
-	arrstart = arr;
 	workingstack = ft_calloc(arrlen, sizeof(int));
 	if (!workingstack)
 		return (1);
 	wrkstckstart = workingstack;
-	while (ft_check_order(arrstart, arrlen) || *wrkstckstart)
+	while (ft_check_order(arr, lencpy) || *wrkstckstart)
 	{
 		issue_commands(&arr, &workingstack, wrkstckstart, &lencpy);
-		for (int x = 0; x < lencpy; x++)
-		{
-			ft_printf("Len %d Print arr value %d, index %d \n", lencpy, *(arr + x), x);
-		}
+		// for (int x = 0; x < lencpy; x++)
+		// {
+		// 	ft_printf("Len %d Print arr value %d, index %d \n", lencpy, *(arr + x), x);
+		// }
 	}
 	return (0);
 	
+}
+
+int dup_check(int *array, int counter)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < counter)
+	{
+		j = i + 1;
+		while (j < counter)
+		{
+			if (*(array + j) == *(array + i))
+				return (1);
+			j++;
+		}
+		i++;
+	}
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -99,6 +117,7 @@ int	main(int argc, char **argv)
 			error = ft_add_to_array(*(argv + 1 + counter), (array + counter));
 			counter++;
 		}
+		error = dup_check(array, counter);
 		if (error == 0)
 		{
 			ft_sort(array, (argc - 1));
