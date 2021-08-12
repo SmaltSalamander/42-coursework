@@ -79,9 +79,9 @@ void	issue_commands(int **arr, int **wrkngstck, int *wrkbegin, int *arrlen)
 		{
 			ft_pushing(arr, wrkngstck, wrkbegin, 1);
 			*arrlen = *arrlen + 1;
-		}		
+		}
 	}
-	else if ((**arr) < *(*arr + 1))
+	if ((**arr) < *(*arr + 1))
 	{
 		if (*arrlen <= 2 && *wrkbegin)
 		{

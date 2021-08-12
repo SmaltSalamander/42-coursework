@@ -107,6 +107,7 @@ int	main(int argc, char **argv)
 	int	counter;
 
 	counter = 0;
+	array = 0;
 	if (argc > 1)
 	{
 		array = malloc((argc - 1) * sizeof(int));
