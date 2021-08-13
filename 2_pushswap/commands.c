@@ -11,11 +11,12 @@
 /* ************************************************************************** */
 
 #include "./libft/libft.h"
+#include "pushswap.h"
 
 void	ft_swapping(int **arr, int **wrkngstck, int *wrkbegin)
 {
 	int	temp;
-	int initswapb;
+	int	initswapb;
 
 	initswapb = 0;
 	if (*wrkngstck && (*wrkngstck - wrkbegin) > 0)
@@ -37,38 +38,40 @@ void	ft_swapping(int **arr, int **wrkngstck, int *wrkbegin)
 		ft_putstr_fd("sa\n", 1);
 }
 
-void	ft_pushing(int **arr, int **wrkngstck, int *wrkbegin, int direction)
+void	ft_pushing_pb(int **arr, int **wrkngstck, int *wrkbegin)
 {
-	int counter;
+	int	counter;
 	int	wkstcklen;
 
 	wkstcklen = *wrkngstck - wrkbegin;
 	counter = wkstcklen;
-	if (direction == 0)
+	*wrkngstck = (*wrkngstck + 1);
+	while (counter > 0)
 	{
-		*wrkngstck = (*wrkngstck + 1);
-		while (counter > 0)
-		{
-			*(wrkbegin + counter) = *(wrkbegin + counter - 1);
-			counter--;
-		}
-		*wrkbegin = **arr;
-		*arr = (*arr + 1);
-		ft_putstr_fd("pb\n", 1);
+		*(wrkbegin + counter) = *(wrkbegin + counter - 1);
+		counter--;
 	}
-	else
+	*wrkbegin = **arr;
+	*arr = (*arr + 1);
+	ft_putstr_fd("pb\n", 1);
+}
+
+void	ft_pushing_pa(int **arr, int **wrkngstck, int *wrkbegin)
+{
+	int	counter;
+	int	wkstcklen;
+
+	wkstcklen = *wrkngstck - wrkbegin;
+	counter = 0;
+	*arr = (*arr - 1);
+	**arr = *wrkbegin;
+	while (counter < wkstcklen)
 	{
-		counter = 0;
-		*arr = (*arr - 1);
-		**arr = *wrkbegin;
-		while (counter < wkstcklen)
-		{
-			*(wrkbegin + counter) = *(wrkbegin + counter + 1);
-			counter++;
-		}
-		*wrkngstck = (*wrkngstck - 1);
-		ft_putstr_fd("pa\n", 1);
+		*(wrkbegin + counter) = *(wrkbegin + counter + 1);
+		counter++;
 	}
+	*wrkngstck = (*wrkngstck - 1);
+	ft_putstr_fd("pa\n", 1);
 }
 
 void	issue_commands(int **arr, int **wrkngstck, int *wrkbegin, int *arrlen)
@@ -79,14 +82,32 @@ void	issue_commands(int **arr, int **wrkngstck, int *wrkbegin, int *arrlen)
 	{
 		if (*wrkbegin)
 		{
-			ft_pushing(arr, wrkngstck, wrkbegin, 1);
+			ft_pushing_pa(arr, wrkngstck, wrkbegin);
 			*arrlen = *arrlen + 1;
 			return ;
 		}
 		while ((**arr) < *(*arr + 1) && *arrlen > 2)
 		{
-			ft_pushing(arr, wrkngstck, wrkbegin, 0);
+			ft_pushing_pb(arr, wrkngstck, wrkbegin);
 			*arrlen = *arrlen - 1;
 		}
 	}
+}
+
+char	ft_sort(int *arr, int arrlen)
+{
+	int	*workingstack;
+	int	*wrkstckstart;
+	int	lencpy;
+
+	lencpy = arrlen;
+	workingstack = ft_calloc(arrlen, sizeof(int));
+	if (!workingstack)
+		return (1);
+	wrkstckstart = workingstack;
+	while (ft_check_order(arr, lencpy) || *wrkstckstart)
+	{
+		issue_commands(&arr, &workingstack, wrkstckstart, &lencpy);
+	}
+	return (0);
 }
