@@ -75,6 +75,10 @@ char	ft_sort(int *arr, int arrlen)
 		// {
 		// 	ft_printf("Len %d Print arr value %d, index %d \n", lencpy, *(arr + x), x);
 		// }
+		// for (int y = 0; y < (workingstack - wrkstckstart); y++)
+		// {
+		// 	ft_printf("Len %d Print stack value %d, index %d \n", (workingstack - wrkstckstart), *(wrkstckstart + y), y);
+		// }
 	}
 	return (0);
 	
@@ -107,6 +111,7 @@ int	main(int argc, char **argv)
 	int	counter;
 
 	counter = 0;
+	array = 0;
 	if (argc > 1)
 	{
 		array = malloc((argc - 1) * sizeof(int));
@@ -117,7 +122,7 @@ int	main(int argc, char **argv)
 			error = ft_add_to_array(*(argv + 1 + counter), (array + counter));
 			counter++;
 		}
-		error = dup_check(array, counter);
+		error = dup_check(array, (argc - 1));
 		if (error == 0)
 		{
 			ft_sort(array, (argc - 1));

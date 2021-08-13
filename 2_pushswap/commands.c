@@ -18,13 +18,13 @@ void	ft_swapping(int **arr, int **wrkngstck, int *wrkbegin)
 	int initswapb;
 
 	initswapb = 0;
-	if (*wrkngstck && *wrkngstck - wrkbegin >= 2)
+	if (*wrkngstck && (*wrkngstck - wrkbegin) > 0)
 	{
-		if (*(*wrkngstck) < *(*wrkngstck - 1))
+		if (*wrkbegin < *(wrkbegin + 1))
 		{
-			temp = *(*wrkngstck);
-			*(*wrkngstck) = *(*(wrkngstck - 1));
-			*(*(wrkngstck - 1)) = temp;
+			temp = *wrkbegin;
+			*wrkbegin = *(wrkbegin + 1);
+			*(wrkbegin + 1) = temp;
 			initswapb = 1;
 		}
 	}
@@ -43,27 +43,29 @@ void	ft_pushing(int **arr, int **wrkngstck, int *wrkbegin, int direction)
 	int	wkstcklen;
 
 	wkstcklen = *wrkngstck - wrkbegin;
-	counter = 0;
+	counter = wkstcklen;
 	if (direction == 0)
 	{
-		while (counter < wkstcklen)
+		*wrkngstck = (*wrkngstck + 1);
+		while (counter > 0)
 		{
-			*(*wrkngstck - counter + 1) = *(*wrkngstck - counter);
-			counter++;
+			*(wrkbegin + counter) = *(wrkbegin + counter - 1);
+			counter--;
 		}
 		*wrkbegin = **arr;
+		*arr = (*arr + 1);
 		ft_putstr_fd("pb\n", 1);
 	}
 	else
 	{
+		counter = 0;
 		*arr = (*arr - 1);
 		**arr = *wrkbegin;
-		while (*(wrkngstck - counter) > wrkbegin)
+		while (counter < wkstcklen)
 		{
-			*(*wrkngstck - counter - 1) = *(*wrkngstck - counter);
+			*(wrkbegin + counter) = *(wrkbegin + counter + 1);
 			counter++;
 		}
-		**wrkngstck = 0;
 		*wrkngstck = (*wrkngstck - 1);
 		ft_putstr_fd("pa\n", 1);
 	}
@@ -73,25 +75,18 @@ void	issue_commands(int **arr, int **wrkngstck, int *wrkbegin, int *arrlen)
 {
 	if ((**arr) > (*(*arr + 1)))
 		ft_swapping(arr, wrkngstck, wrkbegin);
-	else if (*wrkbegin)
-	{
-		if (**arr < *wrkbegin)
-		{
-			ft_pushing(arr, wrkngstck, wrkbegin, 1);
-			*arrlen = *arrlen + 1;
-		}		
-	}
 	else if ((**arr) < *(*arr + 1))
 	{
-		if (*arrlen <= 2 && *wrkbegin)
+		if (*wrkbegin)
 		{
 			ft_pushing(arr, wrkngstck, wrkbegin, 1);
 			*arrlen = *arrlen + 1;
 			return ;
 		}
-		ft_pushing(arr, wrkngstck, wrkbegin, 0);
-		*arr = (*arr + 1);
-		*wrkngstck = (*wrkngstck + 1);
-		*arrlen = *arrlen - 1;
+		while ((**arr) < *(*arr + 1) && *arrlen > 2)
+		{
+			ft_pushing(arr, wrkngstck, wrkbegin, 0);
+			*arrlen = *arrlen - 1;
+		}
 	}
 }
