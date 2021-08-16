@@ -5,12 +5,17 @@ This project involved sorting data on a stack, with a limited set of instruction
 # Objectives
 
 Sorting algorithms
+
 Battery concept and handling elements
+
 Algorithm implementation
 
 # Skills
 
 Unix
+
 Imperative programming
+
 Rigor
+
 Algorithms & AI 
