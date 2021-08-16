@@ -2,11 +2,11 @@
 
 A recoding of the printf library, handling the cspdiuxX% conversions.
 
-#Objectives
+# Objectives
 
 Unix logic
 
-#Skills
+# Skills
 
 Rigor
 Algorithms & AI 
