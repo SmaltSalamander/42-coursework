@@ -9,5 +9,7 @@ Unix logic
 # Skills
 
 Unix
+
 Rigor
+
 Algorithms & AI 
