@@ -9,5 +9,7 @@ Unix logic
 # Skills
 
 Imperative programming
+
 Rigor
+
 Algorithms & AI 
