@@ -74,7 +74,25 @@ void	ft_pushing_pa(int **arr, int **wrkngstck, int *wrkbegin)
 	ft_putstr_fd("pa\n", 1);
 }
 
-void	issue_commands(int **arr, int **wrkngstck, int *wrkbegin, int *arrlen)
+// void	ft_rotating(int *arr, int **wrkngstck, int *wrkbegin, int *arrlen)
+// {
+// 	int	counter;
+// 	int	wkstcklen;
+// 	int temp;
+
+// 	counter = 0;	 	
+// 	temp = **arr;
+// 	**arr = *(*arr + 1);
+// 	*(*arr + 1) = temp;
+// 	while (counter < arrlen)
+// 	{
+// 		*(arr + counter) = *(arr + counter + 1);
+// 		counter++;
+// 	}
+// 	ft_putstr_fd("ra\n", 1);
+// }
+
+void	issue_commands(t_list **arr, int **wrkngstck, int *wrkbegin, int *arrlen)
 {
 	if ((**arr) > (*(*arr + 1)))
 		ft_swapping(arr, wrkngstck, wrkbegin);
@@ -94,20 +112,20 @@ void	issue_commands(int **arr, int **wrkngstck, int *wrkbegin, int *arrlen)
 	}
 }
 
-char	ft_sort(int *arr, int arrlen)
+char	ft_sort(t_list **arr, int arrlen)
 {
 	int	*workingstack;
-	int	*wrkstckstart;
+	t_list	*workingstack;
 	int	lencpy;
 
 	lencpy = arrlen;
-	workingstack = ft_calloc(arrlen, sizeof(int));
-	if (!workingstack)
-		return (1);
-	wrkstckstart = workingstack;
-	while (ft_check_order(arr, lencpy) || *wrkstckstart)
+	workingstack = 0;
+	while (ft_check_order(*arr, lencpy) || *wrkstckstart)
 	{
-		issue_commands(&arr, &workingstack, wrkstckstart, &lencpy);
+		// issue_commands(arr, &workingstack, wrkstckstart, &lencpy);
+		break ;
 	}
+	if (workingstack)
+		ft_lstclear(workingstack, free);
 	return (0);
 }

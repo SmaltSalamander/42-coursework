@@ -19,7 +19,7 @@ SRC = main.c commands.c
 OBJS = $(SRC:.c=.o)
 OBJSBONUS = $(BONUS:.c=.o)
 TEST = test.c
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Wextra
 LIBPATH = ./libft
 DEPS = libft.h
 NAME = push_swap

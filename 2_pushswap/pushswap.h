@@ -15,6 +15,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-char	ft_sort(int *arr, int arrlen);
-int		ft_check_order(int *arr, int arrlen);
+char	ft_sort(t_list **arr, int arrlen);
+int		ft_check_order(t_list *arr, int arrlen);
+
 #endif
