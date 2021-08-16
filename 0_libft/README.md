@@ -1,12 +1,12 @@
-Description
+# Description
 
 I have recoded some the C standard library functions as well as some other utility functions that will be used during the whole cursus.
 
-Objectives
+# Objectives
 
 Unix logic
 
-Skills
+# Skills
 
 Imperative programming
 Rigor
