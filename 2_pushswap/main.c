@@ -56,11 +56,11 @@ int	ft_check_order(t_list *arr, int arrlen)
 	counter = 0;
 	while (counter < arrlen - 1)
 	{
+		check1 = arr -> next;
 		if (*(int *) arr->content > *(int *) check1->content)
 			break ;
 		counter++;
 		arr = arr -> next;
-		check1 = arr -> next;
 	}
 	if (counter == arrlen - 1)
 		return (0);
@@ -98,12 +98,12 @@ int	main(int argc, char **argv)
 	{
 		while (++counter < (argc - 1) && error != 1)
 			error = ft_add_to_array(*(argv + 1 + counter), &arr);
-		t_list *copy = arr;
-		while (copy != NULL)
-		{
-			ft_printf("%d\n", *(int *)copy->content);
-			copy = copy->next;
-		}
+		// t_list *copy = arr;
+		// while (copy != NULL)
+		// {
+		// 	ft_printf("%d\n", *(int *)copy->content);
+		// 	copy = copy->next;
+		// }
 		error = dup_check(arr);
 		if (error == 0)
 		 	ft_sort(&arr, (argc - 1));
