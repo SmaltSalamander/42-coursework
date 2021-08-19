@@ -19,7 +19,7 @@ SRC = main.c commands.c
 OBJS = $(SRC:.c=.o)
 OBJSBONUS = $(BONUS:.c=.o)
 TEST = test.c
-CFLAGS = -Wall -Wextra
+CFLAGS = -Wall -Werror -Wextra
 LIBPATH = ./libft
 DEPS = libft.h
 NAME = push_swap
@@ -46,7 +46,7 @@ bonus: $(OBJSBONUS)
 	ar rc $(NAME) $(OBJSBONUS)
 
 clean:
-	/bin/rm -f *.o *.so a.out *.debug
+	/bin/rm -fr *.o *.so a.out *.debug ./a.out.dSYM
 
 fclean: clean
 	/bin/rm -f $(NAME)

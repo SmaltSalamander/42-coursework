@@ -42,7 +42,6 @@ int	ft_add_to_array(char *string, t_list **array)
 		return (1);
 	element = ft_lstnew((int *) number);
 	ft_lstadd_back(array, element);
-	// *(int *)(array) = number;
 	return (0);
 }
 
@@ -71,7 +70,7 @@ int	dup_check(t_list *array)
 {
 	t_list	*check1;
 
-	while (array->next)
+	while (array != NULL)
 	{
 		check1 = array->next;
 		while (check1)
@@ -104,7 +103,8 @@ int	main(int argc, char **argv)
 		// 	ft_printf("%d\n", *(int *)copy->content);
 		// 	copy = copy->next;
 		// }
-		error = dup_check(arr);
+		if (error == 0)
+			error = dup_check(arr);
 		if (error == 0)
 		 	ft_sort(&arr, (argc - 1));
 	}

@@ -103,13 +103,13 @@ void	issue_commands(t_list *arr, t_list	*wrkngstck, int *arrlen)
 	{
 		if (wrkngstck->content)
 		{
-			//ft_pushing_pa(arr, wrkngstck);
+			ft_pushing_pa(arr, wrkngstck);
 			*arrlen = *arrlen + 1;
 			return ;
 		}
 		while (((*(int *)(arr)->content) < *(int *) check1->content) && *arrlen > 2)
 		{
-			//ft_pushing_pb(arr, wrkngstck);
+			ft_pushing_pb(arr, wrkngstck);
 			*arrlen = *arrlen - 1;
 		}
 	}
