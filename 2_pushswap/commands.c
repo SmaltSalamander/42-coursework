@@ -38,24 +38,19 @@ void	ft_swapping(t_list *arr, t_list *wrkngstck)
 		ft_putstr_fd("sa\n", 1);
 }
 
-// void	ft_pushing_pb(int **arr, int **wrkngstck, int *wrkbegin)
-// {
-// 	int	counter;
-// 	int	wkstcklen;
+void	ft_pushing_pb(t_list **arr, t_list **wrkngstck)
+{
+	ft_lstadd_front(wrkngstck, arr);
+	*arr = *arr->next;
+	ft_putstr_fd("pb\n", 1);
+}
 
-// 	wkstcklen = *wrkngstck - wrkbegin;
-// 	counter = wkstcklen;
-// 	*wrkngstck = (*wrkngstck + 1);
-// 	while (counter > 0)
-// 	{
-// 		*(wrkbegin + counter) = *(wrkbegin + counter - 1);
-// 		counter--;
-// 	}
-// 	*wrkbegin = **arr;
-// 	*arr = (*arr + 1);
-// 	ft_putstr_fd("pb\n", 1);
-// }
-
+void	ft_pushing_pa(t_list **arr, t_list **wrkngstck)
+{
+	ft_lstadd_front(arr, wrkngstck);
+	*wrkngstck = *wrkngstck->next;
+	ft_putstr_fd("pa\n", 1);
+}
 // void	ft_pushing_pa(int **arr, int **wrkngstck, int *wrkbegin)
 // {
 // 	int	counter;
@@ -101,15 +96,15 @@ void	issue_commands(t_list *arr, t_list	*wrkngstck, int *arrlen)
 		ft_swapping(arr, wrkngstck);
 	else if ((*(int *)(arr)->content) < *(int *) check1->content)
 	{
-		if (wrkngstck->content)
+		if (*(int *) wrkngstck->content)
 		{
-			//ft_pushing_pa(arr, wrkngstck);
+			ft_pushing_pa(&arr, &wrkngstck);
 			*arrlen = *arrlen + 1;
 			return ;
 		}
 		while (((*(int *)(arr)->content) < *(int *) check1->content) && *arrlen > 2)
 		{
-			//ft_pushing_pb(arr, wrkngstck);
+			ft_pushing_pb(&arr, &wrkngstck);
 			*arrlen = *arrlen - 1;
 		}
 	}
@@ -121,8 +116,8 @@ char	ft_sort(t_list **arr, int arrlen)
 	int	lencpy;
 
 	lencpy = arrlen;
-	ft_lstadd_back(&workingstack, ft_lstnew(ft_calloc(1, 1)));
-	while (ft_check_order(*arr, lencpy) || workingstack->content)
+	workingstack = ft_lstnew(ft_calloc(1, 1));
+	while (ft_check_order(*arr, lencpy) || *(int *)workingstack->content)
 	{
 		issue_commands(*arr, workingstack, &lencpy);
 	}

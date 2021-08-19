@@ -54,7 +54,7 @@ int	ft_check_order(t_list *arr, int arrlen)
 	t_list	*check1;
 
 	counter = 0;
-	while (counter < arrlen - 1)
+	while (arr->next)
 	{
 		check1 = arr -> next;
 		if (*(int *) arr->content > *(int *) check1->content)
