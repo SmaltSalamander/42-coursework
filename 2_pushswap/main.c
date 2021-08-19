@@ -23,110 +23,97 @@ int	error_check_atoi(char *string, int *arrelement)
 	resultcopy = ft_itoa(*arrelement);
 	numberlen = ft_strlen(string);
 	if (ft_strncmp(string, resultcopy, numberlen) == 0)
+	{
+		free(resultcopy);
 		return (numberlen);
+	}
 	return (-1);
 }
 
-int	ft_add_to_array(char *string, int *array)
+int	ft_add_to_array(char *string, t_list **array)
 {
-	int		number;
+	int		*number;
 	int		error;
+	t_list	*element;
 
-	error = error_check_atoi(string, &number);
+	number = malloc(sizeof(int));
+	error = error_check_atoi(string, number);
 	if (error == -1)
 		return (1);
-	*(int *)(array) = number;
+	element = ft_lstnew((int *) number);
+	ft_lstadd_back(array, element);
+	// *(int *)(array) = number;
 	return (0);
 }
 
 // Return 0 if the numbers are in ascending order, if not, return 1
 
-int	ft_check_order(int *arr, int arrlen)
+int	ft_check_order(t_list *arr, int arrlen)
 {
 	int	counter;
+	t_list	*check1;
 
 	counter = 0;
 	while (counter < arrlen - 1)
 	{
-		if (*(arr + counter) > *(arr + counter + 1))
+		check1 = arr -> next;
+		if (*(int *) arr->content > *(int *) check1->content)
 			break ;
 		counter++;
+		arr = arr -> next;
 	}
 	if (counter == arrlen - 1)
 		return (0);
 	return (1);
 }
 
-char	ft_sort(int *arr, int arrlen)
+int	dup_check(t_list *array)
 {
-	int	*workingstack;
-	int	*wrkstckstart;
-	int lencpy;
+	t_list	*check1;
 
-	lencpy = arrlen;
-	workingstack = ft_calloc(arrlen, sizeof(int));
-	if (!workingstack)
-		return (1);
-	wrkstckstart = workingstack;
-	while (ft_check_order(arr, lencpy) || *wrkstckstart)
+	while (array->next)
 	{
-		issue_commands(&arr, &workingstack, wrkstckstart, &lencpy);
-		// for (int x = 0; x < lencpy; x++)
-		// {
-		// 	ft_printf("Len %d Print arr value %d, index %d \n", lencpy, *(arr + x), x);
-		// }
-	}
-	return (0);
-	
-}
-
-int dup_check(int *array, int counter)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < counter)
-	{
-		j = i + 1;
-		while (j < counter)
+		check1 = array->next;
+		while (check1)
 		{
-			if (*(array + j) == *(array + i))
+			if (*(int *) check1->content == *(int *) array->content)
 				return (1);
-			j++;
+			check1 = check1->next;
 		}
-		i++;
+		array = array->next;
 	}
 	return (0);
 }
 
 int	main(int argc, char **argv)
 {
-	int	*array;
 	int	error;
 	int	counter;
+	t_list	*arr;
 
-	counter = 0;
-	array = 0;
+	counter = -1;
+	error = 0;
+	arr = 0;
 	if (argc > 1)
 	{
-		array = malloc((argc - 1) * sizeof(int));
-		if (!array)
-			error = 1;
-		while (counter < (argc - 1) && error != 1)
-		{
-			error = ft_add_to_array(*(argv + 1 + counter), (array + counter));
-			counter++;
-		}
-		error = dup_check(array, counter);
+		while (++counter < (argc - 1) && error != 1)
+			error = ft_add_to_array(*(argv + 1 + counter), &arr);
+		// t_list *copy = arr;
+		// while (copy != NULL)
+		// {
+		// 	ft_printf("%d\n", *(int *)copy->content);
+		// 	copy = copy->next;
+		// }
+		error = dup_check(arr);
 		if (error == 0)
-		{
-			ft_sort(array, (argc - 1));
-			return (0);
-		}
+		 	ft_sort(&arr, (argc - 1));
 	}
-	if (array)
-		free(array);
+	else
+		error = 1;
+	if (arr)
+		ft_lstclear(&arr, free);
+	if (!error)
+		return (0);
 	write(1, "Error\n", 6);
 	return (1);
 }

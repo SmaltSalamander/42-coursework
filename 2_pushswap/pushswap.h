@@ -10,11 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBPUSHSWAP_H
-# define LIBPUSHSWAP_H
+#ifndef PUSHSWAP_H
+# define PUSHSWAP_H
 # include <unistd.h>
 # include <stdlib.h>
 
-void	issue_commands(int **arr, int **wrkngstck, int *wrkbegin, int *arrlen);
+char	ft_sort(t_list **arr, int arrlen);
+int		ft_check_order(t_list *arr, int arrlen);
 
 #endif
