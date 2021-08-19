@@ -51,23 +51,6 @@ void	ft_pushing_pa(t_list **arr, t_list **wrkngstck)
 	*wrkngstck = *wrkngstck->next;
 	ft_putstr_fd("pa\n", 1);
 }
-// void	ft_pushing_pa(int **arr, int **wrkngstck, int *wrkbegin)
-// {
-// 	int	counter;
-// 	int	wkstcklen;
-
-// 	wkstcklen = *wrkngstck - wrkbegin;
-// 	counter = 0;
-// 	*arr = (*arr - 1);
-// 	**arr = *wrkbegin;
-// 	while (counter < wkstcklen)
-// 	{
-// 		*(wrkbegin + counter) = *(wrkbegin + counter + 1);
-// 		counter++;
-// 	}
-// 	*wrkngstck = (*wrkngstck - 1);
-// 	ft_putstr_fd("pa\n", 1);
-// }
 
 // void	ft_rotating(int *arr, int **wrkngstck, int *wrkbegin, int *arrlen)
 // {
@@ -98,13 +81,13 @@ void	issue_commands(t_list *arr, t_list	*wrkngstck, int *arrlen)
 	{
 		if (*(int *) wrkngstck->content)
 		{
-			ft_pushing_pa(&arr, &wrkngstck);
+			ft_pushing_pa(arr, wrkngstck);
 			*arrlen = *arrlen + 1;
 			return ;
 		}
 		while (((*(int *)(arr)->content) < *(int *) check1->content) && *arrlen > 2)
 		{
-			ft_pushing_pb(&arr, &wrkngstck);
+			ft_pushing_pb(arr, wrkngstck);
 			*arrlen = *arrlen - 1;
 		}
 	}

@@ -12,7 +12,7 @@
 
 CC = gcc
 
-SRC = main.c commands.c
+SRC = ft_printf.c ft_printf_util.c
 
 #BONUS =
 
@@ -20,33 +20,35 @@ OBJS = $(SRC:.c=.o)
 OBJSBONUS = $(BONUS:.c=.o)
 TEST = test.c
 CFLAGS = -Wall -Werror -Wextra
-LIBPATH = ./libft
-DEPS = libft.h
-NAME = push_swap
-LIBRARY = libft.a
+MINILIBXPATH = ./minilibx_macos
+DEPS = ft_printf.h
+NAME = fdf
+LIBRARY = libmlx.a
 
 all: $(NAME)
 
 $(LIBRARY):
-	make -C $(LIBPATH)
+	make -C $(LIBFTPATH)
+	cp ./minilibx_macos/libmlx.a $(NAME)
 
-$(NAME): $(LIBRARY) $(OBJS)
-	$(CC) -g $(CFLAGS) -o $(NAME) $(OBJS) -L $(LIBPATH) -lft
+$(NAME): $(OBJS) $(LIBRARY)
+	ar rc $(NAME) $(OBJS)
+	ranlib $(NAME)
 
 olib: $(SRC) $(DEPS)
 	$(CC) -c $(CFLAGS) $(SRC)
 
 archive:
-	ar rc $(NAME) *.o
+	ar rc $(NAME) $(OBJS)
 
-debug: $(SRC) $(LIBRARY)
-	$(CC) -g -o a.out $(CFLAGS) $(SRC) -L $(LIBPATH) -lft
+debug: $(SRC) $(TEST) $(LIBRARY)
+	$(CC) -g -o a.out $(CFLAGS) $(TEST) $(SRC) $(NAME)
 
 bonus: $(OBJSBONUS)
 	ar rc $(NAME) $(OBJSBONUS)
 
 clean:
-	/bin/rm -fr *.o *.so a.out *.debug ./a.out.dSYM
+	/bin/rm -f $(OBJS) a.out
 
 fclean: clean
 	/bin/rm -f $(NAME)
