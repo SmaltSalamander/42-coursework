@@ -38,14 +38,14 @@ void	ft_swapping(t_list *arr, t_list *wrkngstck)
 		ft_putstr_fd("sa\n", 1);
 }
 
-void	ft_pushing_pb(t_list **arr, t_list **wrkngstck)
+void	ft_pushing_pb(t_list *arr, t_list **wrkngstck)
 {
 	ft_lstadd_front(wrkngstck, arr);
 	*arr = *arr->next;
 	ft_putstr_fd("pb\n", 1);
 }
 
-void	ft_pushing_pa(t_list **arr, t_list **wrkngstck)
+void	ft_pushing_pa(t_list **arr, t_list *wrkngstck)
 {
 	ft_lstadd_front(arr, wrkngstck);
 	*wrkngstck = *wrkngstck->next;
@@ -81,13 +81,13 @@ void	issue_commands(t_list *arr, t_list	*wrkngstck, int *arrlen)
 	{
 		if (*(int *) wrkngstck->content)
 		{
-			ft_pushing_pa(arr, wrkngstck);
+			ft_pushing_pa(&arr, wrkngstck);
 			*arrlen = *arrlen + 1;
 			return ;
 		}
 		while (((*(int *)(arr)->content) < *(int *) check1->content) && *arrlen > 2)
 		{
-			ft_pushing_pb(arr, wrkngstck);
+			ft_pushing_pb(arr, &wrkngstck);
 			*arrlen = *arrlen - 1;
 		}
 	}
