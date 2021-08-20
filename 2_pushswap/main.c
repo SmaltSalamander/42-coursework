@@ -49,7 +49,7 @@ int	ft_add_to_array(char *string, t_list **array)
 
 int	ft_check_order(t_list *arr, int arrlen)
 {
-	int	counter;
+	int		counter;
 	t_list	*check1;
 
 	counter = 0;
@@ -86,8 +86,8 @@ int	dup_check(t_list *array)
 
 int	main(int argc, char **argv)
 {
-	int	error;
-	int	counter;
+	int		error;
+	int		counter;
 	t_list	*arr;
 
 	counter = -1;
@@ -106,7 +106,7 @@ int	main(int argc, char **argv)
 		if (error == 0)
 			error = dup_check(arr);
 		if (error == 0)
-		 	ft_sort(&arr, (argc - 1));
+			ft_sort(&arr, (argc - 1));
 	}
 	else
 		error = 1;

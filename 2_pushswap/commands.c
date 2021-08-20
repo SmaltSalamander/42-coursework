@@ -23,18 +23,18 @@ void	ft_swapping(t_list *arr, t_list *wrkngstck)
 	{
 		if (wrkngstck->content && ft_lstsize(wrkngstck) > 1)
 		{
-			if (*(int *) wrkngstck->content < *(int *) (wrkngstck->next)->content)
+			if (*(int *)wrkngstck->content < *(int *)(wrkngstck->next)->content)
 			{
 				temp = *(int *) wrkngstck->content;
-				*(int *) wrkngstck->content = *(int *) (wrkngstck->next)->content;
-				*(int *) (wrkngstck->next)->content = temp;
+				*(int *)wrkngstck->content = *(int *)(wrkngstck->next)->content;
+				*(int *)(wrkngstck->next)->content = temp;
 				initswapb = 1;
 			}
 		}
 	}
 	temp = *(int *) arr->content;
-	*(int *) arr->content = *(int *) (arr->next)->content;
-	*(int *) (arr->next)->content = temp;
+	*(int *)arr->content = *(int *)(arr->next)->content;
+	*(int *)(arr->next)->content = temp;
 	if (initswapb)
 		ft_putstr_fd("ss\n", 1);
 	else
@@ -94,7 +94,7 @@ void	issue_commands(t_list **arr, t_list	**wrkngstck, int *arrlen)
 	{
 		if ((*(int *)(*arr)->content) > *(int *) check1->content)
 			ft_swapping(*arr, *wrkngstck);
-		else if ((*(int *)(*arr)->content) < *(int *) check1->content)
+		while ((*(int *)(*arr)->content) < *(int *) check1->content)
 		{
 			if ((*wrkngstck))
 			{
@@ -102,7 +102,7 @@ void	issue_commands(t_list **arr, t_list	**wrkngstck, int *arrlen)
 				*arrlen = *arrlen + 1;
 				return ;
 			}
-			while (((*(int *)(*arr)->content) < *(int *) check1->content) && *arrlen > 2)
+			else if (*arrlen > 2)
 			{
 				ft_pushing_pb(arr, wrkngstck);
 				*arrlen = *arrlen - 1;
@@ -118,13 +118,12 @@ void	issue_commands(t_list **arr, t_list	**wrkngstck, int *arrlen)
 			return ;
 		}
 	}
-	
 }
 
 char	ft_sort(t_list **arr, int arrlen)
 {
 	t_list	*workingstack;
-	int	lencpy;
+	int		lencpy;
 
 	lencpy = arrlen;
 	workingstack = 0;
