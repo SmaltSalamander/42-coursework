@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include "./libft/libft.h"
 #include "pushswap.h"
 
 int	error_check_atoi(char *string, int *arrelement)
@@ -97,12 +96,6 @@ int	main(int argc, char **argv)
 	{
 		while (++counter < (argc - 1) && error != 1)
 			error = ft_add_to_array(*(argv + 1 + counter), &arr);
-		// t_list *copy = arr;
-		// while (copy != NULL)
-		// {
-		// 	ft_printf("%d\n", *(int *)copy->content);
-		// 	copy = copy->next;
-		// }
 		if (error == 0)
 			error = dup_check(arr);
 		if (error == 0)

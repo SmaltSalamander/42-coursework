@@ -12,7 +12,7 @@
 
 CC = gcc
 
-SRC = main.c commands.c
+SRC = main.c commands.c pushing.c rotation.c
 
 #BONUS =
 

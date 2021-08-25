@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./libft/libft.h"
 #include "pushswap.h"
 
 void	ft_swapping(t_list *arr, t_list *wrkngstck)
@@ -41,132 +40,149 @@ void	ft_swapping(t_list *arr, t_list *wrkngstck)
 		ft_putstr_fd("sa\n", 1);
 }
 
-void	ft_pushing_pb(t_list **arr, t_list **wrkngstck)
+int	lookforsmallest(t_list *arr)
 {
-	t_list	*ele;
+	int	index;
+	int	value;
+	int	temp;
 
-	ele = *arr;
-	ft_lstadd_front(wrkngstck, ft_lstnew(ele->content));
-	*arr = (*arr)->next;
-	free(ele);
-	ft_putstr_fd("pb\n", 1);
+	temp = 0;
+	value = *(int *)(arr)->content;
+	index = 0;
+	while (arr)
+	{
+		if (*(int *)(arr)->content < value)
+		{
+			value = *(int *)(arr)->content;
+			index = temp;
+		}
+		temp++;
+		arr = arr->next;
+	}
+	return (index);
 }
 
-void	ft_pushing_pa(t_list **arr, t_list **wrkngstck)
+
+
+void	sort_stack(t_list **arr, t_list	**arr1, int *arrlen)
 {
-	t_list	*ele;
+	int		index;
 
-	ele = *wrkngstck;
-	ft_lstadd_front(arr, ft_lstnew(ele->content));
-	*wrkngstck = (*wrkngstck)->next;
-	free(ele);
-	ft_putstr_fd("pa\n", 1);
-}
-
-// rb : rotate b - shift up all elements of stack b by 1.
-// The first element becomes the last one.
-
-void	ft_rotating_rb(t_list **wrkngstck)
-{
-	t_list	*ele;
-
-	ele = *wrkngstck;
-	ft_lstadd_back(wrkngstck, ft_lstnew(ele->content));
-	*wrkngstck = (*wrkngstck)->next;
-	ft_lstdelone(ele, free);
-	ft_putstr_fd("rb\n", 1);
-}
-
-// ra : rotate a - shift up all elements of stack a by 1.
-// The first element becomes the last one.
-
-void	ft_rotating_ra(t_list **arr)
-{
-	t_list	*ele;
-
-	ele = *arr;
-	ft_lstadd_back(arr, ft_lstnew(ele->content));
-	*arr = (*arr)->next;
-	ft_lstdelone(ele, free);
-	ft_putstr_fd("ra\n", 1);
-}
-
-// rrb : reverse rotate b - shift down all elements of stack b by 1.
-// The last element becomes the first one.
-
-void	ft_rev_rotating_rb(t_list **wrkngstck)
-{
-	t_list	*ele;
-	t_list	*cpy;
-
-	ele = ft_lstlast(*wrkngstck);
-	ft_lstadd_front(wrkngstck, ft_lstnew(ele->content));
-	cpy = *wrkngstck;
-	while (cpy->next != ele)
-		cpy = cpy->next;
-	cpy->next = 0;
-	free(ele);
-	ft_putstr_fd("rrb\n", 1);
-}
-
-// rra : reverse rotate a - shift down all elements of stack a by 1.
-// The last element becomes the first one.
-
-void	ft_rev_rotating_ra(t_list **arr)
-{
-	t_list	*ele;
-	t_list	*cpy;
-
-	ele = ft_lstlast(*arr);
-	ft_lstadd_front(arr, ft_lstnew(ele->content));
-	cpy = *arr;
-	while (cpy->next != ele)
-		cpy = cpy->next;
-	cpy->next = 0;
-	free(ele);
-	ft_putstr_fd("rra\n", 1);
+	index = lookforsmallest(*arr);
+	if (index == 0)
+		ft_pushing_pb(arr, arr1, arrlen);
+	else if (index <= (*arrlen / 2))
+	{
+		while (index != 0)
+		{
+			ft_rotating_ra(arr);
+			index--;
+		}
+		ft_pushing_pb(arr, arr1, arrlen);
+	}
+	else
+	{
+		while (index != *arrlen)
+		{
+			ft_rev_rotating_ra(arr);
+			index++;
+		}
+		ft_pushing_pb(arr, arr1, arrlen);
+	}
 }
 
 void	issue_commands(t_list **arr, t_list	**wrkngstck, int *arrlen)
 {
-	t_list	*check1;
-	int		last;
-	t_list	*lastlst;
+	//int	parts;
 
-	lastlst = ft_lstlast(*arr);
-	last = *(int *)lastlst->content;
+	//parts = 1;
+	if (*arrlen < 10)
+	{
+		sort_stack(arr, wrkngstck, arrlen);
+	}
+// 	else if (*arrlen <= 100)
+// 	{
+// 		parts = 2;
+// 	}
+// 	else
+// 	{
+// 		parts = 10;
+// 	}
+	}
+
+// void	issue_commands(t_list **arr, t_list	**wrkngstck, int *arrlen)
+// {
+// 	int		index;
+
+// 	index = lookforsmallest(*arr);
+// 	if (index == 0)
+// 		ft_pushing_pb(arr, wrkngstck, arrlen);
+// 	else if (index <= (*arrlen / 2))
+// 	{
+// 		while (index != 0)
+// 		{
+// 			ft_rotating_ra(arr);
+// 			index--;
+// 		}
+// 		ft_pushing_pb(arr, wrkngstck, arrlen);
+// 	}
+// 	else
+// 	{
+// 		while (index != *arrlen)
+// 		{
+// 			ft_rev_rotating_ra(arr);
+// 			index++;
+// 		}
+// 		ft_pushing_pb(arr, wrkngstck, arrlen);
+// 	}
+// }
+
+void	put_back(t_list **arr, t_list **wrkngstck, int *arrlen)
+{
+	t_list	*check1;
+
 	check1 = (*arr)->next;
 	if (check1 != 0x0)
-	{
 		if ((*(int *)(*arr)->content) > *(int *) check1->content)
 			ft_swapping(*arr, *wrkngstck);
-		else if (last < *(int *)(*arr)->content)
-			ft_rev_rotating_ra(arr);
-		else if ((*(int *)(*arr)->content) < *(int *) check1->content)
-		{
-			if ((*wrkngstck))
-			{
-				ft_pushing_pa(arr, wrkngstck);
-				*arrlen = *arrlen + 1;
-				return ;
-			}
-			while (*arrlen > 2)
-			{
-				ft_pushing_pb(arr, wrkngstck);
-				*arrlen = *arrlen - 1;
-			}
-		}
-	}
-	else
-	{
-		if (*(int *)(*wrkngstck)->content)
-		{
-			ft_pushing_pa(arr, wrkngstck);
-			*arrlen = *arrlen + 1;
-			return ;
-		}
-	}
+	ft_pushing_pa(arr, wrkngstck, arrlen);
 }
+
+// void	issue_commands(t_list **arr, t_list	**wrkngstck, int *arrlen)
+// {
+// 	t_list	*check1;
+// 	int		last;
+
+// 	last = *(int *)(ft_lstlast(*arr))->content;
+// 	check1 = (*arr)->next;
+// 	if (check1 != 0x0)
+// 	{
+// 		if ((*(int *)(*arr)->content) > *(int *) check1->content)
+// 			ft_swapping(*arr, *wrkngstck);
+// 		else if (last < *(int *)(*arr)->content)
+// 			ft_rev_rotating_ra(arr);
+// 		else if ((*(int *)(*arr)->content) < *(int *) check1->content)
+// 		{
+// 			if ((*wrkngstck))
+// 			{
+// 				ft_pushing_pa(arr, wrkngstck, arrlen);
+// 				return ;
+// 			}
+// 			while (*arrlen > 2)
+// 			{
+// 				ft_pushing_pb(arr, wrkngstck, arrlen);
+// 			}
+// 		}
+// 	}
+// 	else
+// 	{
+// 		if (*(int *)(*wrkngstck)->content)
+// 		{
+// 			ft_pushing_pa(arr, wrkngstck, arrlen);
+// 			return ;
+// 		}
+// 	}
+// }
 
 char	ft_sort(t_list **arr, int arrlen)
 {
@@ -178,6 +194,9 @@ char	ft_sort(t_list **arr, int arrlen)
 	while (ft_check_order(*arr, lencpy) || lencpy != arrlen)
 	{
 		issue_commands(arr, &workingstack, &lencpy);
+		if (lencpy <= 2)
+			while (lencpy != arrlen)
+				put_back(arr, &workingstack, &lencpy);
 	}
 	if (workingstack)
 		ft_lstclear(&workingstack, free);
