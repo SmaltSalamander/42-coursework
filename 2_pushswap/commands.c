@@ -89,23 +89,40 @@ void	sort_smallstack(t_list **arr, t_list	**arr1, int *arrlen)
 	}
 }
 
+int	*calc_median(t_list *arr, int amount)
+{
+	int	*result;
+	int	*array;
+	int counter;
+
+	counter = 0;
+	array = malloc(sizeof(int) * ft_lstsize(arr));
+	while (arr)
+	{
+		array[counter] = *(int *)arr->content;
+		arr = arr->next;
+		counter++;
+	}
+	while ()
+	free(arr);
+	return (result);
+}
+
 void	issue_comms(t_list **arr, t_list	**wrkngstck, int *arrlen, int mode)
 {
-	int	cutoff;
+	int	*cutoff;
 	int	counter;
 
 	counter = 0;
 	cutoff = 0;
 	if (mode == 0)
-	{
 		sort_smallstack(arr, wrkngstck, arrlen);
-	}
 	else if (mode == 1)
 	{
+		cutoff = calc_median(*arr, 2);
 		while (counter < 2)
 		{
-			cutoff = calc_median(*arr, 2);
-			push_to_work(arr, cutoff);
+			push_to_work(arr[counter], cutoff);
 			sort_work(wrkngstck);
 			while ((*wrkngstck)->next)
 			{
@@ -117,10 +134,10 @@ void	issue_comms(t_list **arr, t_list	**wrkngstck, int *arrlen, int mode)
 	}
 	else
 	{
+		cutoff = calc_median(*arr, 10);
 		while (counter < 10)
 		{
-			cutoff = calc_median(*arr, 10);
-			push_to_work(arr, cutoff);
+			push_to_work(arr[counter], cutoff);
 			sort_work(wrkngstck);
 			while ((*wrkngstck)->next)
 			{
@@ -130,7 +147,7 @@ void	issue_comms(t_list **arr, t_list	**wrkngstck, int *arrlen, int mode)
 			counter++;
 		}
 	}
-	}
+}
 
 // void	issue_commands(t_list **arr, t_list	**wrkngstck, int *arrlen)
 // {
