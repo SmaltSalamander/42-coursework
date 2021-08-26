@@ -62,9 +62,7 @@ int	lookforsmallest(t_list *arr)
 	return (index);
 }
 
-
-
-void	sort_stack(t_list **arr, t_list	**arr1, int *arrlen)
+void	sort_smallstack(t_list **arr, t_list	**arr1, int *arrlen)
 {
 	int		index;
 
@@ -91,23 +89,47 @@ void	sort_stack(t_list **arr, t_list	**arr1, int *arrlen)
 	}
 }
 
-void	issue_commands(t_list **arr, t_list	**wrkngstck, int *arrlen)
+void	issue_comms(t_list **arr, t_list	**wrkngstck, int *arrlen, int mode)
 {
-	//int	parts;
+	int	cutoff;
+	int	counter;
 
-	//parts = 1;
-	if (*arrlen < 10)
+	counter = 0;
+	cutoff = 0;
+	if (mode == 0)
 	{
-		sort_stack(arr, wrkngstck, arrlen);
+		sort_smallstack(arr, wrkngstck, arrlen);
 	}
-// 	else if (*arrlen <= 100)
-// 	{
-// 		parts = 2;
-// 	}
-// 	else
-// 	{
-// 		parts = 10;
-// 	}
+	else if (mode == 1)
+	{
+		while (counter < 2)
+		{
+			cutoff = calc_median(*arr, 2);
+			push_to_work(arr, cutoff);
+			sort_work(wrkngstck);
+			while ((*wrkngstck)->next)
+			{
+				ft_pushing_pa(arr, wrkngstck, arrlen);
+				*wrkngstck = (*wrkngstck)->next;
+			}
+			counter++;
+		}
+	}
+	else
+	{
+		while (counter < 10)
+		{
+			cutoff = calc_median(*arr, 10);
+			push_to_work(arr, cutoff);
+			sort_work(wrkngstck);
+			while ((*wrkngstck)->next)
+			{
+				ft_pushing_pa(arr, wrkngstck, arrlen);
+				*wrkngstck = (*wrkngstck)->next;
+			}
+			counter++;
+		}
+	}
 	}
 
 // void	issue_commands(t_list **arr, t_list	**wrkngstck, int *arrlen)
@@ -188,12 +210,19 @@ char	ft_sort(t_list **arr, int arrlen)
 {
 	t_list	*workingstack;
 	int		lencpy;
+	int		mode;
 
+	if (arrlen <= 10)
+		mode = 0;
+	else if (arrlen <= 100)
+		mode = 1;
+	else
+		mode = 2;
 	lencpy = arrlen;
 	workingstack = 0;
 	while (ft_check_order(*arr, lencpy) || lencpy != arrlen)
 	{
-		issue_commands(arr, &workingstack, &lencpy);
+		issue_comms(arr, &workingstack, &lencpy, mode);
 		if (lencpy <= 2)
 			while (lencpy != arrlen)
 				put_back(arr, &workingstack, &lencpy);
