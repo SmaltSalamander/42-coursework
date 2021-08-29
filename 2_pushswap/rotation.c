@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 13:23:15 by sbienias          #+#    #+#             */
-/*   Updated: 2021/08/25 14:37:59 by sbienias         ###   ########.fr       */
+/*   Updated: 2021/08/29 21:13:55 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,16 @@
 void	ft_rotating_rb(t_list **wrkngstck)
 {
 	t_list	*ele;
+	t_list	*last;
 
 	ele = *wrkngstck;
-	ft_lstadd_back(wrkngstck, ft_lstnew(ele->content));
 	*wrkngstck = (*wrkngstck)->next;
-	free(ele);
+	last = ft_lstlast(*wrkngstck);
+	last->next = ele;
+	ele->next = 0x0;
+	// ft_lstadd_back(wrkngstck, ft_lstnew(ele->content));
+	// *wrkngstck = (*wrkngstck)->next;
+	// free(ele);
 	ft_putstr_fd("rb\n", 1);
 }
 
@@ -32,11 +37,15 @@ void	ft_rotating_rb(t_list **wrkngstck)
 void	ft_rotating_ra(t_list **arr)
 {
 	t_list	*ele;
+	t_list	*last;
 
 	ele = *arr;
-	ft_lstadd_back(arr, ft_lstnew(ele->content));
 	*arr = (*arr)->next;
-	free(ele);
+	last = ft_lstlast(*arr);
+	// ft_lstadd_back(arr, ft_lstnew(ele->content));
+	last->next = ele;
+	ele->next = 0x0;
+	// free(ele);
 	ft_putstr_fd("ra\n", 1);
 }
 
@@ -49,12 +58,12 @@ void	ft_rev_rotating_rb(t_list **wrkngstck)
 	t_list	*cpy;
 
 	ele = ft_lstlast(*wrkngstck);
-	ft_lstadd_front(wrkngstck, ft_lstnew(ele->content));
+	ele->next = *wrkngstck;
+	*wrkngstck = ele;
 	cpy = *wrkngstck;
 	while (cpy->next != ele)
 		cpy = cpy->next;
-	cpy->next = 0;
-	free(ele);
+	cpy->next = 0x0;
 	ft_putstr_fd("rrb\n", 1);
 }
 
