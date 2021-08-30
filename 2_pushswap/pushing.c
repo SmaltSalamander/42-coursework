@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 13:24:45 by sbienias          #+#    #+#             */
-/*   Updated: 2021/08/29 20:54:49 by sbienias         ###   ########.fr       */
+/*   Updated: 2021/08/30 19:28:22 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,6 @@ void	ft_pushing_pa(t_list **arr, t_list **wrkngstck, int *arrlen)
 	*wrkngstck = (*wrkngstck)->next;
 	ele->next = *arr;
 	*arr = ele;
-	// ft_lstadd_front(arr, ft_lstnew(ele->content));
-	// *wrkngstck = (*wrkngstck)->next;
-	// free(ele);
 	*arrlen = *arrlen + 1;
 	ft_putstr_fd("pa\n", 1);
 }

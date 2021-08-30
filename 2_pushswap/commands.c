@@ -139,14 +139,14 @@ int	*calc_median(t_list *arr, int amount)
 	counter = 0;
 	res[counter] = array[counter];
 	while (++counter < amount)
-		res[counter] = array[size / (amount - counter + 1) + size % 2];
+		res[counter] = array[(size / amount) * counter];
 	res[counter++] = array[size - 1] + 1;
 	res[counter] = 0;
 	free(array);
 	return (res);
 }
 
-void	push_to_work(t_list **arr, t_list **arr1, int *ls, int *arrlen)
+void	push_to_work_half(t_list **arr, t_list **arr1, int *ls, int *arrlen)
 {
 	t_list	*copy;
 	int		counter;
@@ -182,15 +182,92 @@ void	push_to_work(t_list **arr, t_list **arr1, int *ls, int *arrlen)
 		counter = frstcandidate - 1;
 		while (frstcandidate-- > 0)
 			ft_rotating_ra(arr);
-		ft_pushing_pb(arr, arr1, arrlen);
-		while (counter-- >= 0)
-			ft_rev_rotating_ra(arr);
+		ft_pushing_pb(arr, arr1, arrlen);;
 	}	
 	if (frstcandidate == lastcandidate && frstcandidate == -1)
 		return ;
-	push_to_work(arr, arr1, ls, arrlen);
+	push_to_work_half(arr, arr1, ls, arrlen);
 }
 
+// void	ft_sortwrkng(t_list **arr1)
+// {
+// 	t_list	*next;
+// 	int		big;
+// 	int		size;
+
+// 	size = ft_lstsize(*arr1);
+// 	next = (*arr1)->next;
+// 	if (next)
+// 	{
+// 		big = lookforval(*arr1, 1);
+// 		while (big < size - 1)
+// 		{
+// 			ft_rotating_rb(arr1);
+// 			big++;
+// 		}
+// 	}
+// }
+
+// void	push_to_work(t_list **arr, t_list **arr1, int *ls, int *arrlen)
+// {
+// 	t_list	*copy;
+// 	int		counter;
+// 	int		frstcandidate;
+// 	int		lastcandidate;
+
+// 	counter = 0;
+// 	frstcandidate = -1;
+// 	lastcandidate = -1;
+// 	copy = *arr;
+// 	while (copy)
+// 	{
+// 		if (*(int *)copy->content >= *ls && frstcandidate == -1
+// 			&& (*(ls + 1) == 0 || *(int *)copy->content < *(ls + 1)))
+// 			frstcandidate = counter;
+// 		if (*(int *)copy->content >= *ls
+// 			&& (*(ls + 1) == 0 || *(int *)copy->content < *(ls + 1)))
+// 			lastcandidate = counter;
+// 		counter++;
+// 		copy = copy->next;
+// 	}
+// 	if (lastcandidate != -1 && ft_lstsize(*arr) - lastcandidate < frstcandidate)
+// 	{
+// 		counter = lastcandidate - 1;
+// 		while (lastcandidate++ < ft_lstsize(*arr))
+// 			ft_rev_rotating_ra(arr);
+// 		ft_pushing_pb(arr, arr1, arrlen);
+// 		while (counter++ < ft_lstsize(*arr))
+// 			ft_rotating_ra(arr);
+// 	}
+// 	else if (frstcandidate >= 0)
+// 	{
+// 		counter = frstcandidate - 1;
+// 		while (frstcandidate-- > 0)
+// 			ft_rotating_ra(arr);
+// 		ft_pushing_pb(arr, arr1, arrlen);
+// 		while (counter-- >= 0)
+// 			ft_rev_rotating_ra(arr);
+// 	}	
+// 	if (frstcandidate == lastcandidate && frstcandidate == -1)
+// 		return ;
+// 	push_to_work(arr, arr1, ls, arrlen);
+// }
+void	push_to_work(t_list **arr, t_list **arr1, int *ls, int *arrlen)
+{
+	t_list	*copy;
+
+	copy = *arr;
+	while (copy)
+	{
+		if (*(int *)copy->content >= *ls
+			&& (*(ls + 1) == 0 || *(int *)copy->content < *(ls + 1)))
+		{
+			ft_pushing_pb(arr, arr1, arrlen);
+		}
+		copy = copy->next;
+		ft_rotating_ra(arr);
+	}
+}
 void	sort_stack(t_list **arr, t_list	**arr1, int *arrlen)
 {
 	int		index;
@@ -225,7 +302,8 @@ void	sort_stack(t_list **arr, t_list	**arr1, int *arrlen)
 			small++;
 		}
 		ft_pushing_pa(arr, arr1, arrlen);
-		if (small == (ft_lstsize(*arr1) + 1) && index != ft_lstsize(*arr1))
+		if (small == (ft_lstsize(*arr1) + 1) && index != ft_lstsize(*arr1)
+			&& *arr)
 			ft_rotating_ra(arr);
 	}
 	if (*arr1)
@@ -264,7 +342,6 @@ void	issue_comms(t_list **arr, t_list	**wrkngstck, int *arrlen, int mode)
 	cutoff = 0;
 	if (mode == 0)
 		sort_smallstack(arr, wrkngstck, arrlen);
-	//FIXTHIS
 	else if (mode == 1)
 	{
 		cutoff = calc_median(*arr, 2);
@@ -272,18 +349,17 @@ void	issue_comms(t_list **arr, t_list	**wrkngstck, int *arrlen, int mode)
 		// sort_stack(arr, wrkngstck, arrlen);
 		while (counter < 2)
 		{
-			push_to_work(arr, wrkngstck, cutoff, arrlen);
+			push_to_work_half(arr, wrkngstck, cutoff, arrlen);
+			sort_stack(arr, wrkngstck, arrlen);
 			cutoff = cutoff + 1;
 			counter++;
 		}
-		sort_stack(arr, wrkngstck, arrlen);
+		move_to_bottom(arr, cutoff - 1);
 	}
 	else
 	{
-		cutoff = calc_median(*arr, 2);
-		// push_to_work(arr, wrkngstck, cutoff, arrlen);
-		// sort_stack(arr, wrkngstck, arrlen);
-		while (counter < 2)
+		cutoff = calc_median(*arr, 4);
+		while (counter < 4)
 		{
 			push_to_work(arr, wrkngstck, cutoff, arrlen);
 			sort_stack(arr, wrkngstck, arrlen);
@@ -291,7 +367,6 @@ void	issue_comms(t_list **arr, t_list	**wrkngstck, int *arrlen, int mode)
 			cutoff = cutoff + 1;
 			counter++;
 		}
-		//sort_stack(arr, wrkngstck, arrlen);
 	}
 }
 
@@ -314,10 +389,10 @@ char	ft_sort(t_list **arr, int arrlen)
 
 	if (arrlen <= 4)
 		mode = 0;
-	else if (arrlen <= 100)
+	else if (arrlen <= 5)
 		mode = 1;
 	else
-		mode = 1;
+		mode = 2;
 	lencpy = arrlen;
 	workingstack = 0;
 	while (ft_check_order(*arr, lencpy) || lencpy != arrlen)

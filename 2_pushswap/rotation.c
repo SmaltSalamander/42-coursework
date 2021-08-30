@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 13:23:15 by sbienias          #+#    #+#             */
-/*   Updated: 2021/08/29 21:13:55 by sbienias         ###   ########.fr       */
+/*   Updated: 2021/08/30 19:29:38 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ void	ft_rotating_rb(t_list **wrkngstck)
 	last = ft_lstlast(*wrkngstck);
 	last->next = ele;
 	ele->next = 0x0;
-	// ft_lstadd_back(wrkngstck, ft_lstnew(ele->content));
-	// *wrkngstck = (*wrkngstck)->next;
-	// free(ele);
 	ft_putstr_fd("rb\n", 1);
 }
 
@@ -42,10 +39,8 @@ void	ft_rotating_ra(t_list **arr)
 	ele = *arr;
 	*arr = (*arr)->next;
 	last = ft_lstlast(*arr);
-	// ft_lstadd_back(arr, ft_lstnew(ele->content));
 	last->next = ele;
 	ele->next = 0x0;
-	// free(ele);
 	ft_putstr_fd("ra\n", 1);
 }
 
@@ -76,11 +71,11 @@ void	ft_rev_rotating_ra(t_list **arr)
 	t_list	*cpy;
 
 	ele = ft_lstlast(*arr);
-	ft_lstadd_front(arr, ft_lstnew(ele->content));
+	ele->next = *arr;
+	*arr = ele;
 	cpy = *arr;
 	while (cpy->next != ele)
 		cpy = cpy->next;
-	cpy->next = 0;
-	free(ele);
+	cpy->next = 0x0;
 	ft_putstr_fd("rra\n", 1);
 }
