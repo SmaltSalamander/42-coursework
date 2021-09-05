@@ -16,7 +16,7 @@
 # include <stdlib.h>
 # include "./libft/libft.h"
 
-char	ft_sort(t_list **arr, int arrlen);
+void	ft_sort(t_list **arr, int arrlen);
 int		ft_check_order(t_list *arr, int arrlen);
 void	ft_rotating_rb(t_list **wrkngstck);
 void	ft_rotating_ra(t_list **arr);
@@ -24,5 +24,12 @@ void	ft_rev_rotating_rb(t_list **wrkngstck);
 void	ft_rev_rotating_ra(t_list **arr);
 void	ft_pushing_pb(t_list **arr, t_list **wrkngstck, int *arrlen);
 void	ft_pushing_pa(t_list **arr, t_list **wrkngstck, int *arrlen);
+void	ft_swapping(t_list *arr, t_list *wrkngstck);
+void	sort_3(t_list **arr, t_list **arr1, int *arrlen);
+void	sort_smallstack(t_list **arr, t_list **arr1, int *arrlen);
+int		lookforval(t_list *arr, int mode);
+void	ft_srtarr(int **array, int size);
+int		*calc_median(t_list *arr, int amount, int length);
+void	ft_swapping(t_list *arr, t_list *wrkngstck);
 
 #endif

@@ -12,7 +12,8 @@
 
 CC = gcc
 
-SRC = main.c commands.c pushing.c rotation.c
+SRC = main.c commands.c pushing.c rotation.c sort_small.c search_median.c \
+swapping.c
 
 #BONUS =
 

@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 13:23:15 by sbienias          #+#    #+#             */
-/*   Updated: 2021/08/30 19:29:38 by sbienias         ###   ########.fr       */
+/*   Updated: 2021/09/05 20:51:54 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,30 @@ void	ft_rotating_ra(t_list **arr)
 	ele->next = 0x0;
 	ft_putstr_fd("ra\n", 1);
 }
+
+// void	ft_rotating(t_list **arr, t_list **wrkngstck)
+// {
+// 	int	initrotb;
+// 	int	initrota;
+
+// 	initrotb = 0;
+// 	initrota = 0;
+// 	if (wrkngstck && wrkngstck->next)
+// 	{
+// 		if (*(int *)(*wrkngstck)->content )
+// 		initrotb = ft_swapping_sb(wrkngstck);
+// 	}
+// 	if (arr && arr->next)
+// 	{
+// 		initrota = ft_swapping_sa(arr);
+// 	}
+// 	if (initrotb && initrota)
+// 		ft_putstr_fd("ss\n", 1);
+// 	else if (!initrotb && initrota)
+// 		ft_putstr_fd("sa\n", 1);
+// 	else if (initrotb && !initrota)
+// 		ft_putstr_fd("sb\n", 1);	
+// }
 
 // rrb : reverse rotate b - shift down all elements of stack b by 1.
 // The last element becomes the first one.
