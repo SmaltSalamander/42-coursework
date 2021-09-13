@@ -6,11 +6,36 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 20:45:32 by sbienias          #+#    #+#             */
-/*   Updated: 2021/09/02 21:52:00 by sbienias         ###   ########.fr       */
+/*   Updated: 2021/09/13 12:27:31 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
+
+int	*canidadates_in_range(t_list **arr, int *ls)
+{
+	int		*candidates;
+	t_list	*copy;
+	int		counter;
+
+	counter = 0;
+	copy = *arr;
+	candidates = malloc(sizeof(int) * 2);
+	candidates[0] = -1;
+	candidates[1] = -1;
+	while (copy)
+	{
+		if (*(int *)copy->content <= *ls && candidates[0] == -1
+			&& (*(ls + 1) == 0 || *(int *)copy->content > *(ls + 1)))
+			candidates[0] = counter;
+		if (*(int *)copy->content <= *ls
+			&& (*(ls + 1) == 0 || *(int *)copy->content > *(ls + 1)))
+			candidates[1] = counter;
+		counter++;
+		copy = copy->next;
+	}
+	return (candidates);
+}
 
 void	ft_srtarr(int **array, int size)
 {
@@ -24,7 +49,7 @@ void	ft_srtarr(int **array, int size)
 		j = counter + 1;
 		while (j < size)
 		{
-			if ((*array)[counter] > (*array)[j])
+			if ((*array)[counter] < (*array)[j])
 			{
 				check = (*array)[counter];
 				(*array)[counter] = (*array)[j];
@@ -57,13 +82,29 @@ int	*calc_median(t_list *arr, int amount, int size)
 	counter = 0;
 	res[counter] = array[counter];
 	while (++counter < amount)
-		res[counter] = array[(size / amount) * counter + (size % amount)];
-	res[counter++] = array[size - 1] + 1;
+		res[counter] = array[(size / amount) * counter];
+	res[counter++] = array[size - 1] - 1;
 	res[counter] = 0;
 	free(array);
 	return (res);
 }
 
+int	valatindex(t_list *arr, int index)
+{
+	int		counter;
+	t_list	*copy;
+
+	counter = 0;
+	copy = arr;
+	while (counter != index)
+	{
+		copy = copy->next;
+		counter++;
+	}
+	return (*(int *)copy->content);
+}
+
+// Look for the smallest (0) or biggest (1)
 int	lookforval(t_list *arr, int mode)
 {
 	int	index;

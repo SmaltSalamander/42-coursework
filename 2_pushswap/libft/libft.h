@@ -70,7 +70,9 @@ int		ft_lstsize(t_list *lst);
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
 int		ft_printf(const char *format, ...);
 char	*itoa_unsign(unsigned long num);
+int		get_next_line(int fd, char **line);
 
 #endif

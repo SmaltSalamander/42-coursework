@@ -13,9 +13,9 @@
 CC = gcc
 
 SRC = main.c commands.c pushing.c rotation.c sort_small.c search_median.c \
-swapping.c
+swapping.c array_manipulation.c
 
-#BONUS =
+BONUS = checker_prog.c array_manipulation.c pushing.c rotation.c swapping.c
 
 OBJS = $(SRC:.c=.o)
 OBJSBONUS = $(BONUS:.c=.o)
@@ -25,6 +25,7 @@ LIBPATH = ./libft
 DEPS = libft.h
 NAME = push_swap
 LIBRARY = libft.a
+BSNAME = checker
 
 all: $(NAME)
 
@@ -43,14 +44,14 @@ archive:
 debug: $(SRC) $(LIBRARY)
 	$(CC) -g -o a.out $(CFLAGS) $(SRC) -L $(LIBPATH) -lft
 
-bonus: $(OBJSBONUS)
-	ar rc $(NAME) $(OBJSBONUS)
+bonus: $(BONUS) $(LIBRARY)
+	$(CC) -o $(BSNAME) -g $(CFLAGS) $(BONUS) -L $(LIBPATH) -lft
 
 clean:
 	/bin/rm -fr *.o *.so a.out *.debug ./a.out.dSYM
 
 fclean: clean
-	/bin/rm -f $(NAME)
+	/bin/rm -f $(NAME) $(BSNAME)
 
 re: fclean all
 

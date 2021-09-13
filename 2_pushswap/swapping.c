@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 14:53:23 by sbienias          #+#    #+#             */
-/*   Updated: 2021/09/05 20:41:31 by sbienias         ###   ########.fr       */
+/*   Updated: 2021/09/13 15:32:36 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_swapping_sa(t_list *arr)
 	return (0);
 }
 
-void	ft_swapping(t_list *arr, t_list *wrkngstck)
+void	ft_swapping(t_list *arr, t_list *wrkngstck, int print)
 {
 	int	initswapb;
 	int	initswapa;
@@ -58,6 +58,8 @@ void	ft_swapping(t_list *arr, t_list *wrkngstck)
 	{
 		initswapa = ft_swapping_sa(arr);
 	}
+	if (!print)
+		return ;
 	if (initswapb && initswapa)
 		ft_putstr_fd("ss\n", 1);
 	else if (!initswapb && initswapa)
