@@ -12,7 +12,7 @@
 
 CC = gcc
 
-SRC = ft_printf.c ft_printf_util.c
+SRC = main.c
 
 #BONUS =
 
@@ -20,20 +20,22 @@ OBJS = $(SRC:.c=.o)
 OBJSBONUS = $(BONUS:.c=.o)
 TEST = test.c
 CFLAGS = -Wall -Werror -Wextra
-MINILIBXPATH = ./minilibx_macos
+MINILIBXPATH = ./minilbxMac
 DEPS = ft_printf.h
-NAME = so_long
+NAME = so_long.out
 LIBRARY = libmlx.a
 
-all: $(NAME)
+all: $(LIBRARY) $(NAME)
+
+%.o: %.c
+	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
+
+$(NAME): $(OBJ)
+	$(CC) -L /usr/X11/lib -lXext -lX11 $(SRC) $(LIBRARY)
 
 $(LIBRARY):
-	make -C $(LIBFTPATH)
-	cp ./minilibx_macos/libmlx.a $(NAME)
-
-$(NAME): $(OBJS) $(LIBRARY)
-	ar rc $(NAME) $(OBJS)
-	ranlib $(NAME)
+	make -C $(MINILIBXPATH)
+	cp $(MINILIBXPATH)/$(LIBRARY) .
 
 olib: $(SRC) $(DEPS)
 	$(CC) -c $(CFLAGS) $(SRC)
