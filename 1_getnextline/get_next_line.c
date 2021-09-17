@@ -15,26 +15,6 @@
 #include "get_next_line.h"
 #ifdef BUFFER_SIZE
 
-void	*ft_calloc(unsigned long nmemb, unsigned long size)
-{
-	char			*mem;
-	unsigned long	n;
-	unsigned long	counter;
-
-	counter = 0;
-	mem = (char *)malloc(size);
-	if (mem == NULL)
-		return (NULL);
-	n = nmemb * size;
-	while (n > 0)
-	{
-		*(char *)(mem + counter) = 0;
-		n--;
-		counter++;
-	}
-	return (mem);
-}
-
 int	create_line(char **line, char **tempbuff)
 {
 	int		counter;

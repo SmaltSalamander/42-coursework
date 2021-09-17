@@ -22,7 +22,7 @@ TEST = test.c
 CFLAGS = -Wall -Werror -Wextra
 MINILIBXPATH = ./minilibx_macos
 DEPS = ft_printf.h
-NAME = fdf
+NAME = so_long
 LIBRARY = libmlx.a
 
 all: $(NAME)
