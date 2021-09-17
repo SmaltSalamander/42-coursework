@@ -6,62 +6,94 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 12:39:36 by sbienias          #+#    #+#             */
-/*   Updated: 2021/09/13 19:14:50 by sbienias         ###   ########.fr       */
+/*   Updated: 2021/09/15 17:53:32 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
-#include <stdio.h>
 
-int	interpret_command(t_list **arr, t_list **arr1, char *com)
+int	interpret_rotations(t_list **arr, t_list **arr1, t_list **comms)
 {
-	int	length;
+	t_list	*copy;
 
-	length = 0;
-	if (!ft_strncmp(com, "sa", 2))
-		ft_swapping(*arr, 0, 0);
-	else if (!ft_strncmp(com, "sb", 2))
-		ft_swapping(0, *arr1, 0);
-	else if (!ft_strncmp(com, "sa", 2))
-		ft_swapping(*arr, *arr1, 0);
-	else if (!ft_strncmp(com, "ra", 2))
+	copy = *comms;
+	if (!ft_strncmp(copy->content, "ra\0", 3))
 		ft_rotating_ra(arr, 0);
-	else if (!ft_strncmp(com, "rb", 2))
+	else if (!ft_strncmp(copy->content, "rb\0", 3))
 		ft_rotating_rb(arr1, 0);
-	else if (!ft_strncmp(com, "rra", 3))
+	else if (!ft_strncmp(copy->content, "rra\0", 4))
 		ft_rev_rotating_ra(arr, 0);
-	else if (!ft_strncmp(com, "rrb", 3))
+	else if (!ft_strncmp(copy->content, "rrb\0", 4))
 		ft_rev_rotating_rb(arr1, 0);
-	else if (!ft_strncmp(com, "pa", 2))
-		ft_pushing_pa(arr, arr1, &length, 0);
-	else if (!ft_strncmp(com, "pb", 2))
-		ft_pushing_pb(arr, arr1, &length, 0);
+	else if (!ft_strncmp(copy->content, "rrr\0", 4))
+	{
+		ft_rev_rotating_ra(arr, 0);
+		ft_rev_rotating_rb(arr1, 0);
+	}
+	else if (!ft_strncmp(copy->content, "rr\0", 3))
+	{
+		ft_rotating_ra(arr, 0);
+		ft_rotating_rb(arr1, 0);
+	}
 	else
 		return (0);
 	return (1);
 }
 
-void	read_commands(t_list *arr)
+int	interpret_command(t_list **arr, t_list **arr1, t_list **comms)
+{
+	int		length;
+	t_list	*copy;
+
+	copy = *comms;
+	length = 2;
+	if (!ft_strncmp(copy->content, "sa\0", 3))
+		ft_swapping(*arr, 0, 0);
+	else if (!ft_strncmp(copy->content, "sb\0", 3))
+		ft_swapping(0, *arr1, 0);
+	else if (!ft_strncmp(copy->content, "ss\0", 3))
+		ft_swapping(*arr, *arr1, 0);
+	else if (!ft_strncmp(copy->content, "pa\0", 3))
+		ft_pushing_pa(arr, arr1, &length, 0);
+	else if (!ft_strncmp(copy->content, "pb\0", 3))
+		ft_pushing_pb(arr, arr1, &length, 0);
+	else
+		length = interpret_rotations(arr, arr1, comms);
+	*comms = (*comms)->next;
+	ft_lstdelone(copy, free);
+	if (length != 0 && *comms)
+		interpret_command(arr, arr1, comms);
+	return (length);
+}
+
+void	add_to_list(char *string, t_list **list)
+{
+	t_list	*element;
+	char	*strcpy;
+
+	strcpy = ft_strdup(string);
+	element = ft_lstnew((char *)strcpy);
+	ft_lstadd_back(list, element);
+}
+
+int	read_commands(t_list *arr)
 {
 	int		test;
 	char	*command;
 	t_list	*wrkng;
 	int		len;
-	int		command_flow;
+	t_list	*cmdlist;
 
 	len = ft_lstsize(arr);
 	wrkng = 0;
-	test = get_next_line(0, &command);
-	while (test)
-	{
-		command_flow = interpret_command(&arr, &wrkng, command);
-		if (!command_flow)
-		{
-			write(2, "Error\n", 6);
-			return ;
-		}
-		test = get_next_line(0, &command);
-	}
+	cmdlist = 0;
+	test = 1;
+	while (get_next_line(0, &command))
+		add_to_list(command, &cmdlist);
+	if (cmdlist)
+		test = interpret_command(&arr, &wrkng, &cmdlist);
+	if (test == 0)
+		return (1);
 	test = ft_check_order(arr, len);
 	if (wrkng)
 		ft_lstclear(&wrkng, free);
@@ -69,6 +101,7 @@ void	read_commands(t_list *arr)
 		write(1, "OK\n", 3);
 	else if (test == 1)
 		write(1, "KO\n", 3);
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -87,10 +120,10 @@ int	main(int argc, char **argv)
 		if (error == 0)
 			error = dup_check(arr);
 		if (error == 0)
-			read_commands(arr);
+			error = read_commands(arr);
 	}
 	else
-		error = 1;
+		return (1);
 	if (arr)
 		ft_lstclear(&arr, free);
 	if (!error)

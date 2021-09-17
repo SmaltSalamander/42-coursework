@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "pushswap.h"
 
 int	main(int argc, char **argv)
@@ -32,7 +31,7 @@ int	main(int argc, char **argv)
 			ft_sort(&arr, (argc - 1));
 	}
 	else
-		error = 1;
+		return (0);
 	if (arr)
 		ft_lstclear(&arr, free);
 	if (!error)

@@ -6,17 +6,17 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 14:53:23 by sbienias          #+#    #+#             */
-/*   Updated: 2021/09/13 15:32:36 by sbienias         ###   ########.fr       */
+/*   Updated: 2021/09/13 19:55:39 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pushswap.h"
 
-int	ft_swapping_sb(t_list *wrkngstck)
+int	ft_swapping_sb(t_list *wrkngstck, int print)
 {
 	int	temp;
 
-	if (wrkngstck->content && ft_lstsize(wrkngstck) > 1)
+	if ((wrkngstck->content && ft_lstsize(wrkngstck) > 1) || !print)
 	{
 		if (*(int *)wrkngstck->content < *(int *)(wrkngstck->next)->content)
 		{
@@ -29,11 +29,11 @@ int	ft_swapping_sb(t_list *wrkngstck)
 	return (0);
 }
 
-int	ft_swapping_sa(t_list *arr)
+int	ft_swapping_sa(t_list *arr, int print)
 {
 	int	temp;
 
-	if (*(int *)arr->content > *(int *)(arr->next)->content)
+	if (*(int *)arr->content > *(int *)(arr->next)->content || !print)
 	{
 		temp = *(int *) arr->content;
 		*(int *)arr->content = *(int *)(arr->next)->content;
@@ -52,11 +52,11 @@ void	ft_swapping(t_list *arr, t_list *wrkngstck, int print)
 	initswapa = 0;
 	if (wrkngstck && wrkngstck->next)
 	{
-		initswapb = ft_swapping_sb(wrkngstck);
+		initswapb = ft_swapping_sb(wrkngstck, print);
 	}
 	if (arr && arr->next)
 	{
-		initswapa = ft_swapping_sa(arr);
+		initswapa = ft_swapping_sa(arr, print);
 	}
 	if (!print)
 		return ;

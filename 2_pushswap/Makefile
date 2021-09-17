@@ -19,42 +19,32 @@ BONUS = checker_prog.c array_manipulation.c pushing.c rotation.c swapping.c
 
 OBJS = $(SRC:.c=.o)
 OBJSBONUS = $(BONUS:.c=.o)
-TEST = test.c
 CFLAGS = -Wall -Werror -Wextra
 LIBPATH = ./libft
-DEPS = libft.h
 NAME = push_swap
 LIBRARY = libft.a
 BSNAME = checker
 
-all: $(NAME)
+all: $(LIBRARY) $(NAME)
+
+bonus: $(LIBRARY) $(BSNAME)
 
 $(LIBRARY):
 	make -C $(LIBPATH)
 
-$(NAME): $(LIBRARY) $(OBJS)
-	$(CC) -g $(CFLAGS) -o $(NAME) $(OBJS) -L $(LIBPATH) -lft
-
-olib: $(SRC) $(DEPS)
-	$(CC) -c $(CFLAGS) $(SRC)
-
-archive:
-	ar rc $(NAME) *.o
+$(NAME): $(SRC) 
+	$(CC) -g $(CFLAGS) -o $(NAME) $(SRC) -L $(LIBPATH) -lft
 
 debug: $(SRC) $(LIBRARY)
 	$(CC) -g -o a.out $(CFLAGS) $(SRC) -L $(LIBPATH) -lft
 
-bonus: $(BONUS) $(LIBRARY)
-	$(CC) -o $(BSNAME) -g $(CFLAGS) $(BONUS) -L $(LIBPATH) -lft
+$(BSNAME): $(BONUS) 
+	$(CC) $(CFLAGS) -o $(BSNAME) $(BONUS) -L $(LIBPATH) -lft
 
 clean:
-	/bin/rm -fr *.o *.so a.out *.debug ./a.out.dSYM
+	/bin/rm -fr $(OBJS) $(OBJSBONUS) a.out ./a.out.dSYM
 
 fclean: clean
 	/bin/rm -f $(NAME) $(BSNAME)
 
 re: fclean all
-
-so:
-	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRC) $(BONUS)
-	$(CC) -nostartfiles -shared -o libft.so $(OBJS) $(OBJSBONUS)

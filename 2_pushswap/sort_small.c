@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/31 20:43:41 by sbienias          #+#    #+#             */
-/*   Updated: 2021/09/13 15:37:37 by sbienias         ###   ########.fr       */
+/*   Updated: 2021/09/15 18:55:07 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	sort_smallstack(t_list **arr, t_list **arr1, int *arrlen)
 		ft_pushing_pb(arr, arr1, arrlen, 1);
 		small = lookforval(*arr, 0);
 	}
-	if (*arrlen == 3)
+	if (*arrlen <= 3)
 		sort_3(arr, arr1, arrlen);
 	while (*arr1)
 	{

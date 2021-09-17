@@ -30,7 +30,11 @@ void	push_to_work(t_list **arr, t_list **arr1, int *ls, int *arrlen)
 		ft_pushing_pb(arr, arr1, arrlen, 1);
 	}	
 	if (candidates[0] == candidates[1] && candidates[0] == -1)
+	{
+		free(candidates);
 		return ;
+	}
+	free(candidates);
 	push_to_work(arr, arr1, ls, arrlen);
 }
 
@@ -107,14 +111,14 @@ void	issue_comms(t_list **arr, t_list	**wrkngstck, int *arrlen, int parts)
 		cutoff = calc_median(*arr, parts, -1);
 		while (counter < parts)
 		{
-			push_to_work(arr, wrkngstck, cutoff, arrlen);
+			push_to_work(arr, wrkngstck, cutoff + counter, arrlen);
 			if (counter)
 				move_to_bottom(arr, element);
 			sort_stack(arr, wrkngstck, arrlen);
-			cutoff = cutoff + 1;
 			element = *(int *)(*arr)->content;
 			counter++;
 		}
+		free(cutoff);
 	}
 }
 
