@@ -12,59 +12,38 @@
 
 CC = gcc
 
-SRC = main.c
+SRC = ft_calloc.c ft_isascii.c ft_itoa.c ft_memcmp.c ft_memset.c \
+ft_putnbr_fd.c ft_strjoin.c ft_strlen.c ft_strrchr.c ft_tolower.c ft_atoi.c \
+ft_isalnum.c ft_isdigit.c ft_memccpy.c ft_memcpy.c ft_putchar_fd.c ft_strchr.c \
+ft_strlcat.c ft_strncmp.c ft_strtrim.c ft_toupper.c ft_bzero.c ft_isalpha.c \
+ft_isprint.c ft_memchr.c ft_memmove.c ft_putendl_fd.c ft_strdup.c \
+ft_strlcpy.c ft_strnstr.c ft_substr.c ft_putstr_fd.c ft_split.c ft_strmapi.c \
+ft_itoa_numsys.c ft_printf_util.c ft_printf.c ft_get_next_line.c
 
-#BONUS =
+BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstdelone.c \
+ft_lstlast.c ft_lstsize.c ft_lstadd_back.c ft_lstiter.c ft_lstclear.c \
+ft_lstmap.c
 
 OBJS = $(SRC:.c=.o)
 OBJSBONUS = $(BONUS:.c=.o)
 TEST = test.c
 CFLAGS = -Wall -Werror -Wextra
-MINILIBXPATH = ./mlx
-DEPS = ft_printf.h
-NAME = so_long.out
-LIBRARY = libmlx.a
-LIBFTPATH = ./libft
+DEPS = libft.h
+NAME = libft.a
 
-all: $(LIBRARY) libft.a $(NAME)
+all: $(NAME)
 
-# Mac
-# %.o: %.c
-# 	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
-# Linux
-%.o: %.c
-	$(CC) -Wall -Wextra -Werror -I/usr/include -Imlx -O3 -c $< -o $@
-# Mac
-# $(NAME): $(OBJ)
-# 	$(CC) -L /usr/X11/lib -lXext -lX11 $(SRC) $(LIBRARY)
-# Linux
-$(NAME): $(SRC)
-	$(CC) $(SRC) $(LIBRARY) -g -L/usr/include/X11/extensions -lX11 -lXext -L $(LIBFTPATH) -lft
+$(NAME): $(OBJS) $(OBJSBONUS)
+	ar rc $(NAME) $(OBJS) $(OBJSBONUS)
 
-$(LIBRARY):
-	make -C $(MINILIBXPATH)
-	cp $(MINILIBXPATH)/$(LIBRARY) .
-
-libft.a:
-	make -C $(LIBFTPATH)
-
-olib: $(SRC) $(DEPS)
-	$(CC) -c $(CFLAGS) $(SRC)
-
-archive:
-	ar rc $(NAME) $(OBJS)
-
-debug: $(SRC) $(TEST) $(LIBRARY)
-	$(CC) -g -o a.out $(CFLAGS) $(TEST) $(SRC) $(NAME)
-
-bonus: $(OBJSBONUS)
-	ar rc $(NAME) $(OBJSBONUS)
+debug: $(SRC) $(TEST)
+	$(CC) -g -o $(NAME).debug $(CFLAGS) $(TEST) $(SRC) -lbsd
 
 clean:
-	/bin/rm -f $(OBJS) a.out
+	/bin/rm -f $(OBJS) $(OBJSBONUS) *.so a.out *.debug
 
 fclean: clean
-	/bin/rm -f $(NAME) $(LIBRARY)
+	/bin/rm -f $(NAME)
 
 re: fclean all
 

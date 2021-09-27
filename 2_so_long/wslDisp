@@ -1,0 +1,2 @@
+export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0.0
+172.18.80.1:0.0
