@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 14:52:44 by sbienias          #+#    #+#             */
-/*   Updated: 2021/09/27 21:57:35 by sbienias         ###   ########.fr       */
+/*   Updated: 2021/10/01 12:45:43 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,17 +98,17 @@ void draw(t_window *mlx, t_data *img, t_list *map)
 	int		y;
 	int		counter;
 	char	*line;
+	t_list	*copy;
 
 	counter = 0;
 	x = 0;
 	y = 0;
-	while (map)
+	copy = map;
+	while (copy)
 	{
-		line = map->content;
+		line = copy->content;
 		while (*(line + counter))
 		{
-			(*img).img = mlx_xpm_file_to_image((*mlx).mlx, "./bg.xpm", &(*img).width, &(*img).height);
-			mlx_put_image_to_window((*mlx).mlx, (*mlx).win, (*img).img, x, y);
 			if (*(line + counter) == '1')
 			{
 				(*img).img = mlx_xpm_file_to_image((*mlx).mlx, "./wall1.xpm", &(*img).width, &(*img).height);
@@ -129,17 +129,61 @@ void draw(t_window *mlx, t_data *img, t_list *map)
 				(*img).img = mlx_xpm_file_to_image((*mlx).mlx, "./wolf6.xpm", &(*img).width, &(*img).height);
 				mlx_put_image_to_window((*mlx).mlx, (*mlx).win, (*img).img, x, y);
 			}
+			else
+			{
+				(*img).img = mlx_xpm_file_to_image((*mlx).mlx, "./bg.xpm", &(*img).width, &(*img).height);
+				mlx_put_image_to_window((*mlx).mlx, (*mlx).win, (*img).img, x, y);
+			}
 			counter++;
 			x += 32;
 		}
 		if (counter == 0)
 			break ;
-		map = map->next;
+		copy = copy->next;
 		y += 32;
 		x = 0;
 		counter = 0;
 	}
-	ft_printf("out\n");
+}
+
+void	move_char(t_list *map, char dir)
+{
+	t_list	*prev;
+	t_list	*curr;
+	int		counter;
+
+	prev = map;
+	curr = prev->next;
+	while (curr->next)
+	{
+		counter = 0;
+		while (*(char *)(curr->content + counter) != 'P' && *(char *)(curr->content + counter))
+			counter++;
+		if (*(char *)(curr->content + counter) == 'P')
+			break ;
+		prev = curr;
+		curr = curr->next;
+	}
+	if (dir == 'u' && *(char *)(prev->content + counter) != '1')
+	{
+		*(char *)(prev->content + counter) = 'P';
+		*(char *)(curr->content + counter) = '0';
+	}
+	else if (dir == 'l' && *(char *)(curr->content + counter - 1) != '1')
+	{
+		*(char *)(curr->content + counter - 1) = 'P';
+		*(char *)(curr->content + counter) = '0';
+	}
+	else if (dir == 'r' && *(char *)(curr->content + counter + 1) != '1')
+	{
+		*(char *)(curr->content + counter + 1) = 'P';
+		*(char *)(curr->content + counter) = '0';
+	}
+	else if (dir == 'd' && *(char *)(curr->next->content + counter) != '1')
+	{
+		*(char *)(curr->next->content + counter) = 'P';
+		*(char *)(curr->content + counter) = '0';
+	}
 }
 
 int	catch_key(int key, t_list *map)
@@ -148,38 +192,25 @@ int	catch_key(int key, t_list *map)
 	t_list *curr;
 	int	counter;
 
-	prev = *map;
-	curr = prev->next;
-	while (curr->next)
-	{
-		counter = 0;
-		while (*(char *)(curr->content + counter) != 'P' && *(char *)curr->content)
-			counter++;
-		if (*(char *)(curr->content + counter) == 'P')
-			break ;
-		prev = curr;
-		curr = curr->next;
-	}
 	if (key == 119)
 	{
 		ft_putchar_fd('u', 1);
-		if (*(char *)(prev->content + counter) != '1')
-		{
-			*(char *)(prev->content + counter) = 'P';
-			*(char *)(curr->content + counter) = '0';
-		}
+		move_char(map, 'u');
 	}
 	else if (key == 97)
 	{
 		ft_putchar_fd('l', 1);
+		move_char(map, 'l');
 	}
 	else if (key == 100)
 	{
 		ft_putchar_fd('r', 1);
+		move_char(map, 'r');
 	}
 	else if (key == 115)
 	{
 		ft_putchar_fd('d', 1);
+		move_char(map, 'd');
 	}
 	else if (key == 65307)
 		exit(0);
@@ -195,10 +226,10 @@ int	close_game(void *param)
 
 
 
-int	render(t_window mlx)
+int	render(t_window *mlx)
 {
-	draw(&mlx, &(mlx.img), mlx.map);
-	sleep(1);
+	draw(mlx, &((*mlx).img), (*mlx).map);
+	// sleep(1);
 	return (0);
 }
 
@@ -227,7 +258,7 @@ int	main(int argc, char **argv)
 	// &img.line_length, &img.endian);
 
 	
-	mlx_key_hook(mlx.win, catch_key, &map);
+	mlx_key_hook(mlx.win, catch_key, mlx.map);
 	mlx_hook(mlx.win, 17, 1L << 17, close_game, 0);
 	mlx_loop_hook(mlx.mlx, render, (void *) &mlx);
 	mlx_loop(mlx.mlx);
