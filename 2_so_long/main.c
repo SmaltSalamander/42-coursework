@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 14:52:44 by sbienias          #+#    #+#             */
-/*   Updated: 2021/10/01 12:45:43 by sbienias         ###   ########.fr       */
+/*   Updated: 2021/10/01 21:24:06 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ typedef struct	s_window {
 	void	*win;
 	t_data	img;
 	t_list	*map;
+	int		score;
+	int		mov_count;
 }				t_window;
+
 
 int	read_ends(char *line)
 {
@@ -62,7 +65,7 @@ int	read_middle(char *line, int *events)
 	return (1);
 }
 
-int	map_error_check(int fd, t_list **map)
+int	map_error_check(int fd, t_list **map, int *score)
 {
 	char	*line;
 	int		status;
@@ -87,135 +90,147 @@ int	map_error_check(int fd, t_list **map)
 		status = 1;
 	else
 		status = 0;
+	*score = event_count[0];
 	ft_lstadd_back(map, ft_lstnew(line));
 	close(fd);
 	return (status);
 }
 
+void	put_sprite_in_win(char type, t_window *mlx, t_data *img, int *crds)
+{
+	if (type == '1')
+	{
+		(*img).img = mlx_xpm_file_to_image((*mlx).mlx, "./wall1.xpm", \
+		&(*img).width, &(*img).height);
+	}
+	else if (type == 'C')
+	{
+		(*img).img = mlx_xpm_file_to_image((*mlx).mlx, "./collect.xpm", \
+		&(*img).width, &(*img).height);
+	}
+	else if (type == 'E')
+	{
+		(*img).img = mlx_xpm_file_to_image((*mlx).mlx, "./exit1.xpm", \
+		&(*img).width, &(*img).height);
+	}
+	else if (type == 'P')
+	{
+		(*img).img = mlx_xpm_file_to_image((*mlx).mlx, "./wolf6.xpm", \
+		&(*img).width, &(*img).height);
+	}
+	else
+		(*img).img = mlx_xpm_file_to_image((*mlx).mlx, "./bg.xpm", \
+		&(*img).width, &(*img).height);
+	mlx_put_image_to_window((*mlx).mlx, (*mlx).win, (*img).img, *crds, crds[1]);
+}
+
 void draw(t_window *mlx, t_data *img, t_list *map)
 {
-	int		x;
-	int		y;
+	int		coords[2];
 	int		counter;
 	char	*line;
 	t_list	*copy;
 
 	counter = 0;
-	x = 0;
-	y = 0;
+	coords[0] = 0;
+	coords[1] = 0;
 	copy = map;
 	while (copy)
 	{
 		line = copy->content;
 		while (*(line + counter))
 		{
-			if (*(line + counter) == '1')
-			{
-				(*img).img = mlx_xpm_file_to_image((*mlx).mlx, "./wall1.xpm", &(*img).width, &(*img).height);
-				mlx_put_image_to_window((*mlx).mlx, (*mlx).win, (*img).img, x, y);
-			}
-			else if (*(line + counter) == 'C')
-			{
-				(*img).img = mlx_xpm_file_to_image((*mlx).mlx, "./collect.xpm", &(*img).width, &(*img).height);
-				mlx_put_image_to_window((*mlx).mlx, (*mlx).win, (*img).img, x, y);
-			}
-			else if (*(line + counter) == 'E')
-			{
-				(*img).img = mlx_xpm_file_to_image((*mlx).mlx, "./exit1.xpm", &(*img).width, &(*img).height);
-				mlx_put_image_to_window((*mlx).mlx, (*mlx).win, (*img).img, x, y);
-			}
-			else if (*(line + counter) == 'P')
-			{
-				(*img).img = mlx_xpm_file_to_image((*mlx).mlx, "./wolf6.xpm", &(*img).width, &(*img).height);
-				mlx_put_image_to_window((*mlx).mlx, (*mlx).win, (*img).img, x, y);
-			}
-			else
-			{
-				(*img).img = mlx_xpm_file_to_image((*mlx).mlx, "./bg.xpm", &(*img).width, &(*img).height);
-				mlx_put_image_to_window((*mlx).mlx, (*mlx).win, (*img).img, x, y);
-			}
+			put_sprite_in_win(*(line + counter), mlx, img, coords);
 			counter++;
-			x += 32;
+			coords[0] += 32;
 		}
 		if (counter == 0)
 			break ;
 		copy = copy->next;
-		y += 32;
-		x = 0;
+		coords[1] += 32;
+		coords[0] = 0;
 		counter = 0;
 	}
 }
 
-void	move_char(t_list *map, char dir)
+int	move_char(t_list *map, int dir, int *mov_count, int score)
 {
 	t_list	*prev;
 	t_list	*curr;
 	int		counter;
+	int		retval;
+	char	*currdir;
 
 	prev = map;
+	retval = 0;
 	curr = prev->next;
 	while (curr->next)
 	{
 		counter = 0;
-		while (*(char *)(curr->content + counter) != 'P' && *(char *)(curr->content + counter))
+		while (*(char *)(curr->content + counter) != 'P' \
+		&& *(char *)(curr->content + counter))
 			counter++;
 		if (*(char *)(curr->content + counter) == 'P')
 			break ;
 		prev = curr;
 		curr = curr->next;
 	}
-	if (dir == 'u' && *(char *)(prev->content + counter) != '1')
+	if (dir == 119)
+		currdir = (char *)(prev->content + counter);
+	else if (dir == 97)
+		currdir = (char *)(curr->content + counter - 1);
+	else if (dir == 100)
+		currdir = (char *)(curr->content + counter + 1);
+	else if (dir == 115)
+		currdir = (char *)(curr->next->content + counter);
+	if (*currdir != '1')
 	{
-		*(char *)(prev->content + counter) = 'P';
+		if (*currdir == 'C')
+			retval = 1;
+		else if (*currdir == 'E' && score == 0)
+			exit(0);
+		else if (*currdir == 'E')
+			return (0);
+		*currdir = 'P';
 		*(char *)(curr->content + counter) = '0';
+		*mov_count = *mov_count + 1;
 	}
-	else if (dir == 'l' && *(char *)(curr->content + counter - 1) != '1')
-	{
-		*(char *)(curr->content + counter - 1) = 'P';
-		*(char *)(curr->content + counter) = '0';
-	}
-	else if (dir == 'r' && *(char *)(curr->content + counter + 1) != '1')
-	{
-		*(char *)(curr->content + counter + 1) = 'P';
-		*(char *)(curr->content + counter) = '0';
-	}
-	else if (dir == 'd' && *(char *)(curr->next->content + counter) != '1')
-	{
-		*(char *)(curr->next->content + counter) = 'P';
-		*(char *)(curr->content + counter) = '0';
-	}
+	return (retval);
 }
 
-int	catch_key(int key, t_list *map)
+int	catch_key(int key, t_window *mlx)
 {
-	t_list *prev;
-	t_list *curr;
-	int	counter;
-
-	if (key == 119)
+	if (key == 119 || key == 97 || key == 100 || key == 115)
 	{
-		ft_putchar_fd('u', 1);
-		move_char(map, 'u');
-	}
-	else if (key == 97)
-	{
-		ft_putchar_fd('l', 1);
-		move_char(map, 'l');
-	}
-	else if (key == 100)
-	{
-		ft_putchar_fd('r', 1);
-		move_char(map, 'r');
-	}
-	else if (key == 115)
-	{
-		ft_putchar_fd('d', 1);
-		move_char(map, 'd');
+		if (move_char((*mlx).map, key, &((*mlx).mov_count), (*mlx).score))
+			(*mlx).score = (*mlx).score - 1;
 	}
 	else if (key == 65307)
 		exit(0);
-	else
-		return (0);
+	// {
+	// 	if (move_char((*mlx).map, 'u', &((*mlx).mov_count)))
+	// 		(*mlx).score = (*mlx).score - 1;
+	// }
+	// else if (key == 97)
+	// {
+	// 	if (move_char((*mlx).map, 'l', &((*mlx).mov_count)))
+	// 		(*mlx).score = (*mlx).score - 1;
+	// }
+	// else if (key == 100)
+	// {
+	// 	if (move_char((*mlx).map, 'r', &((*mlx).mov_count)))
+	// 		(*mlx).score = (*mlx).score - 1;
+	// }
+	// else if (key == 115)
+	// {
+	// 	if (move_char((*mlx).map, 'd', &((*mlx).mov_count)))
+	// 		(*mlx).score = (*mlx).score - 1;
+	// }
+
+	if (key == 119 || key == 97 || key == 100 || key == 115)
+		ft_putnbr_fd((*mlx).mov_count, 1);
+	ft_printf("Score %d\n", (*mlx).score);
+	return (0);
 }
 
 int	close_game(void *param)
@@ -224,13 +239,16 @@ int	close_game(void *param)
 	exit(0);
 }
 
-
-
 int	render(t_window *mlx)
 {
 	draw(mlx, &((*mlx).img), (*mlx).map);
-	// sleep(1);
 	return (0);
+}
+
+void	set_values(t_window *mlx, t_list *map)
+{
+	(*mlx).map = map;
+	(*mlx).mov_count = 0;
 }
 
 int	main(int argc, char **argv)
@@ -244,21 +262,18 @@ int	main(int argc, char **argv)
 		return (1);
 	map = 0;
 	status = open(argv[1], O_RDONLY);
-	if (map_error_check(status, &map) == 1)
+	if (map_error_check(status, &map,  &(mlx.score)) == 1)
 	{
 		ft_printf("Error\n");
 		return (1);
 	}
 	mlx.mlx = mlx_init();
 	mlx.win = mlx_new_window(mlx.mlx, ft_strlen(map->content)*32, ft_lstsize(map)*32, "Save meee");
-	mlx.map = map;
+	set_values(&mlx, map);
+	// mlx.map = map;
+	// mlx.score = 0;
 	draw(&mlx, &(mlx.img), mlx.map);
-	// img.img = mlx_new_image(mlx.mlx, 800, 600);
-	// img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, \
-	// &img.line_length, &img.endian);
-
-	
-	mlx_key_hook(mlx.win, catch_key, mlx.map);
+	mlx_key_hook(mlx.win, catch_key, (void *) &mlx);
 	mlx_hook(mlx.win, 17, 1L << 17, close_game, 0);
 	mlx_loop_hook(mlx.mlx, render, (void *) &mlx);
 	mlx_loop(mlx.mlx);
