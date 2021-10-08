@@ -39,7 +39,7 @@ all: $(LIBRARY) libft.a $(NAME)
 # 	$(CC) -L /usr/X11/lib -lXext -lX11 $(SRC) $(LIBRARY)
 # Linux
 $(NAME): $(SRC)
-	$(CC) $(SRC) $(LIBRARY) -g -L/usr/include/X11/extensions -lX11 -lXext -L $(LIBFTPATH) -lft
+	$(CC) $(SRC) $(LIBRARY) -g $(CFLAGS) -L/usr/include/X11/extensions -lX11 -lXext -L $(LIBFTPATH) -lft
 
 $(LIBRARY):
 	make -C $(MINILIBXPATH)
