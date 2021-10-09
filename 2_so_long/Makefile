@@ -12,7 +12,7 @@
 
 CC = gcc
 
-SRC = main.c
+SRC = main.c mapcheck.c putimg.c playermovement.c
 
 #BONUS =
 
@@ -25,7 +25,6 @@ DEPS = ft_printf.h
 NAME = so_long.out
 LIBRARY = libmlx.a
 LIBFTPATH = ./libft
-
 all: $(LIBRARY) libft.a $(NAME)
 
 # Mac
@@ -65,9 +64,6 @@ clean:
 
 fclean: clean
 	/bin/rm -f $(NAME) $(LIBRARY)
+	make -C $(LIBFTPATH) fclean
 
 re: fclean all
-
-so:
-	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRC) $(BONUS)
-	$(CC) -nostartfiles -shared -o libft.so $(OBJS) $(OBJSBONUS)
