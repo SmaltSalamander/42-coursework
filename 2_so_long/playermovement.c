@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   playermovement.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 17:55:22 by sbienias          #+#    #+#             */
-/*   Updated: 2021/10/09 17:55:40 by sbienias         ###   ########.fr       */
+/*   Updated: 2021/10/17 18:37:32 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,14 @@ char	*next_position(int dir, t_list *line, int counter)
 {
 	char	*currdir;
 
-	if (dir == 119)
+	currdir = (char *)(ft_lstlast(line)->content);
+	if (dir == UP)
 		currdir = (char *)(line->content + counter);
-	else if (dir == 97)
+	else if (dir == LEFT)
 		currdir = (char *)(line->next->content + counter - 1);
-	else if (dir == 100)
+	else if (dir == RIGHT)
 		currdir = (char *)(line->next->content + counter + 1);
-	else if (dir == 115)
+	else if (dir == DOWN)
 		currdir = (char *)(line->next->next->content + counter);
 	return (currdir);
 }

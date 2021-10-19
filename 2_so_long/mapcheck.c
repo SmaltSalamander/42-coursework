@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 16:21:01 by sbienias          #+#    #+#             */
-/*   Updated: 2021/10/09 18:00:03 by sbienias         ###   ########.fr       */
+/*   Updated: 2021/10/17 22:17:21 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	read_ends(char *line)
 {
+	if (!*line)
+		return (0);
 	while (*line)
 	{
 		if (*line != '1')

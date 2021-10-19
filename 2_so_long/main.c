@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 14:52:44 by sbienias          #+#    #+#             */
-/*   Updated: 2021/10/09 20:17:12 by sbienias         ###   ########.fr       */
+/*   Updated: 2021/10/17 22:21:13 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,18 @@ int	close_game(t_window *mlx)
 	if ((*mlx).map)
 		ft_lstclear(&(*mlx).map, free);
 	mlx_destroy_window((*mlx).mlx, (*mlx).win);
-	mlx_destroy_display((*mlx).mlx);
 	free((*mlx).mlx);
 	exit(0);
 }
 
 int	catch_key(int key, t_window *mlx)
 {
-	if (key == 119 || key == 97 || key == 100 || key == 115)
+	if (key == UP || key == LEFT || key == DOWN || key == RIGHT)
 	{
 		move_char(mlx, key);
 		draw(mlx, (*mlx).map, key);
 	}
-	else if (key == 65307)
+	else if (key == ESC)
 		close_game(mlx);
 	return (0);
 }
