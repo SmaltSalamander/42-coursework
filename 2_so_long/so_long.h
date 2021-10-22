@@ -44,7 +44,7 @@ typedef struct s_window {
 	int		mov_count;
 }				t_window;
 
-int		map_error_check(int fd, t_list **map, int *score);
+int		map_error_check(char *pthname, int fd, t_list **map, int *score);
 void	draw(t_window *mlx, t_list *map, int dir);
 void	move_char(t_window *mlx, int dir);
 int		close_game(t_window *mlx);

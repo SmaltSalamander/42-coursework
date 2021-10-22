@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/17 14:52:44 by sbienias          #+#    #+#             */
-/*   Updated: 2021/10/17 22:21:13 by sbienias         ###   ########.fr       */
+/*   Updated: 2021/10/22 13:05:06 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int argc, char **argv)
 		return (1);
 	mlx.map = 0;
 	status = open(argv[1], O_RDONLY);
-	if (map_error_check(status, &(mlx.map), &(mlx.score)) == 1)
+	if (map_error_check(argv[1], status, &(mlx.map), &(mlx.score)) == 1)
 	{
 		ft_lstclear(&(mlx.map), free);
 		ft_printf("Error\n");

@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 16:21:01 by sbienias          #+#    #+#             */
-/*   Updated: 2021/10/17 22:17:21 by sbienias         ###   ########.fr       */
+/*   Updated: 2021/10/22 14:05:52 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,23 @@ int	read_middle(char *line, int *events)
 	return (1);
 }
 
-int	map_error_check(int fd, t_list **map, int *score)
+int	checkmap(char *pathname)
+{
+	char	*extension;
+	int		result;
+
+	extension = ft_strrchr(pathname, '.');
+	result = ft_strncmp(extension + 1, "ber\0", 4);
+	return (result);
+}
+
+int	map_error_check(char *pthname, int fd, t_list **map, int *score)
 {
 	char	*line;
 	int		status;
 	int		event_count[3];
 
-	if (fd <= 0)
+	if (fd <= 0 || checkmap(pthname))
 		return (1);
 	status = get_next_line(fd, &line);
 	if (!status)
