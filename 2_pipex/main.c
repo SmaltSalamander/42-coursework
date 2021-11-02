@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 21:12:30 by sbienias          #+#    #+#             */
-/*   Updated: 2021/10/31 22:18:56 by sbienias         ###   ########.fr       */
+/*   Updated: 2021/11/01 20:58:49 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,6 @@ int	main(int argc, char **argv, char **envp)
 	if (processid == 0)
 		execute_command(str, envp);
 	else
-		ft_putstr_fd("\ntest\n", 1);
+		execute_command(str, envp);
 	return (0);
 }
