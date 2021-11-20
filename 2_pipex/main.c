@@ -6,12 +6,30 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 21:12:30 by sbienias          #+#    #+#             */
-/*   Updated: 2021/11/01 20:58:49 by sbienias         ###   ########.fr       */
+/*   Updated: 2021/11/20 23:27:13 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include "pipex.h"
+
+int	openfile(char *filename, int mode)
+{
+	if (mode == 0)
+	{
+		if (access(filename, R_OK))
+		{
+			perror("Failed to open ");
+			write(2, filename, ft_strlen(filename));
+			write(2, ": No such file or directory\n", 28);
+			exit(1);
+		}
+		return (open(filename, O_RDONLY));
+	}
+	else
+		return (open(filename, O_CREAT | O_WRONLY | O_TRUNC,
+				S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH));
+}
 
 char	**find_path(char **envp)
 {
@@ -34,49 +52,74 @@ char	**find_path(char **envp)
 	return (result);
 }
 
-void	execute_command(char **str, char **envp)
+void	execute_command(char *command, char **envp)
 {
 	char	*cmd;
 	int		i;
+	char	**str;
 
 	i = 0;
+	str = ft_split(command, ' ');
 	while (envp[i])
 	{
 		cmd = ft_strjoin(envp[i], *str);
-		ft_printf("%s\n", cmd);
-		execve((char const *) cmd, (char *const *)(str + 1), envp);
+		if (access(cmd, F_OK) == 0)
+		{
+			execve((char const *) cmd, (char *const *)(str), envp);
+		}
 		free(cmd);
 		i++;
 	}
-	ft_putstr_fd("failed all\n", 1);
-	return ;
+	perror("Command not found");
+	exit(1);
 }
 
-// < file1 cmd1 | cmd2 > file2
-int	main(int argc, char **argv, char **envp)
+// Fork 0 is child, 1 is parent
+void	pipex(char *command, char **envp)
 {
-	// int		fd1;
-	// int		fd2;
-	char	**str;
 	int		ends[2];
 	pid_t	processid;
 
-	if (argc < 2)
-		return (1);
-	// fd1 = open(argv[1], O_RDONLY);
-	// fd2 = open(argv[argc - 1], O_CREAT | O_RDWR | O_TRUNC, 0644);
-	str = ft_split(argv[2], ' ');
-	envp = find_path(envp);
 	pipe(ends);
 	processid = fork();
 	if (processid < 0)
 	{
 		perror("Fork failed");
-		return (1);
+		return ;
 	}
-	if (processid == 0)
-		execute_command(str, envp);
+	else if (processid > 0)
+	{
+		close(ends[1]);
+		dup2(ends[0], 0);
+		waitpid(processid, NULL, 0);
+	}
 	else
-		execute_command(str, envp);
+	{
+		close(ends[0]);
+		dup2(ends[1], 1);
+		execute_command(command, envp);
+	}
+}
+
+// < file1 cmd1 | cmd2 > file2
+int	main(int argc, char **argv, char **envp)
+{
+	int		fds[2];
+	int		commandcount;
+
+	if (argc < 2)
+		return (1);
+	envp = find_path(envp);
+	fds[0] = openfile(argv[1], 0);
+	fds[1] = openfile(argv[argc - 1], 1);
+	dup2(fds[0], 0);
+	dup2(fds[1], 1);
+	commandcount = 2;
+	while (commandcount < argc - 2)
+	{
+		pipex(argv[commandcount], envp);
+		commandcount++;
+	}
+	execute_command(argv[commandcount], envp);
 	return (0);
 }
