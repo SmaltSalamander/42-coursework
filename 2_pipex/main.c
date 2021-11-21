@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 21:12:30 by sbienias          #+#    #+#             */
-/*   Updated: 2021/11/20 23:27:13 by sbienias         ###   ########.fr       */
+/*   Updated: 2021/11/21 20:48:21 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	openfile(char *filename, int mode)
 	{
 		if (access(filename, R_OK))
 		{
-			perror("Failed to open ");
+			write(2, "Failed to open ", 15);
 			write(2, filename, ft_strlen(filename));
 			write(2, ": No such file or directory\n", 28);
 			exit(1);
@@ -64,40 +64,52 @@ void	execute_command(char *command, char **envp)
 	{
 		cmd = ft_strjoin(envp[i], *str);
 		if (access(cmd, F_OK) == 0)
-		{
 			execve((char const *) cmd, (char *const *)(str), envp);
-		}
 		free(cmd);
 		i++;
 	}
-	perror("Command not found");
-	exit(1);
+	write(2, "command not found", 17);
+	i = 0;
+	while (str[i])
+		free(str[i++]);
+	i = 0;
+	while (envp[i])
+		free(envp[i++]);
+	free(str);
+	free(envp);
+	exit(-1);
 }
 
 // Fork 0 is child, 1 is parent
-void	pipex(char *command, char **envp)
+void	pipex(char **commands, char **envp, int argc)
 {
 	int		ends[2];
 	pid_t	processid;
+	int		cmdcount;
+	int		status;
 
 	pipe(ends);
-	processid = fork();
+	cmdcount = 1;
+	processid = 1;
+	while (++cmdcount < argc - 2 && processid)
+		processid = fork();
 	if (processid < 0)
 	{
-		perror("Fork failed");
+		write(2, "Fork failed", 11);
 		return ;
 	}
 	else if (processid > 0)
 	{
 		close(ends[1]);
 		dup2(ends[0], 0);
-		waitpid(processid, NULL, 0);
+		if (wait(&status) != -1)
+			execute_command(commands[argc - 2], envp);
 	}
 	else
 	{
 		close(ends[0]);
 		dup2(ends[1], 1);
-		execute_command(command, envp);
+		execute_command(commands[cmdcount], envp);
 	}
 }
 
@@ -105,21 +117,17 @@ void	pipex(char *command, char **envp)
 int	main(int argc, char **argv, char **envp)
 {
 	int		fds[2];
-	int		commandcount;
 
-	if (argc < 2)
+	if (argc < 4)
 		return (1);
-	envp = find_path(envp);
 	fds[0] = openfile(argv[1], 0);
 	fds[1] = openfile(argv[argc - 1], 1);
 	dup2(fds[0], 0);
 	dup2(fds[1], 1);
-	commandcount = 2;
-	while (commandcount < argc - 2)
-	{
-		pipex(argv[commandcount], envp);
-		commandcount++;
-	}
-	execute_command(argv[commandcount], envp);
+	close(fds[0]);
+	close(fds[1]);
+	envp = find_path(envp);
+	pipex(argv, envp, argc);
+	// execute_command(argv[argc - 2], envp);
 	return (0);
 }

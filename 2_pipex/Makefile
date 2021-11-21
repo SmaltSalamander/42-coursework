@@ -30,10 +30,12 @@ $(LIBRARY):
 	make -C $(LIBFTPATH)
 
 $(NAME): $(SRC) 
-	$(CC) -g $(CFLAGS) $(SRC) -L $(LIBFTPATH) -lft
+	$(CC) -g $(CFLAGS) $(SRC) -L $(LIBFTPATH) -lft -o $(NAME)
 
 debug: $(SRC) $(TEST) $(LIBRARY)
 	$(CC) -g -o a.out $(CFLAGS) $(TEST) $(SRC) $(NAME)
+
+bonus: all
 
 clean:
 	/bin/rm -f $(OBJS) a.out mlx.h
