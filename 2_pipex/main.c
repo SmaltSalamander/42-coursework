@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 21:12:30 by sbienias          #+#    #+#             */
-/*   Updated: 2021/11/21 20:48:21 by sbienias         ###   ########.fr       */
+/*   Updated: 2021/12/02 23:10:21 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	execute_command(char *command, char **envp)
 		free(envp[i++]);
 	free(str);
 	free(envp);
-	exit(-1);
+	exit(1);
 }
 
 // Fork 0 is child, 1 is parent
@@ -91,8 +91,14 @@ void	pipex(char **commands, char **envp, int argc)
 	pipe(ends);
 	cmdcount = 1;
 	processid = 1;
-	while (++cmdcount < argc - 2 && processid)
+	status = 0;
+	while (cmdcount < argc - 3 && processid)
+	{
+		write(2, "parent forking\n", 15);
 		processid = fork();
+		cmdcount++;
+	}
+	// write(2, ft_itoa(cmdcount), 1);
 	if (processid < 0)
 	{
 		write(2, "Fork failed", 11);
@@ -102,11 +108,18 @@ void	pipex(char **commands, char **envp, int argc)
 	{
 		close(ends[1]);
 		dup2(ends[0], 0);
-		if (wait(&status) != -1)
-			execute_command(commands[argc - 2], envp);
+		// wait(NULL);
+		// write(2, "pbefo\n", 6);
+		waitpid(processid, &status, WUNTRACED);
+		if (status == 1)
+			exit(1);
+		// write(2, "pafte\n", 6);
+		execute_command(commands[argc - 2], envp);
 	}
 	else
 	{
+		// write(2, "child\n", 6);
+		// write(2, ft_itoa(cmdcount), 1);
 		close(ends[0]);
 		dup2(ends[1], 1);
 		execute_command(commands[cmdcount], envp);
