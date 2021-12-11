@@ -56,12 +56,6 @@ $(LIBRARY):
 libft.a:
 	make -C $(LIBFTPATH)
 
-olib: $(SRC) $(DEPS)
-	$(CC) -c $(CFLAGS) $(SRC)
-
-archive:
-	ar rc $(NAME) $(OBJS)
-
 debug: $(SRC) $(TEST) $(LIBRARY)
 	$(CC) -g -o a.out $(CFLAGS) $(TEST) $(SRC) $(NAME)
 

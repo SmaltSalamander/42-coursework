@@ -6,51 +6,11 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 21:12:30 by sbienias          #+#    #+#             */
-/*   Updated: 2021/12/02 23:10:21 by sbienias         ###   ########.fr       */
+/*   Updated: 2021/12/11 21:04:31 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
 #include "pipex.h"
-
-int	openfile(char *filename, int mode)
-{
-	if (mode == 0)
-	{
-		if (access(filename, R_OK))
-		{
-			write(2, "Failed to open ", 15);
-			write(2, filename, ft_strlen(filename));
-			write(2, ": No such file or directory\n", 28);
-			exit(1);
-		}
-		return (open(filename, O_RDONLY));
-	}
-	else
-		return (open(filename, O_CREAT | O_WRONLY | O_TRUNC,
-				S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH));
-}
-
-char	**find_path(char **envp)
-{
-	int		i;
-	char	**result;
-	char	*tmp;
-
-	i = 0;
-	while (ft_strncmp(envp[i], "PATH=", 4) != 0)
-		i++;
-	result = ft_split(envp[i] + 5, ':');
-	i = 0;
-	while (result[i])
-	{
-		tmp = ft_strjoin(result[i], "/");
-		free(result[i]);
-		result[i] = tmp;
-		i++;
-	}
-	return (result);
-}
 
 void	execute_command(char *command, char **envp)
 {
@@ -80,50 +40,49 @@ void	execute_command(char *command, char **envp)
 	exit(1);
 }
 
-// Fork 0 is child, 1 is parent
-void	pipex(char **commands, char **envp, int argc)
+void	handle_process(pid_t pid, char **cmd, char **envp, int	*ends)
 {
-	int		ends[2];
-	pid_t	processid;
-	int		cmdcount;
 	int		status;
 
-	pipe(ends);
-	cmdcount = 1;
-	processid = 1;
 	status = 0;
-	while (cmdcount < argc - 3 && processid)
-	{
-		write(2, "parent forking\n", 15);
-		processid = fork();
-		cmdcount++;
-	}
-	// write(2, ft_itoa(cmdcount), 1);
-	if (processid < 0)
+	if (pid < 0)
 	{
 		write(2, "Fork failed", 11);
 		return ;
 	}
-	else if (processid > 0)
+	else if (pid > 0)
 	{
-		close(ends[1]);
-		dup2(ends[0], 0);
-		// wait(NULL);
-		// write(2, "pbefo\n", 6);
-		waitpid(processid, &status, WUNTRACED);
+		waitpid(pid, &status, WNOHANG);
 		if (status == 1)
 			exit(1);
-		// write(2, "pafte\n", 6);
-		execute_command(commands[argc - 2], envp);
+		close(ends[1]);
+		dup2(ends[0], 0);
+		execute_command(cmd[3], envp);
 	}
 	else
 	{
-		// write(2, "child\n", 6);
-		// write(2, ft_itoa(cmdcount), 1);
 		close(ends[0]);
 		dup2(ends[1], 1);
-		execute_command(commands[cmdcount], envp);
+		execute_command(cmd[2], envp);
 	}
+}
+
+// Fork 0 is child, 1 is parent
+void	pipex(char **commands, char **envp, int argc)
+{
+	pid_t	processid;
+	int		cmdcount;
+	int		ends[2];
+
+	pipe(ends);
+	cmdcount = 1;
+	processid = 1;
+	while (cmdcount < argc - 3 && processid)
+	{
+		processid = fork();
+		cmdcount++;
+	}
+	handle_process(processid, commands, envp, ends);
 }
 
 // < file1 cmd1 | cmd2 > file2
@@ -131,7 +90,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	int		fds[2];
 
-	if (argc < 4)
+	if (argc != 5)
 		return (1);
 	fds[0] = openfile(argv[1], 0);
 	fds[1] = openfile(argv[argc - 1], 1);
@@ -141,6 +100,5 @@ int	main(int argc, char **argv, char **envp)
 	close(fds[1]);
 	envp = find_path(envp);
 	pipex(argv, envp, argc);
-	// execute_command(argv[argc - 2], envp);
 	return (0);
 }

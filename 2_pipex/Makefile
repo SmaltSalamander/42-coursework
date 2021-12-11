@@ -12,7 +12,7 @@
 
 CC = gcc
 
-SRC = main.c
+SRC = main.c utils.c
 
 #BONUS =
 
