@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 21:12:30 by sbienias          #+#    #+#             */
-/*   Updated: 2021/12/11 21:04:31 by sbienias         ###   ########.fr       */
+/*   Updated: 2021/12/14 15:05:32 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,30 +40,34 @@ void	execute_command(char *command, char **envp)
 	exit(1);
 }
 
-void	handle_process(pid_t pid, char **cmd, char **envp, int	*ends)
+void	handle_process(char **cmd, char **envp)
 {
 	int		status;
+	int		ends[2];
+	pid_t	pid;
 
+	pipe(ends);
+	pid = fork();
 	status = 0;
 	if (pid < 0)
 	{
 		write(2, "Fork failed", 11);
 		return ;
 	}
-	else if (pid > 0)
+	else if (pid == 0)
 	{
+		close(ends[0]);
+		dup2(ends[1], 1);
+		execute_command(cmd[0], envp);
+		exit(127);
+	}
+	else
+	{
+		dup2(ends[0], 0);
 		waitpid(pid, &status, WNOHANG);
 		if (status == 1)
 			exit(1);
 		close(ends[1]);
-		dup2(ends[0], 0);
-		execute_command(cmd[3], envp);
-	}
-	else
-	{
-		close(ends[0]);
-		dup2(ends[1], 1);
-		execute_command(cmd[2], envp);
 	}
 }
 
@@ -72,17 +76,14 @@ void	pipex(char **commands, char **envp, int argc)
 {
 	pid_t	processid;
 	int		cmdcount;
-	int		ends[2];
 
-	pipe(ends);
 	cmdcount = 1;
 	processid = 1;
-	while (cmdcount < argc - 3 && processid)
+	while (cmdcount < argc - 3)
 	{
-		processid = fork();
 		cmdcount++;
+		handle_process(commands + cmdcount, envp);
 	}
-	handle_process(processid, commands, envp, ends);
 }
 
 // < file1 cmd1 | cmd2 > file2
@@ -90,7 +91,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	int		fds[2];
 
-	if (argc != 5)
+	if (argc < 5)
 		return (1);
 	fds[0] = openfile(argv[1], 0);
 	fds[1] = openfile(argv[argc - 1], 1);
@@ -100,5 +101,6 @@ int	main(int argc, char **argv, char **envp)
 	close(fds[1]);
 	envp = find_path(envp);
 	pipex(argv, envp, argc);
+	execute_command(argv[argc - 2], envp);
 	return (0);
 }
