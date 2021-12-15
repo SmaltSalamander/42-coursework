@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 20:54:46 by sbienias          #+#    #+#             */
-/*   Updated: 2021/12/11 20:54:58 by sbienias         ###   ########.fr       */
+/*   Updated: 2021/12/15 14:54:52 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,17 @@ char	**find_path(char **envp)
 		i++;
 	}
 	return (result);
+}
+
+void	error_message_exit(char *msg, int statuscode)
+{
+	ft_putstr_fd(msg, 2);
+	ft_putstr_fd("\n", 2);
+	exit(statuscode);
+}
+
+void	ft_pipe_error_check(int status)
+{
+	if (status == -1)
+		error_message_exit("Piping failed", 1);
 }

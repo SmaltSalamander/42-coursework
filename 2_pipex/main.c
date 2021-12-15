@@ -6,12 +6,14 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 21:12:30 by sbienias          #+#    #+#             */
-/*   Updated: 2021/12/14 15:05:32 by sbienias         ###   ########.fr       */
+/*   Updated: 2021/12/15 15:01:11 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
+//Cycle through possible paths, trying to access the command. If it works
+//execute it, if it can't be found, free and exit
 void	execute_command(char *command, char **envp)
 {
 	char	*cmd;
@@ -40,20 +42,20 @@ void	execute_command(char *command, char **envp)
 	exit(1);
 }
 
+//Pipe for each process, with parent waiting for the child, with the read end
+//open, closing the pipe after the child is done.
+// Fork 0 is child, 1 is parent
 void	handle_process(char **cmd, char **envp)
 {
 	int		status;
 	int		ends[2];
 	pid_t	pid;
 
-	pipe(ends);
+	ft_pipe_error_check(pipe(ends));
 	pid = fork();
 	status = 0;
 	if (pid < 0)
-	{
-		write(2, "Fork failed", 11);
-		return ;
-	}
+		error_message_exit("Fork failed", 1);
 	else if (pid == 0)
 	{
 		close(ends[0]);
@@ -71,14 +73,12 @@ void	handle_process(char **cmd, char **envp)
 	}
 }
 
-// Fork 0 is child, 1 is parent
+// Call the handle_process command for each command in the program
 void	pipex(char **commands, char **envp, int argc)
 {
-	pid_t	processid;
 	int		cmdcount;
 
 	cmdcount = 1;
-	processid = 1;
 	while (cmdcount < argc - 3)
 	{
 		cmdcount++;
