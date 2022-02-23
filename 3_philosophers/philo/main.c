@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 12:01:45 by sbienias          #+#    #+#             */
-/*   Updated: 2022/02/23 16:22:54 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/02/23 22:19:27 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,34 @@ int	has_starved(t_philo	*phil)
 	return (status);
 }
 
+void	switch_forks(t_philo	*phil, int *state)
+{
+	pthread_mutex_lock(&(*phil->forknext));
+	pthread_mutex_lock(&phil->forkmut);
+	phil->fork = 0;
+	print_request(phil, 4);
+	*phil->forkl = 0;
+	print_request(phil, 4);
+	phil->lastmeal = format_time(*phil->time);
+	print_request(phil, 0);
+	usleep(phil->timerfood);
+	phil->fork = 1;
+	*phil->forkl = 1;
+	pthread_mutex_unlock(&(*phil->forknext));
+	pthread_mutex_unlock(&phil->forkmut);
+	phil->neededmeals -= 1;
+	*state = 1;
+}
+
 void	try_eating(t_philo	*phil, int *state)
 {
-	if (*state == 0 && phil->fork && *phil->forkl)
+	if (!*phil->death)
 	{
+		if (phil->nbr % 2 == 0)
+		{
+			switch_forks(phil, state);
+			return ;
+		}
 		pthread_mutex_lock(&phil->forkmut);
 		pthread_mutex_lock(&(*phil->forknext));
 		phil->fork = 0;
@@ -107,7 +131,7 @@ void	try_eating(t_philo	*phil, int *state)
 
 void	sleep_time(t_philo	*phil, int *state)
 {
-	if (*state == 1)
+	if (!*phil->death)
 	{
 		print_request(phil, 1);
 		usleep(phil->timersleep);
@@ -122,8 +146,6 @@ void	*active_phils(void *arg)
 
 	state = 0;
 	phil = ((t_philo *) arg);
-	if (phil->nbr % 2 == 0)
-		usleep(phil->timerfood);
 	while (phil->neededmeals && !has_starved(phil))
 	{
 		if (state == 2)
@@ -131,8 +153,10 @@ void	*active_phils(void *arg)
 			print_request(phil, 3);
 			state = 0;
 		}
-		try_eating(phil, &state);
-		sleep_time(phil, &state);
+		else if (state == 0)
+			try_eating(phil, &state);
+		else if (state == 1)
+			sleep_time(phil, &state);
 	}
 	pthread_exit(NULL);
 	return (NULL);
