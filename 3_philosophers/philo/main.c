@@ -43,7 +43,10 @@ void	print_request(t_philo *phil, int type)
 	pthread_mutex_lock(phil->printflag);
 	time = format_time(*phil->time);
 	if (*phil->death)
+	{
+		pthread_mutex_unlock(phil->printflag);
 		return ;
+	}
 	if (type == 0)
 		printf("%ld Philosopher %d is eating\n", time, phil->nbr);
 	else if (type == 1)
@@ -84,8 +87,8 @@ void	try_eating(t_philo	*phil, int *state)
 {
 	if (*state == 0 && phil->fork && *phil->forkl)
 	{
-		phil->fork = 0;
 		pthread_mutex_lock(&phil->forkmut);
+		phil->fork = 0;
 		print_request(phil, 4);
 		*phil->forkl = 0;
 		pthread_mutex_lock(&(*phil->forknext));
