@@ -96,10 +96,10 @@ void	try_eating(t_philo	*phil, int *state)
 		phil->lastmeal = format_time(*phil->time);
 		print_request(phil, 0);
 		usleep(phil->timerfood);
-		pthread_mutex_unlock(&phil->forkmut);
-		pthread_mutex_unlock(&(*phil->forknext));
 		phil->fork = 1;
 		*phil->forkl = 1;
+		pthread_mutex_unlock(&phil->forkmut);
+		pthread_mutex_unlock(&(*phil->forknext));
 		phil->neededmeals -= 1;
 		*state = 1;
 	}
@@ -123,7 +123,7 @@ void	*active_phils(void *arg)
 	state = 0;
 	phil = ((t_philo *) arg);
 	if (phil->nbr % 2 == 0)
-		usleep(50);
+		usleep(phil->timerfood);
 	while (phil->neededmeals && !has_starved(phil))
 	{
 		if (state == 2)
