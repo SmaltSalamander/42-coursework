@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 12:01:45 by sbienias          #+#    #+#             */
-/*   Updated: 2022/02/22 16:22:36 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/02/23 10:08:54 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,14 +57,14 @@ void	print_request(t_philo phil, int type)
 
 int		has_starved(t_philo	*phil)
 {
-	// long	timesincemeal;
+	long	timenow;
 
-	// timesincemeal = phil->lastmeal - *phil->time;
-	printf("Last meal %ld Timer %ld\n", phil->lastmeal, phil->timerdeath);
+	timenow = format_time(*phil->time);
+	printf("Last meal %ld Timer %ld Time %ld\n", phil->lastmeal, phil->timerdeath, timenow);
 	// pthread_mutex_lock(&(*phil->dead));
 	if (phil->death)
 		return (1);
-	if (!phil->death && phil->lastmeal >= phil->timerdeath)
+	if (!phil->death && ((timenow - phil->lastmeal) >= phil->timerdeath))
 	{
 		phil->death = 1;
 		return (1);
@@ -76,7 +76,7 @@ int		has_starved(t_philo	*phil)
 
 void	try_eating(t_philo	*phil, int *state)
 {
-	if (*state == 0 && phil->fork && *phil->forkl && !has_starved(phil))
+	if (*state == 0 && phil->fork && *phil->forkl)
 	{
 		phil->fork = 0;
 		pthread_mutex_lock(&phil->forkmut);
@@ -98,12 +98,14 @@ void	try_eating(t_philo	*phil, int *state)
 
 void	sleep_time(t_philo	*phil, int *state)
 {
-	if (*state == 1 && !has_starved(phil))
+	printf("here sleep1\n");
+	if (*state == 1)
 	{
 		print_request(*phil, 1);
 		usleep(phil->timersleep);
 		*state = 2;
 	}
+	printf("here sleep2\n");
 }
 
 void	*active_phils(void *arg)
@@ -119,10 +121,13 @@ void	*active_phils(void *arg)
 	{
 		if (state == 2)
 		{
+			printf("here2\n");
 			print_request(*phil, 3);
 			state = 0;
 		}
 		try_eating(phil, &state);
+		if (has_starved(phil))
+			break ;
 		sleep_time(phil, &state);
 	}
 	if (phil->death)
@@ -176,8 +181,13 @@ int	init_phils(t_philo *phils, int argc, char **argv)
 		}
 		counter++;
 	}
-	phils[0].forknext = &(phils[number - 1].forkmut);
-	phils[0].forkl = &(phils[number - 1].fork);
+	if (number == 1 && counter--)
+		phils[0].forkl = &counter;
+	else
+	{
+		phils[0].forknext = &(phils[number - 1].forkmut);
+		phils[0].forkl = &(phils[number - 1].fork);
+	}
 	counter = -1;
 	while (++counter < number)
 	{

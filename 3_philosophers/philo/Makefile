@@ -35,7 +35,6 @@ clean:
 	/bin/rm -f $(OBJS) a.out
 
 fclean: clean
-	/bin/rm -f $(NAME) $(LIBRARY)
-	make -C $(LIBFTPATH) fclean
+	/bin/rm -f $(NAME)
 
 re: fclean all
