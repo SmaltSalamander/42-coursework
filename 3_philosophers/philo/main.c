@@ -90,8 +90,8 @@ void	try_eating(t_philo	*phil, int *state)
 		pthread_mutex_lock(&phil->forkmut);
 		phil->fork = 0;
 		print_request(phil, 4);
-		*phil->forkl = 0;
 		pthread_mutex_lock(&(*phil->forknext));
+		*phil->forkl = 0;
 		print_request(phil, 4);
 		phil->lastmeal = format_time(*phil->time);
 		print_request(phil, 0);
