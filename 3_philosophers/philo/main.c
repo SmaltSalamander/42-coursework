@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 12:01:45 by sbienias          #+#    #+#             */
-/*   Updated: 2022/02/25 13:57:06 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/02 17:48:30 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,6 @@ int	check_args(int argc, char **argv)
 	return (0);
 }
 
-long	format_time(long time)
-{
-	struct timeval	timetoconvert;
-	long			result;
-
-	gettimeofday(&timetoconvert, NULL);
-	result = timetoconvert.tv_sec * 1000;
-	result += timetoconvert.tv_usec / 1000;
-	result -= time;
-	return (result);
-}
 
 void	print_request(t_philo *phil, int type)
 {
@@ -45,18 +34,23 @@ void	print_request(t_philo *phil, int type)
 		return ;
 	}
 	if (type == 0)
-		printf("%ld Philosopher %d is eating\n", time, phil->nbr);
+		printf("%05ld %d is eating\n", time, phil->nbr);
 	else if (type == 1)
-		printf("%ld Philosopher %d is sleeping\n", time, phil->nbr);
+		printf("%05ld %d is sleeping\n", time, phil->nbr);
 	else if (type == 2)
 	{
-		printf("%ld Philosopher %d died\n", time, phil->nbr);
+		printf("%05ld %d died\n", time, phil->nbr);
 		*phil->death = 1;
 	}
 	else if (type == 3)
-		printf("%ld Philosopher %d is thinking\n", time, phil->nbr);
+		printf("%05ld %d is thinking\n", time, phil->nbr);
+	// else if (type == 4)
+	// 	printf("%ld Philosopher %d has taken a fork\n", time, phil->nbr);
 	else if (type == 4)
-		printf("%ld Philosopher %d has taken a fork\n", time, phil->nbr);
+	{
+		printf("%05ld %d has taken a fork\n", time, phil->nbr);
+		printf("%05ld %d has taken a fork\n", time, phil->nbr);
+	}
 	pthread_mutex_unlock(phil->printflag);
 }
 
@@ -80,129 +74,24 @@ int	has_starved(t_philo	*phil)
 	return (status);
 }
 
-void	switch_forks(t_philo	*phil, int type)
-{
-	if (type == 0)
-	{
-		pthread_mutex_lock(&(*phil->forknext));
-		pthread_mutex_lock(&phil->forkmut);
-	}
-	else
-	{
-		pthread_mutex_unlock(&(*phil->forknext));
-		pthread_mutex_unlock(&phil->forkmut);
-	}
-}
+// void	check_death(t_philo *phil, long time)
+// {
+// 	long	timenow;
+// 	long	timediff;
 
-void	try_eating(t_philo	*phil, int *state)
-{
-	pthread_mutex_lock(&(*phil->dead));
-	if (*phil->death)
-	{
-		pthread_mutex_unlock(&(*phil->dead));
-		return ;
-	}
-	pthread_mutex_unlock(&(*phil->dead));
-	if (!*phil->death && *state == 0)
-	{
-		pthread_mutex_lock(&(*phil->access));
-		if (!phil->fork && !*phil->forkl)
-		{
-			pthread_mutex_unlock(&(*phil->access));
-			return ;
-		}
-		phil->fork = 0;
-		*phil->forkl = 0;
-		pthread_mutex_unlock(&(*phil->access));
-		if (phil->nbr % 2 == 0)
-		{
-			pthread_mutex_lock(&(*phil->forknext));
-			pthread_mutex_lock(&phil->forkmut);
-			//switch_forks(phil, 0);
-		}
-		else
-		{
-			pthread_mutex_lock(&phil->forkmut);
-			pthread_mutex_lock(&(*phil->forknext));
-		}
-		print_request(phil, 4);
-		print_request(phil, 4);
-		phil->lastmeal = format_time(*phil->time);
-		print_request(phil, 0);
-		usleep(phil->timerfood);
-		pthread_mutex_lock(&(*phil->access));
-		phil->fork = 1;
-		*phil->forkl = 1;
-		pthread_mutex_unlock(&(*phil->access));
-		if (phil->nbr % 2 == 0)
-			switch_forks(phil, 1);
-		else
-		{
-			pthread_mutex_unlock(&phil->forkmut);
-			pthread_mutex_unlock(&(*phil->forknext));
-		}
-		phil->neededmeals -= 1;
-		*state = 1;
-	}
-}
+// 	timenow = format_time(*phil->time);
+// 	timediff = timenow + time / 1000 - phil->lastmeal;
+// 	if (timediff >= phil->timerdeath / 1000)
+// 	{
+// 		ft_usleep((phil->timerdeath - timediff) * 1000 - 30, *phil->time);
+// 		pthread_mutex_lock(&(*phil->dead));
+// 		*phil->death = 1;
+// 		pthread_mutex_unlock(&(*phil->dead));
+// 		return ;
+// 	}
+// }
 
-void	check_death(t_philo *phil, long time)
-{
-	long	timenow;
-	long	timediff;
 
-	timenow = format_time(*phil->time);
-	timediff = timenow + time / 1000 - phil->lastmeal;
-	if (timediff >= phil->timerdeath / 1000)
-	{
-		usleep((phil->timerdeath - timediff) * 1000 - 30);
-		pthread_mutex_lock(&(*phil->dead));
-		*phil->death = 1;
-		pthread_mutex_unlock(&(*phil->dead));
-		return ;
-	}
-}
-
-void	sleep_time(t_philo	*phil, int *state)
-{
-	if (has_starved(phil))
-		return ;
-	if (*state == 1)
-	{
-		print_request(phil, 1);
-		check_death(phil, phil->timersleep);
-		//usleep(phil->timersleep);
-		*state = 2;
-	}
-}
-
-void	*active_phils(void *arg)
-{
-	t_philo	*phil;
-	int		state;
-
-	state = 0;
-	phil = ((t_philo *) arg);
-	while (phil->neededmeals && !has_starved(phil))
-	{
-		if (state == 2)
-		{
-			print_request(phil, 3);
-			state = 0;
-		}
-		try_eating(phil, &state);
-		sleep_time(phil, &state);
-	}
-	pthread_exit(NULL);
-	return (NULL);
-}
-
-void	set_timers(t_philo *phil, char **argv)
-{
-	phil->timerdeath = ft_atoi(argv[2]) * 1000;
-	phil->timerfood = ft_atoi(argv[3]) * 1000;
-	phil->timersleep = ft_atoi(argv[4]) * 1000;
-}
 
 int	handle_one_philo(char **argv)
 {
@@ -284,11 +173,30 @@ void	cleanup_memory(t_philo *phils, int counter)
 	}
 }
 
+int		check_for_death(t_philo *phils, int num)
+{
+	int	counter;
+	int	status;
+
+	counter = 0;
+	status = 0;
+	while (!status && counter < num)
+	{
+		status = has_starved(&phils[counter]);
+		counter++;
+	}
+	return (status);
+}
+
 void	monitor_phils(t_philo *phils, char **argv)
 {
 	int	number;
+	int	status;
 
+	status = 0;
 	number = ft_atoi(argv[1]);
+	while (!status)
+		status = check_for_death(phils, number);
 	while (number--)
 	{
 		pthread_join(phils[number].id, NULL);
