@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 12:01:45 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/03 21:07:04 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/03 21:16:20 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,11 @@ int	has_starved(t_philo	*phil)
 	return (status);
 }
 
-
-
 void	cleanup_memory(t_philo *phils, int counter)
 {
 	pthread_mutex_destroy(phils[0].dead);
 	pthread_mutex_destroy(phils[0].access);
-	pthread_mutex_destroy(phils[0].dead);
+	pthread_mutex_destroy(phils[0].printflag);
 	free(phils[0].death);
 	free(phils[0].time);
 	while (counter--)
