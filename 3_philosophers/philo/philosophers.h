@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 16:00:41 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/02 17:11:06 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/03 13:00:06 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	has_starved(t_philo	*phil);
 long	format_time(long time);
 void	sleep_time(t_philo	*phil, int *state);
 void	set_timers(t_philo *phil, char **argv);
-void	ft_usleep(long	time, long timenow);
+void	ft_usleep(long	time);
 
 
 #endif

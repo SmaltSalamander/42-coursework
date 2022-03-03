@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:41:09 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/02 18:01:08 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/03 13:00:42 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ void	sleep_time(t_philo	*phil, int *state)
 	{
 		print_request(phil, 1);
 		//check_death(phil, phil->timersleep);
-		ft_usleep(phil->timersleep, *phil->time);
+		//ft_usleep(phil->timersleep, *phil->time);
+		usleep(phil->timersleep - 2000);
 		*state = 2;
 	}
 }
@@ -56,22 +57,40 @@ void	set_timers(t_philo *phil, char **argv)
 	phil->timersleep = ft_atoi(argv[4]) * 1000;
 }
 
-void	ft_usleep(long	time, long timenow)
+// void	ft_usleep(long	time, long timenow)
+// {
+// 	long	pres;
+// 	//struct timeval	timetoconvert;
+
+// 	pres = 0;
+// 	printf("%ld %ld %ld\n", time, timenow, pres);
+// 	while (pres < time)
+// 	{
+// 		usleep(100);
+// 		// gettimeofday(&timetoconvert, NULL);
+// 		// pres = timetoconvert.tv_sec * 1000000;
+// 		// pres += timetoconvert.tv_usec;
+// 		// pres -= timenow * 1000;
+// 		//write(1, "here", 4);
+// 		pres = format_micsec(timenow * 1000);
+// 	}
+// 	printf("%ld %ld %ld\n", time, timenow, pres);
+// }
+
+void	ft_usleep(long	time)
 {
-	long	pres;
+	int	pres;
 	//struct timeval	timetoconvert;
 
 	pres = 0;
-	printf("%ld %ld %ld\n", time, timenow, pres);
-	while (pres < time)
+	while (pres < 9)
 	{
-		usleep(100);
+		usleep(time / 10);
 		// gettimeofday(&timetoconvert, NULL);
 		// pres = timetoconvert.tv_sec * 1000000;
 		// pres += timetoconvert.tv_usec;
 		// pres -= timenow * 1000;
 		//write(1, "here", 4);
-		pres = format_micsec(timenow * 1000);
+		pres++;
 	}
-	printf("%ld %ld %ld\n", time, timenow, pres);
 }

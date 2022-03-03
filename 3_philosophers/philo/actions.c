@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:35:43 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/02 17:34:32 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/03 12:59:54 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	*active_phils(void *arg)
 		{
 			print_request(phil, 3);
 			state = 0;
+			usleep(100);
 		}
 		try_eating(phil, &state);
 		sleep_time(phil, &state);
@@ -52,7 +53,7 @@ int		death_approaching(t_philo *phil)
 	long	timenow;
 
 	timenow = format_time(*phil->time);
-	if ((timenow - phil->lastmeal) >= (phil->timerdeath / 1000) / 2)
+	if ((timenow - phil->lastmeal) >= (phil->timerdeath / 1000) / 3)
 		return (1);
 	else
 		return (0);
@@ -121,8 +122,8 @@ void	try_eating(t_philo	*phil, int *state)
 		phil->lastmeal = format_time(*phil->time);
 		print_request(phil, 0);
 		pthread_mutex_unlock(&(*phil->dead));
-		ft_usleep(phil->timerfood, *phil->time);
-		//usleep(phil->timerfood);
+		ft_usleep(phil->timerfood);
+		//usleep(phil->timerfood - 2000);
 		pthread_mutex_lock(&(*phil->access));
 		phil->fork = 1;
 		*phil->forkl = 1;

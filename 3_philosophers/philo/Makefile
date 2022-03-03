@@ -24,7 +24,7 @@ NAME = philo
 all: $(NAME)
 
 $(NAME): $(SRC) 
-	$(CC) -g -fsanitize=thread $(CFLAGS) $(SRC) -pthread -o $(NAME)
+	$(CC) $(CFLAGS) $(SRC) -pthread -o $(NAME)
 
 debug: $(SRC)
 	$(CC) -g -o a.out $(SRC) -pthread
