@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 12:01:45 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/03 19:18:36 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/03 19:45:38 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,6 @@ void	print_request(t_philo *phil, int type)
 		printf("%05ld %d is thinking\n", time, phil->nbr);
 	else if (type == 4)
 		printf("%05ld %d has taken a fork\n", time, phil->nbr);
-	// else if (type == 4)
-	// {
-	// 	printf("%05ld %d has taken a fork\n", time, phil->nbr);
-	// 	printf("%05ld %d has taken a fork\n", time, phil->nbr);
-	// }
 	pthread_mutex_unlock(phil->printflag);
 }
 
@@ -59,7 +54,6 @@ int	has_starved(t_philo	*phil)
 	int		status;
 
 	timenow = format_time(*phil->time);
-	//printf("Philo %d Last meal %ld Timer %ld Time %ld\n", phil->nbr, phil->lastmeal, phil->timerdeath / 1000, timenow);
 	pthread_mutex_lock(&(*phil->dead));
 	status = 0;
 	if (*phil->death)
@@ -72,25 +66,6 @@ int	has_starved(t_philo	*phil)
 	pthread_mutex_unlock(&(*phil->dead));
 	return (status);
 }
-
-// void	check_death(t_philo *phil, long time)
-// {
-// 	long	timenow;
-// 	long	timediff;
-
-// 	timenow = format_time(*phil->time);
-// 	timediff = timenow + time / 1000 - phil->lastmeal;
-// 	if (timediff >= phil->timerdeath / 1000)
-// 	{
-// 		ft_usleep((phil->timerdeath - timediff) * 1000 - 30, *phil->time);
-// 		pthread_mutex_lock(&(*phil->dead));
-// 		*phil->death = 1;
-// 		pthread_mutex_unlock(&(*phil->dead));
-// 		return ;
-// 	}
-// }
-
-
 
 int	handle_one_philo(char **argv)
 {
@@ -152,12 +127,10 @@ int	init_phils(t_philo *phils, int argc, char **argv)
 	while (++counter < number)
 	{
 		phils[counter].time = time;
-		// pthread_mutex_lock(access);
 		if (pthread_create(&phils[counter].id, NULL, active_phils, \
 		&phils[counter]))
 			return (printf("err\n"));
 	}
-	// pthread_mutex_unlock(access);
 	return (0);
 }
 
@@ -218,6 +191,5 @@ int	main(int argc, char **argv)
 	if (status)
 		return (0);
 	monitor_phils(phils, argv);
-	//pthread_join(tid, NULL);
 	return (0);
 }
