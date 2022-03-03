@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:35:43 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/03 19:46:39 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/03 20:01:47 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	*active_phils(void *arg)
 	return (NULL);
 }
 
-int		death_approaching(t_philo *phil)
+int	death_approaching(t_philo *phil)
 {
 	long	timenow;
 
@@ -63,19 +63,28 @@ void	grab_fork(t_philo	*phil, int type)
 	pthread_mutex_unlock(&(*phil->access));
 }
 
+int	check_availability(t_philo	*phil)
+{
+	pthread_mutex_lock(&(*phil->access));
+	if (!phil->fork || !*phil->forkl)
+	{
+		if (!death_approaching(phil))
+		{
+			pthread_mutex_unlock(&(*phil->access));
+			return (0);
+		}
+	}
+	return (1);
+}
+
+//Ugly piece of code, mutex lock both forks after checking for their
+//availability, print out action of taking, start eating, then drop forks
 void	try_eating(t_philo	*phil, int *state)
 {
 	if (*state == 0)
 	{
-		pthread_mutex_lock(&(*phil->access));
-		if (!phil->fork || !*phil->forkl)
-		{
-			if (!death_approaching(phil))
-			{
-				pthread_mutex_unlock(&(*phil->access));
-				return ;
-			}
-		}
+		if (!check_availability(phil))
+			return ;
 		phil->fork = 0;
 		*phil->forkl = 0;
 		pthread_mutex_unlock(&(*phil->access));

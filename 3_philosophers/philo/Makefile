@@ -12,7 +12,7 @@
 
 CC = gcc
 
-SRC = main.c ft_atoi.c actions.c time_mgmt.c
+SRC = main.c ft_atoi.c actions.c time_mgmt.c init_phils.c
 
 #BONUS =
 

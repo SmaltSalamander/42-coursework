@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 12:01:45 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/03 19:45:38 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/03 21:07:04 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,72 +67,7 @@ int	has_starved(t_philo	*phil)
 	return (status);
 }
 
-int	handle_one_philo(char **argv)
-{
-	printf("%d Philosopher 1 died\n", ft_atoi(argv[2]));
-	return (1);
-}
 
-//Initialization of all shared mutexes, values, setting them for each philo and
-//then running them
-int	init_phils(t_philo *phils, int argc, char **argv)
-{
-	int				counter;
-	int				number;
-	int				*death;
-	long			*time;
-	pthread_mutex_t	*access;
-	pthread_mutex_t	*dead;
-	pthread_mutex_t	*printflag;
-
-	counter = 0;
-	number = ft_atoi(argv[1]);
-	if (number == 1)
-		return (handle_one_philo(argv));
-	access = malloc(sizeof(pthread_mutex_t));
-	dead = malloc(sizeof(pthread_mutex_t));
-	time = malloc(sizeof(long));
-	death = malloc(sizeof(int));
-	printflag = malloc(sizeof(pthread_mutex_t));
-	*death = 0;
-	*time = format_time(0);
-	pthread_mutex_init(access, NULL);
-	pthread_mutex_init(dead, NULL);
-	pthread_mutex_init(printflag, NULL);
-	while (counter < number)
-	{
-		phils[counter].nbr = counter + 1;
-		if (argc == 6)
-			phils[counter].neededmeals = ft_atoi(argv[argc - 1]);
-		else
-			phils[counter].neededmeals = -1;
-		phils[counter].fork = 1;
-		phils[counter].death = death;
-		phils[counter].access = access;
-		phils[counter].dead = dead;
-		phils[counter].printflag = printflag;
-		phils[counter].lastmeal = 0;
-		set_timers(&phils[counter], argv);
-		pthread_mutex_init(&phils[counter].forkmut, NULL);
-		if (counter != 0)
-		{
-			phils[counter].forknext = &(phils[counter - 1].forkmut);
-			phils[counter].forkl = &(phils[counter - 1].fork);
-		}
-		counter++;
-	}
-	phils[0].forknext = &(phils[number - 1].forkmut);
-	phils[0].forkl = &(phils[number - 1].fork);
-	counter = -1;
-	while (++counter < number)
-	{
-		phils[counter].time = time;
-		if (pthread_create(&phils[counter].id, NULL, active_phils, \
-		&phils[counter]))
-			return (printf("err\n"));
-	}
-	return (0);
-}
 
 void	cleanup_memory(t_philo *phils, int counter)
 {
