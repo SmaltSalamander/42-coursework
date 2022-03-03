@@ -33,6 +33,7 @@ bonus: all
 
 clean:
 	/bin/rm -f $(OBJS) a.out
+	rm -rf $(NAME).dSYM
 
 fclean: clean
 	/bin/rm -f $(NAME)

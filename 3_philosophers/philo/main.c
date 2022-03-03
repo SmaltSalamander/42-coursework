@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 12:01:45 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/02 17:48:30 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/03 19:18:36 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	check_args(int argc, char **argv)
 		return (1);
 	return (0);
 }
-
 
 void	print_request(t_philo *phil, int type)
 {
@@ -44,13 +43,13 @@ void	print_request(t_philo *phil, int type)
 	}
 	else if (type == 3)
 		printf("%05ld %d is thinking\n", time, phil->nbr);
-	// else if (type == 4)
-	// 	printf("%ld Philosopher %d has taken a fork\n", time, phil->nbr);
 	else if (type == 4)
-	{
 		printf("%05ld %d has taken a fork\n", time, phil->nbr);
-		printf("%05ld %d has taken a fork\n", time, phil->nbr);
-	}
+	// else if (type == 4)
+	// {
+	// 	printf("%05ld %d has taken a fork\n", time, phil->nbr);
+	// 	printf("%05ld %d has taken a fork\n", time, phil->nbr);
+	// }
 	pthread_mutex_unlock(phil->printflag);
 }
 
@@ -153,10 +152,12 @@ int	init_phils(t_philo *phils, int argc, char **argv)
 	while (++counter < number)
 	{
 		phils[counter].time = time;
+		// pthread_mutex_lock(access);
 		if (pthread_create(&phils[counter].id, NULL, active_phils, \
 		&phils[counter]))
 			return (printf("err\n"));
 	}
+	// pthread_mutex_unlock(access);
 	return (0);
 }
 

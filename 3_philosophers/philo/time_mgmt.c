@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:41:09 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/03 13:00:42 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/03 18:58:12 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	sleep_time(t_philo	*phil, int *state)
 		print_request(phil, 1);
 		//check_death(phil, phil->timersleep);
 		//ft_usleep(phil->timersleep, *phil->time);
-		usleep(phil->timersleep - 2000);
+		ft_usleep(phil->timersleep - 2000);
 		*state = 2;
 	}
 }
@@ -79,18 +79,30 @@ void	set_timers(t_philo *phil, char **argv)
 
 void	ft_usleep(long	time)
 {
-	int	pres;
-	//struct timeval	timetoconvert;
+	// int	count;
+	long	pres;
+	struct timeval	timetoconvert;
+	long			bef_loop;
 
-	pres = 0;
-	while (pres < 9)
+	// count = 0;
+	// pres = timetoconvert.tv_sec * 1000000;
+	// pres += timetoconvert.tv_usec;
+	gettimeofday(&timetoconvert, NULL);
+	bef_loop = timetoconvert.tv_sec * 1000000;
+	bef_loop += timetoconvert.tv_usec;
+	// count = 2;
+	while (1)
 	{
-		usleep(time / 10);
-		// gettimeofday(&timetoconvert, NULL);
-		// pres = timetoconvert.tv_sec * 1000000;
-		// pres += timetoconvert.tv_usec;
-		// pres -= timenow * 1000;
+		// count *= 2;
+		usleep(10);
+		gettimeofday(&timetoconvert, NULL);
+		pres = timetoconvert.tv_sec * 1000000;
+		pres += timetoconvert.tv_usec;
+		if (pres > bef_loop + time)
+			break ;
+		// if (pres > bef_loop + time)
+		// 	break ;
 		//write(1, "here", 4);
-		pres++;
+		// time /= 100;
 	}
 }
