@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   time_mgmt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:41:09 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/03 19:47:59 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/04 12:39:33 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	set_timers(t_philo *phil, char **argv)
 	phil->timersleep = ft_atoi(argv[4]) * 1000;
 }
 
-void	ft_usleep(long	time)
+void	ft_usleep(long time)
 {
 	long			pres;
 	struct timeval	timetoconvert;

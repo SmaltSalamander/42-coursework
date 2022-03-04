@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 12:01:45 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/03 21:16:20 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/04 12:40:04 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,25 +48,6 @@ void	print_request(t_philo *phil, int type)
 	pthread_mutex_unlock(phil->printflag);
 }
 
-int	has_starved(t_philo	*phil)
-{
-	long	timenow;
-	int		status;
-
-	timenow = format_time(*phil->time);
-	pthread_mutex_lock(&(*phil->dead));
-	status = 0;
-	if (*phil->death)
-		status = 1;
-	if (!*phil->death && ((timenow - phil->lastmeal) >= phil->timerdeath / 1000))
-	{
-		print_request(phil, 2);
-		status = 1;
-	}
-	pthread_mutex_unlock(&(*phil->dead));
-	return (status);
-}
-
 void	cleanup_memory(t_philo *phils, int counter)
 {
 	pthread_mutex_destroy(phils[0].dead);
@@ -78,21 +59,6 @@ void	cleanup_memory(t_philo *phils, int counter)
 	{
 		pthread_mutex_destroy(&phils[counter].forkmut);
 	}
-}
-
-int		check_for_death(t_philo *phils, int num)
-{
-	int	counter;
-	int	status;
-
-	counter = 0;
-	status = 0;
-	while (!status && counter < num)
-	{
-		status = has_starved(&phils[counter]);
-		counter++;
-	}
-	return (status);
 }
 
 void	monitor_phils(t_philo *phils, char **argv)

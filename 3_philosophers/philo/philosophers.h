@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 16:00:41 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/03 20:07:34 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/04 13:18:30 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,19 @@ void	try_eating(t_philo	*phil, int *state);
 void	switch_forks(t_philo	*phil, int type);
 void	*active_phils(void *arg);
 void	print_request(t_philo *phil, int type);
-
-int		has_starved(t_philo	*phil);
-void	grab_first_fork(t_philo	*phil, int *state);
-void	grab_next_fork(t_philo	*phil, int *state);
+int	handle_one_philo(char **argv);
 
 // Time
 long	format_time(long time);
 void	sleep_time(t_philo	*phil, int *state);
 void	set_timers(t_philo *phil, char **argv);
-void	ft_usleep(long	time);
+void	ft_usleep(long time);
 
-int	init_phils(t_philo *phils, int argc, char **argv);
+int		init_phils(t_philo *phils, int argc, char **argv);
+
+//Death
+int		death_approaching(t_philo *phil);
+int		has_starved(t_philo	*phil);
+int		check_for_death(t_philo *phils, int num);
 
 #endif

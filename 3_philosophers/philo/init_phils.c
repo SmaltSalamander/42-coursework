@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_phils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 20:06:18 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/03 21:11:15 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/04 13:18:08 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,47 +40,42 @@ pthread_mutex_t	**init_mutexes(void)
 	return (mutexarr);
 }
 
-int	handle_one_philo(char **argv)
-{
-	printf("%d Philosopher 1 died\n", ft_atoi(argv[2]));
-	return (1);
-}
 
-//Initialization of all shared mutexes, values, setting them for each philo and
-//then running them
-int	init_phils(t_philo *phils, int argc, char **argv)
+static void	set_numbers(t_philo	*phils, char **argv, int argc)
 {
-	int				counter;
-	int				number;
-	int				*death;
-	long			*time;
-	pthread_mutex_t	**mutexarr;
+	int	counter;
+	int	num;
 
 	counter = 0;
-	number = ft_atoi(argv[1]);
-	if (number == 1)
-		return (handle_one_philo(argv));
-	mutexarr = init_mutexes();
-	if (!mutexarr)
-		return (-1);
-	time = malloc(sizeof(long));
-	death = malloc(sizeof(int));
-	*death = 0;
-	*time = format_time(0);
-	while (counter < number)
+	num = ft_atoi(argv[1]);
+	while (counter < num)
 	{
-		phils[counter].nbr = counter + 1;
 		if (argc == 6)
 			phils[counter].neededmeals = ft_atoi(argv[argc - 1]);
 		else
 			phils[counter].neededmeals = -1;
+		phils[counter].nbr = counter + 1;
 		phils[counter].fork = 1;
+		phils[counter].lastmeal = 0;
+		set_timers(&phils[counter], argv);
+		counter++;
+	}
+}
+
+void	set_shared_values(t_philo	*phils, pthread_mutex_t **mutexarr, int num)
+{
+	int	*death;
+	int	counter;
+
+	death = malloc(sizeof(int));
+	*death = 0;
+	counter = 0;
+	while (counter < num)
+	{
 		phils[counter].death = death;
 		phils[counter].access = mutexarr[0];
 		phils[counter].dead = mutexarr[1];
 		phils[counter].printflag = mutexarr[2];
-		phils[counter].lastmeal = 0;
-		set_timers(&phils[counter], argv);
 		pthread_mutex_init(&phils[counter].forkmut, NULL);
 		if (counter != 0)
 		{
@@ -89,15 +84,47 @@ int	init_phils(t_philo *phils, int argc, char **argv)
 		}
 		counter++;
 	}
-	phils[0].forknext = &(phils[number - 1].forkmut);
-	phils[0].forkl = &(phils[number - 1].fork);
+	phils[0].forknext = &(phils[num - 1].forkmut);
+	phils[0].forkl = &(phils[num - 1].fork);
+}
+
+int	run_philosophers(t_philo *phils, int number)
+{
+	long	*time;
+	int		counter;
+
+	time = malloc(sizeof(long));
+	*time = format_time(0);
 	counter = -1;
 	while (++counter < number)
 	{
 		phils[counter].time = time;
 		if (pthread_create(&phils[counter].id, NULL, active_phils, \
 		&phils[counter]))
-			return (printf("err\n"));
+		{
+			printf("Thread creation error detected\n");
+			return (2);
+		}
 	}
 	return (0);
+}
+
+//Initialization of all shared mutexes, values, setting them for each philo and
+//then running them
+int	init_phils(t_philo *phils, int argc, char **argv)
+{
+	int				status;
+	int				number;
+	pthread_mutex_t	**mutexarr;
+
+	number = ft_atoi(argv[1]);
+	if (number == 1)
+		return (handle_one_philo(argv));
+	mutexarr = init_mutexes();
+	if (!mutexarr)
+		return (-1);
+	set_numbers(phils, argv, argc);
+	set_shared_values(phils, mutexarr, number);
+	status = run_philosophers(phils, number);
+	return (status);
 }

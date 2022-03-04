@@ -12,7 +12,7 @@
 
 CC = gcc
 
-SRC = main.c ft_atoi.c actions.c time_mgmt.c init_phils.c
+SRC = main.c ft_atoi.c actions.c time_mgmt.c init_phils.c death.c
 
 #BONUS =
 
@@ -24,7 +24,7 @@ NAME = philo
 all: $(NAME)
 
 $(NAME): $(SRC) 
-	$(CC) $(CFLAGS) $(SRC) -pthread -o $(NAME)
+	$(CC) $(CFLAGS) -g $(SRC) -pthread -o $(NAME)
 
 debug: $(SRC)
 	$(CC) -g -o a.out $(SRC) -pthread

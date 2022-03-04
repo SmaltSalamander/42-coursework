@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:35:43 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/03 20:01:47 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/04 13:18:15 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,6 @@ void	*active_phils(void *arg)
 	}
 	pthread_exit(NULL);
 	return (NULL);
-}
-
-int	death_approaching(t_philo *phil)
-{
-	long	timenow;
-
-	timenow = format_time(*phil->time);
-	if ((timenow - phil->lastmeal) >= (phil->timerdeath / 1000) / 3)
-		return (1);
-	else
-		return (0);
 }
 
 void	grab_fork(t_philo	*phil, int type)
@@ -105,4 +94,10 @@ void	try_eating(t_philo	*phil, int *state)
 		phil->neededmeals -= 1;
 		*state = 1;
 	}
+}
+
+int	handle_one_philo(char **argv)
+{
+	printf("%d Philosopher 1 died\n", ft_atoi(argv[2]));
+	return (1);
 }
