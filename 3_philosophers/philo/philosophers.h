@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 16:00:41 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/04 13:18:30 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/04 13:29:36 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	try_eating(t_philo	*phil, int *state);
 void	switch_forks(t_philo	*phil, int type);
 void	*active_phils(void *arg);
 void	print_request(t_philo *phil, int type);
-int	handle_one_philo(char **argv);
+int		handle_one_philo(char **argv);
 
 // Time
 long	format_time(long time);

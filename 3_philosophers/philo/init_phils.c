@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 20:06:18 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/04 13:18:08 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/04 13:29:43 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ pthread_mutex_t	**init_mutexes(void)
 	mutexarr[2] = printflag;
 	return (mutexarr);
 }
-
 
 static void	set_numbers(t_philo	*phils, char **argv, int argc)
 {
