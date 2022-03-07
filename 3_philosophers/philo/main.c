@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 12:01:45 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/04 12:40:04 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/07 19:34:29 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ void	print_request(t_philo *phil, int type)
 	else if (type == 3)
 		printf("%05ld %d is thinking\n", time, phil->nbr);
 	else if (type == 4)
+	{
 		printf("%05ld %d has taken a fork\n", time, phil->nbr);
+		printf("%05ld %d has taken a fork\n", time, phil->nbr);
+	}
 	pthread_mutex_unlock(phil->printflag);
 }
 
