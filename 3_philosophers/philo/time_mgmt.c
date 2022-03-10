@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:41:09 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/10 11:52:06 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/10 12:17:08 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_usleep(long time)
 	bef_loop += timetoconvert.tv_usec;
 	while (1)
 	{
-		usleep(10);
+		usleep(50);
 		gettimeofday(&timetoconvert, NULL);
 		pres = timetoconvert.tv_sec * 1000000 + timetoconvert.tv_usec;
 		if (pres > bef_loop + time)

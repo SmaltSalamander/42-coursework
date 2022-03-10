@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:35:43 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/10 11:52:34 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/10 12:15:42 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	*active_phils(void *arg)
 	state = 0;
 	phil = ((t_philo *) arg);
 	if (phil->nbr % 2 == 1)
-		usleep(50);
+		usleep(15000);
 	while (phil->neededmeals && !has_starved(phil))
 	{
 		if (state == 2)

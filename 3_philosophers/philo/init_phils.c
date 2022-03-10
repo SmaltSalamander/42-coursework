@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_phils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 20:06:18 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/04 13:29:43 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/10 12:00:10 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ static void	set_numbers(t_philo	*phils, char **argv, int argc)
 		phils[counter].nbr = counter + 1;
 		phils[counter].fork = 1;
 		phils[counter].lastmeal = 0;
+		phils[counter].totalcount = num;
 		set_timers(&phils[counter], argv);
 		counter++;
 	}

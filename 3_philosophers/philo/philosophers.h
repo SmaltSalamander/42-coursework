@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 16:00:41 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/04 13:29:36 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/10 11:59:49 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 typedef struct s_philo {
 	int				nbr;
+	int				totalcount;
 	pthread_t		id;
 	pthread_mutex_t	forkmut;
 	pthread_mutex_t	*access;
