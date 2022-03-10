@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:35:43 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/10 12:15:42 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/10 13:49:02 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,23 @@ void	try_eating(t_philo	*phil, int *state)
 	}
 }
 
+void	*handle_one(void *arg)
+{
+	char	**argv;
+
+	argv = arg;
+	printf("%d Philosopher 1 died\n", ft_atoi(argv[2]));
+	return (NULL);
+}
+
 int	handle_one_philo(char **argv)
 {
-	printf("%d Philosopher 1 died\n", ft_atoi(argv[2]));
+	if (pthread_create(&phils[counter].id, NULL, handle_one, \
+		argv))
+	{
+		printf("Thread creation error detected\n");
+		return (2);
+	}
+	pthread_join()
 	return (1);
 }

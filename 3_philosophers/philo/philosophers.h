@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 16:00:41 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/10 11:59:49 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/10 13:42:40 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_philo {
 	pthread_mutex_t	*printflag;
 	long			*time;
 	long			lastmeal;
-	long			timerdeath;
+	long			tdeath;
 	long			timerfood;
 	long			timersleep;
 }		t_philo;

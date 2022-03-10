@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 12:01:45 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/10 12:14:29 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/10 13:38:02 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,14 @@ void	cleanup_memory(t_philo *phils, int counter)
 	pthread_mutex_destroy(phils[0].printflag);
 	free(phils[0].death);
 	free(phils[0].time);
+	free(phils[0].dead);
+	free(phils[0].access);
+	free(phils[0].printflag);
 	while (counter--)
 	{
 		pthread_mutex_destroy(&phils[counter].forkmut);
 	}
+	free(phils);
 }
 
 void	monitor_phils(t_philo *phils, char **argv)

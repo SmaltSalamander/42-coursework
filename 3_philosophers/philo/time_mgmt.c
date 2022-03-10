@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   time_mgmt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:41:09 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/10 12:17:08 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/10 13:42:40 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	sleep_time(t_philo	*phil, int *state)
 
 void	set_timers(t_philo *phil, char **argv)
 {
-	phil->timerdeath = ft_atoi(argv[2]) * 1000;
+	phil->tdeath = ft_atoi(argv[2]) * 1000;
 	phil->timerfood = ft_atoi(argv[3]) * 1000;
 	phil->timersleep = ft_atoi(argv[4]) * 1000;
 }

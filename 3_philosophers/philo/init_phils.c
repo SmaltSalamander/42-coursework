@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_phils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 20:06:18 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/10 12:00:10 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/10 13:35:02 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ int	init_phils(t_philo *phils, int argc, char **argv)
 		return (-1);
 	set_numbers(phils, argv, argc);
 	set_shared_values(phils, mutexarr, number);
+	free(mutexarr);
 	status = run_philosophers(phils, number);
 	return (status);
 }

@@ -18,7 +18,7 @@ SRC = main.c ft_atoi.c actions.c time_mgmt.c init_phils.c death.c
 
 OBJS = $(SRC:.c=.o)
 OBJSBONUS = $(BONUS:.c=.o)
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 NAME = philo
 
 all: $(NAME)

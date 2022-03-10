@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   death.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 12:39:08 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/10 11:50:18 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/10 13:44:07 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	has_starved(t_philo	*phil)
 	status = 0;
 	if (*phil->death)
 		status = 1;
-	else if (!*phil->death && ((t - phil->lastmeal) >= phil->timerdeath / 1000 + 2))
+	else if (!*phil->death && ((t - phil->lastmeal) >= phil->tdeath / 1000 + 2))
 	{
 		print_request(phil, 2);
 		status = 1;
@@ -51,7 +51,7 @@ int	death_approaching(t_philo *phil)
 	long	timenow;
 
 	timenow = format_time(*phil->time);
-	if ((timenow - phil->lastmeal) >= (phil->timerdeath / 1000) / 3)
+	if ((timenow - phil->lastmeal) >= (phil->tdeath / 1000) / 3)
 		return (1);
 	else
 		return (0);
