@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:35:43 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/10 13:49:02 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/10 13:50:59 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,12 +106,14 @@ void	*handle_one(void *arg)
 
 int	handle_one_philo(char **argv)
 {
-	if (pthread_create(&phils[counter].id, NULL, handle_one, \
+	pthread_t		id;
+
+	if (pthread_create(&id, NULL, handle_one, \
 		argv))
 	{
 		printf("Thread creation error detected\n");
 		return (2);
 	}
-	pthread_join()
+	pthread_join(id, NULL);
 	return (1);
 }

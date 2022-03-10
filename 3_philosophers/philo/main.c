@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 12:01:45 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/10 13:38:02 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/10 13:51:58 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,10 @@ int	main(int argc, char **argv)
 	phils = malloc(ft_atoi(argv[1]) * sizeof(t_philo));
 	status = init_phils(phils, argc, argv);
 	if (status)
+	{
+		free(phils);
 		return (0);
+	}
 	monitor_phils(phils, argv);
 	return (0);
 }
