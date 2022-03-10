@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "philosophers.h"
+
 static int	ft_isspace(int c)
 {
 	if (c == ' ' || c == '\f' || c == '\n')
@@ -47,4 +49,18 @@ int	ft_atoi(const char *nptr)
 	}
 	result *= is_negative;
 	return (result);
+}
+
+int	handle_one_philo(char **argv)
+{
+	pthread_t		id;
+
+	if (pthread_create(&id, NULL, handle_one, \
+		argv))
+	{
+		printf("Thread creation error detected\n");
+		return (2);
+	}
+	pthread_join(id, NULL);
+	return (1);
 }

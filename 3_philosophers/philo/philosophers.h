@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 16:00:41 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/10 13:42:40 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/10 14:02:14 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,15 @@ typedef struct s_philo {
 	long			timersleep;
 }		t_philo;
 
+//utils.c
 int		ft_atoi(const char *nptr);
+int		handle_one_philo(char **argv);
+
 void	try_eating(t_philo	*phil, int *state);
 void	switch_forks(t_philo	*phil, int type);
 void	*active_phils(void *arg);
 void	print_request(t_philo *phil, int type);
-int		handle_one_philo(char **argv);
+void	*handle_one(void *arg);
 
 // Time
 long	format_time(long time);
