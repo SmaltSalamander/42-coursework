@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: aserdyuk <aserdyuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/20 12:30:49 by sbienias          #+#    #+#             */
-/*   Updated: 2021/05/20 12:30:49 by sbienias         ###   ########.fr       */
+/*   Created: 2021/05/25 10:06:19 by aserdyuk          #+#    #+#             */
+/*   Updated: 2021/06/05 18:31:21 by aserdyuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,20 @@
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	size_t	strlen;
-	size_t	counter;
-	char	*result;
+	char			*result;
+	unsigned int	i;
 
-	if (!s || !f)
+	i = 0;
+	if (s == NULL || f == NULL)
 		return (NULL);
-	strlen = ft_strlen(s);
-	counter = 0;
-	result = malloc(sizeof(char) * strlen + 1);
-	if (result == NULL)
-		return (NULL);
-	while (*(s + counter) != '\0')
+	result = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (!result)
+		return (0);
+	while (*(s + i))
 	{
-		*(result + counter) = (*f)(counter, *(s + counter));
-		counter++;
+		*(result + i) = (*f)(i, *(s + i));
+		i++;
 	}
-	*(result + counter) = '\0';
+	*(result + i) = '\0';
 	return (result);
 }

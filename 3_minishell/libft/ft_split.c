@@ -3,90 +3,106 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: aserdyuk <aserdyuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/20 12:30:47 by sbienias          #+#    #+#             */
-/*   Updated: 2021/05/20 12:30:47 by sbienias         ###   ########.fr       */
+/*   Created: 2021/05/24 07:09:47 by aserdyuk          #+#    #+#             */
+/*   Updated: 2021/06/11 18:27:08 by aserdyuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	**initarray(char const *s, char c, size_t counter)
+static int	count_words(const char *s, char c)
 {
-	size_t	arrcount;
-	char	**array;
+	int	words;
+	int	i;
 
-	arrcount = 1;
-	if (*(s + counter) == '\0')
-		arrcount = 0;
-	while (*(s + counter) != '\0')
+	words = 0;
+	if (s == 0 || s[0] == 0)
+		return (0);
+	if (s[0] != c)
+		words++;
+	i = 1;
+	while (s[i])
 	{
-		if (*(s + counter) == c && *(s + counter + 1) != '\0')
-			if (*(s + counter + 1) != c)
-				arrcount++;
-		counter++;
+		if (s[i] != c && s[i - 1] == c)
+			words++;
+		i++;
 	}
-	array = malloc(sizeof(char **) * (arrcount + 1));
-	if (!array)
-		return (NULL);
-	*(array + arrcount) = 0;
-	return (array);
+	return (words);
 }
 
-static char	*fillit(const char *src, size_t findex, size_t lindex)
+static void	free_arr(char **s, int j)
 {
-	size_t	counter;
-	char	*dest;
+	int	i;
 
-	counter = 0;
-	dest = malloc(lindex - findex + 1);
-	if (!dest)
-		return (NULL);
-	while (findex < lindex)
+	i = 0;
+	while (s[i] && i < j)
 	{
-		*(dest + counter) = *(src + findex);
-		counter++;
-		findex++;
+		free(s[i]);
+		i++;
 	}
-	*(dest + counter) = '\0';
-	return (dest);
+	free(s);
 }
 
-static size_t	searchfirstnonc(char const *s, size_t count, char c)
+static int	word_length(const char *s, char c, int i)
 {
-	while (*(s + count) == c && c != '\0')
+	int	count;
+
+	count = 0;
+	while (s[i] && s[i] == c)
+		i++;
+	while (s[i] && s[i] != c)
 	{
 		count++;
+		i++;
 	}
 	return (count);
 }
 
+void	split_line(char const *s, char **arr, char c, int words)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	i = 0;
+	j = 0;
+	while (j < words)
+	{
+		k = 0;
+		arr[j] = malloc(word_length(s, c, i) + 1);
+		if (arr[j] == NULL)
+			free_arr(arr, j);
+		while (s[i] && s[i] == c)
+			i++;
+		while (s[i] && s[i] != c)
+		{
+			arr[j][k] = s[i];
+			i++;
+			k++;
+		}
+		arr[j][k] = '\0';
+		j++;
+	}
+	arr[j] = 0;
+}
+
 char	**ft_split(char const *s, char c)
 {
-	size_t	firstindex;
-	size_t	counter[2];
-	char	**strarray;
+	char	**arr;
+	int		words;
 
-	if (s == NULL)
+	if (!s)
 		return (NULL);
-	counter[0] = 0;
-	firstindex = searchfirstnonc(s, counter[0], c);
-	counter[1] = 0;
-	strarray = initarray(s, c, firstindex);
-	if (!strarray)
-		return (NULL);
-	while (*(s + counter[0]) != '\0')
+	words = count_words(s, c);
+	arr = malloc((words + 1) * sizeof(char *));
+	if (!arr)
 	{
-		if (*(s + counter[0]) == c && firstindex < counter[0])
-		{
-			*(strarray + counter[1]) = fillit(s, firstindex, counter[0]);
-			firstindex = searchfirstnonc(s, counter[0], c);
-			counter[1]++;
-		}
-		counter[0]++;
+		free(arr);
+		return (NULL);
 	}
-	if (firstindex < counter[0])
-		*(strarray + counter[1]) = fillit(s, firstindex, counter[0]);
-	return (strarray);
+	arr[words] = 0;
+	split_line(s, arr, c, words);
+	return (arr);
 }

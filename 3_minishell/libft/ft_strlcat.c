@@ -3,36 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: aserdyuk <aserdyuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/19 10:08:17 by sbienias          #+#    #+#             */
-/*   Updated: 2021/05/19 10:08:17 by sbienias         ###   ########.fr       */
+/*   Created: 2021/05/21 13:47:27 by aserdyuk          #+#    #+#             */
+/*   Updated: 2021/05/21 15:36:41 by aserdyuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
+** first while loop is to move d pointer to the end of the string and to check
+** if buffer is <= len(dst). Puttin n-- in the while loop and reassigning n
+** after the loop saves us 2 lines of code (norminette)
+** If buffer size is smaller than len(dst), return value will be buffer size
+** + len(src), i.e. smaller than len(dst) + len(src)
+** Next loop till the end of src. If buffer is < len(src) + len(dst), do not 
+** copy anything after size - 1 (n = 1), but loop till the end of src, to get 
+** the correct return value.
+*/
+
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	size_t	strlendest;
-	size_t	strlensrc;
-	size_t	counter;
+	char		*d;
+	const char	*s;
+	size_t		n;
+	size_t		len_d;
 
-	strlendest = ft_strlen(dst);
-	strlensrc = ft_strlen(src);
-	if (!dst || !src)
-		return (0);
-	counter = 0;
-	if (size <= strlendest)
-		return (size + strlensrc);
-	while (*(src + counter) != '\0' && (counter + strlendest) < size - 1)
+	n = size;
+	d = dst;
+	s = src;
+	while (n-- != 0 && *d != '\0')
+		d++;
+	len_d = d - dst;
+	n = size - len_d;
+	if (n == 0)
+		return (len_d + ft_strlen(s));
+	while (*s != '\0')
 	{
-		*(dst + strlendest + counter) = *(src + counter);
-		counter++;
+		if (n != 1)
+		{
+			*d++ = *s;
+			n--;
+		}
+		s++;
 	}
-	*(dst + strlendest + counter) = '\0';
-	if (size < strlendest)
-		return (size + strlensrc);
-	else
-		return (strlendest + strlensrc);
+	*d = '\0';
+	return (len_d + (s - src));
 }

@@ -16,9 +16,10 @@ void	handle_signal(int sig)
 {
 	if (sig == SIGINT)
 	{
-		printf("\n"); // Move to a new line
-		rl_on_new_line(); // Regenerate the prompt on a newline
-		rl_replace_line("", 0); // Clear the previous text
+		g_flag[1] = 1;
+		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
 		rl_redisplay();
 	}
 	else if (sig == SIGQUIT)
@@ -31,8 +32,9 @@ int	catch_signal(int sig, void (*handler)(int))
 {
 	struct sigaction	action;
 
-	action.sa_handler = handler;
 	sigemptyset(&action.sa_mask);
+	sigaddset(&action.sa_mask, sig);
+	action.sa_handler = handler;
 	action.sa_flags = 0;
-	return sigaction (sig, &action, NULL);
+	return (sigaction(sig, &action, NULL));
 }

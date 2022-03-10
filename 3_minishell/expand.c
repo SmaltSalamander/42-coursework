@@ -3,122 +3,98 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/23 18:10:46 by aserdyuk          #+#    #+#             */
-/*   Updated: 2022/01/15 17:58:59 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/02/05 12:16:32 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*append_char(char *line, char c)
+void	expand_handle_quote(char **new_line, char current_char, int *flag, \
+char quote)
 {
-	char	*new_line;
-	int		len;
-
-	len = (int)ft_strlen(line);
-	new_line = malloc(len + 2);
-	ft_memcpy(new_line, line, len);
-	new_line[len] = c;
-	new_line[len + 1] = 0;
-	free(line);
-	return (new_line);
+	new_line[0] = append_char(new_line[0], current_char);
+	if (flag[2] == '0')
+		flag[2] = (unsigned char)quote;
+	else if (flag[2] == quote)
+		flag[2] = '0';
 }
 
-int	variable_length(char *line, int i)
+void	expand_handle_dollar(char **new_line, char *line, t_data *data, \
+int *i)
 {
-	int		len_space;
-	int		len_$;
-	int		len_end;
-	char	*pointer_space;
-	char	*pointer_$;
-
-	len_end = (int)ft_strlen(&line[i]);
-	pointer_space = ft_memchr(&line[i], ' ', len_end);
-	if (pointer_space == 0)
-		len_space = len_end;
-	else
-		len_space = (int)(pointer_space - &line[i]);
-	pointer_$ = ft_memchr(&line[i], '$', len_end);
-	if (pointer_$ == 0)
-		len_$ = len_end;
-	else
-		len_$ = (int)(pointer_$ - &line[i]);
-	if (len_$ < len_space)
-		return (len_$);
-	else
-		return (len_space);
-}
-
-char	*expand_var(int *i, int *j, char *new_line, char *line)
-{
-	int		var_len;
-	char	*variable;
-	char	*var_value;
-	int		k;
-
-	var_len = variable_length(line, *i);
-	variable = malloc(var_len + 1);
-	ft_memcpy(variable, &line[*i], var_len);
-	variable[var_len] = 0;
-	*i = *i + var_len;
-	var_value = getenv(variable);
-	if (var_value != NULL)
+	if (i[2] == '\'')
+		new_line[0] = append_char(new_line[0], line[i[0]]);
+	i[0]++;
+	if (i[2] == '"' || i[2] == '0')
 	{
-		k = -1;
-		while (var_value[++k])
-			new_line = append_char(new_line, var_value[k]);
-		*j += (int)ft_strlen(var_value);
+		if (line[i[0]] == '?')
+			new_line[0] = expand_exit_status(i, new_line[0], *data);
+		else
+			new_line[0] = expand_var(i, new_line[0], line, *data);
 	}
-	return (new_line);
 }
 
-char	*expand_variables(char *line, char *envp[])
+int	expand_handle_star(char **new_line, char *line, int *i)
 {
-	char	*new_line;
-	int		i;
-	int		j;
-	char	quote;
-
-	quote = '0';
-	new_line = NULL;
-	if (ft_strchr((const char *)line, '$') == NULL)
-		new_line = ft_strdup((const char *)line);
+	if (i[2] == '\'' || i[2] == '"')
+		new_line[0] = append_char(new_line[0], line[i[0]]);
 	else
 	{
-		i = 0;
-		j = 0;
+		new_line[0] = expand_wildcard(i, new_line[0], line);
+		return (1);
+	}
+	return (0);
+}
+
+void	expand_loop(char **new_line, char *line, int *i, t_data *data)
+{
+	if (line[i[0]] == '"')
+		expand_handle_quote(new_line, line[i[0]], i, '"');
+	else if (line[i[0]] == '\'')
+		expand_handle_quote(new_line, line[i[0]], i, '\'');
+	else if (line[i[0]] == '$')
+	{
+		if (line[i[0] + 1] == 0 || line[i[0] + 1] == ' '
+			|| line[i[0] + 1] == '"')
+			new_line[0] = append_char(new_line[0], line[i[0]]);
+		else
+		{
+			expand_handle_dollar(new_line, line, data, i);
+			return ;
+		}
+	}
+	else if (line[i[0]] == '*')
+	{
+		if (expand_handle_star(new_line, line, i) == 1)
+			return ;
+	}
+	else
+		new_line[0] = append_char(new_line[0], line[i[0]]);
+	i[0]++;
+	i[1]++;
+}
+
+char	*expand_variables(char *line, t_data *data)
+{
+	char	*new_line;
+	int		i[3];
+
+	i[2] = '0';
+	new_line = NULL;
+	if (ft_strchr((const char *)line, '$') == NULL
+		&& ft_strchr((const char *)line, '*') == NULL)
+		return (line);
+	else
+	{
+		i[0] = 0;
+		i[1] = 0;
 		new_line = malloc(ft_strlen(line));
 		*new_line = 0;
-		while (line[i])
-		{
-			if (line[i] == '"')
-			{
-				if (quote == '0')
-					quote = '"';
-				else if (quote == '"')
-					quote = '0';
-			}
-			else if (line[i] == '\'')
-			{
-				if (quote == '0')
-					quote = '\'';
-				else if (quote == '\'')
-					quote = '0';
-			}
-			else if (line[i] == '$')
-			{
-				i++;
-				if (quote == '"' || quote == '0')
-					new_line = expand_var(&i, &j, new_line, line);
-				continue ;
-			}
-			else
-				new_line = append_char(new_line, line[i]);
-			i++;
-			j++;
-		}
+		while (line[i[0]])
+			expand_loop(&new_line, line, i, data);
 	}
 	free(line);
 	return (new_line);

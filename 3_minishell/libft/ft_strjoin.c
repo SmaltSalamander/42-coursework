@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: aserdyuk <aserdyuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/19 10:22:05 by sbienias          #+#    #+#             */
-/*   Updated: 2021/05/19 10:22:05 by sbienias         ###   ########.fr       */
+/*   Created: 2021/05/23 12:02:50 by aserdyuk          #+#    #+#             */
+/*   Updated: 2021/06/05 18:06:00 by aserdyuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,21 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*str;
-	size_t	s2len;
-	size_t	s1len;
-	size_t	counter;
+	char			*temp_s1;
+	char			*temp_s2;
+	char			*new_str;
+	unsigned int	len;
 
-	if (!s1 || !s2)
-		return (NULL);
-	s1len = ft_strlen(s1);
-	s2len = ft_strlen(s2);
-	str = ft_calloc(sizeof(char), s1len + s2len + 1);
-	if (str != NULL)
-	{
-		counter = 0;
-		while (counter++ < s1len)
-			*(str + counter - 1) = *(s1 + counter - 1);
-		counter = 0;
-		while (counter++ < s2len)
-			*(str + s1len + counter - 1) = *(s2 + counter - 1);
-		*(str + s1len + s2len) = '\0';
-	}
-	return (str);
+	temp_s1 = (char *)s1;
+	temp_s2 = (char *)s2;
+	len = ft_strlen(s1) + ft_strlen(s2);
+	new_str = (char *)malloc(len + 1);
+	if (!new_str)
+		return (0);
+	while (*temp_s1)
+		*new_str++ = *temp_s1++;
+	while (*temp_s2)
+		*new_str++ = *temp_s2++;
+	*new_str = '\0';
+	return (new_str - len);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: aserdyuk <aserdyuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/19 09:56:23 by sbienias          #+#    #+#             */
-/*   Updated: 2021/05/19 09:56:23 by sbienias         ###   ########.fr       */
+/*   Created: 2021/05/21 13:01:56 by aserdyuk          #+#    #+#             */
+/*   Updated: 2021/06/05 16:31:32 by aserdyuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,22 @@
 
 int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	size_t	ctr;
-	int		result;
+	unsigned char	*interm_s1;
+	unsigned char	*interm_s2;
 
-	if (n == 0)
+	interm_s1 = (unsigned char *)s1;
+	interm_s2 = (unsigned char *)s2;
+	if (interm_s1 == interm_s2)
 		return (0);
-	ctr = 0;
-	while (ctr < n - 1)
+	while (n--)
 	{
-		if (*(unsigned char *)(s1 + ctr) != *(unsigned char *)(s2 + ctr))
-			break ;
-		ctr++;
+		if (*interm_s1 != *interm_s2)
+			return (*interm_s1 - *interm_s2);
+		else
+		{
+			interm_s1++;
+			interm_s2++;
+		}
 	}
-	result = (int)(*(unsigned char *)(s1 + ctr) - *(unsigned char *)(s2 + ctr));
-	return (result);
+	return (0);
 }

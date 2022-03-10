@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: aserdyuk <aserdyuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/19 10:12:59 by sbienias          #+#    #+#             */
-/*   Updated: 2021/05/19 10:12:59 by sbienias         ###   ########.fr       */
+/*   Created: 2021/05/22 21:11:31 by aserdyuk          #+#    #+#             */
+/*   Updated: 2021/06/05 17:46:09 by aserdyuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 void	*ft_calloc(size_t nmemb, size_t size)
 {
-	void	*mem;
+	void	*arr;
 
-	mem = malloc(nmemb * size);
-	if (mem == NULL)
-		return (NULL);
-	ft_bzero(mem, (nmemb * size));
-	return (mem);
+	if (nmemb * size == 0)
+		return (malloc(0));
+	arr = (char *)malloc(nmemb * size);
+	if (!arr)
+		return (0);
+	ft_bzero(arr, nmemb * size);
+	return (arr);
 }

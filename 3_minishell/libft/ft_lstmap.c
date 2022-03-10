@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: aserdyuk <aserdyuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/25 09:11:17 by sbienias          #+#    #+#             */
-/*   Updated: 2021/05/25 09:11:17 by sbienias         ###   ########.fr       */
+/*   Created: 2021/05/29 13:36:58 by aserdyuk          #+#    #+#             */
+/*   Updated: 2021/06/06 12:39:29 by aserdyuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,23 @@
 
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*newlst;
-	t_list	*element;
+	t_list	*new;
+	t_list	*tmp;
 
-	if (lst == NULL)
-		return (NULL);
-	newlst = NULL;
-	element = NULL;
-	while (lst != NULL)
+	new = NULL;
+	if (lst && f && del)
 	{
-		element = ft_lstnew(f(lst->content));
-		if (!element)
+		while (lst != NULL)
 		{
-			ft_lstclear(&newlst, del);
-			free(newlst);
-			return (NULL);
+			tmp = ft_lstnew(f(lst->content));
+			if (!tmp)
+			{
+				ft_lstclear(&new, del);
+				return (NULL);
+			}
+			ft_lstadd_back(&new, tmp);
+			lst = lst->next;
 		}
-		ft_lstadd_back(&newlst, element);
-		lst = lst->next;
 	}
-	return (newlst);
+	return (new);
 }

@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 19:49:03 by aserdyuk          #+#    #+#             */
-/*   Updated: 2022/01/26 20:39:48 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/02/14 12:47:09 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,21 @@ void	ft_env(t_data data)
 	}
 }
 
-void	ft_exit(char **line_split)
+void	ft_exit(t_data *data, int index)
 {
-	free_arr(line_split);
-	exit(2);
+	int	status;
+	int	i;
+
+	if (data->commands[index][1])
+	{
+		i = 0;
+		while (data->commands[index][1][i])
+		{
+			if (!ft_isdigit(data->commands[index][1][i++]))
+				exit(2);
+		}
+		status = ft_atoi(data->commands[index][1]);
+		clean_exit(data, status, 1);
+	}
+	clean_exit(data, 0, 1);
 }

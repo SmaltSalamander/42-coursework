@@ -3,34 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: aserdyuk <aserdyuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/19 09:57:03 by sbienias          #+#    #+#             */
-/*   Updated: 2021/05/19 09:57:03 by sbienias         ###   ########.fr       */
+/*   Created: 2021/05/20 11:20:40 by aserdyuk          #+#    #+#             */
+/*   Updated: 2021/05/20 11:48:03 by aserdyuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
+** Because we are not allowed to use malloc here, we change direction of
+** switching characters if destination is further in the memory than source
+*/
+
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	size_t	ctr;
+	char	*interm_src;
+	char	*interm_dest;
 
-	ctr = 0;
-	if (dest < src)
+	interm_src = (char *)src;
+	interm_dest = (char *)dest;
+	if ((interm_src != NULL) && (interm_dest != NULL))
 	{
-		while (ctr < n)
+		if (dest < src)
+			while (n--)
+				*interm_dest++ = *interm_src++;
+		else
 		{
-			*(char *)(dest + ctr) = *(char *)(src + ctr);
-			ctr++;
-		}
-	}
-	else
-	{
-		while (ctr < n)
-		{
-			*(char *)(dest + n - 1 - ctr) = *(char *)(src + n - 1 - ctr);
-			ctr++;
+			while (n > 0)
+			{
+				*(interm_dest + n - 1) = *(interm_src + n - 1);
+				n--;
+			}
 		}
 	}
 	return (dest);

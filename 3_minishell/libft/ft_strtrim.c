@@ -3,65 +3,45 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: aserdyuk <aserdyuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/19 10:22:40 by sbienias          #+#    #+#             */
-/*   Updated: 2021/05/19 10:22:40 by sbienias         ###   ########.fr       */
+/*   Created: 2021/05/23 12:32:30 by aserdyuk          #+#    #+#             */
+/*   Updated: 2021/06/05 18:08:22 by aserdyuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	find_index(char const *s1, char const *set, size_t type)
+static int	found_char(char str, const char *set)
 {
-	size_t	setlen;
-	size_t	counter;
-	size_t	index;
-
-	setlen = ft_strlen(set);
-	counter = 0;
-	if (type == 0)
-		index = 0;
-	else if (type == 1)
-		index = ft_strlen(s1) - 1;
-	while (counter < setlen)
-	{
-		if (*(s1 + index) == *(set + counter))
-		{
-			if (type == 0)
-				index++;
-			else if (type == 1)
-				index--;
-			counter = 0;
-			continue ;
-		}
-		counter++;
-	}
-	return (index);
+	while (*set)
+		if (*set++ == str)
+			return (1);
+	return (0);
 }
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	size_t	firstindex;
-	size_t	lastindex;
-	char	*result;
+	char			*temp_s1;
+	unsigned int	len;
+	char			*new_str;
+	unsigned int	final_len;
 
-	if (s1 && set)
+	temp_s1 = (char *)s1;
+	len = ft_strlen(temp_s1);
+	while (len && found_char(*(temp_s1 + len - 1), set))
+		len--;
+	while (len && found_char(*temp_s1, set))
 	{
-		lastindex = ft_strlen(s1);
-		firstindex = find_index(s1, set, 0);
-		if (firstindex == lastindex)
-		{
-			result = malloc(1);
-			*result = '\0';
-			return (result);
-		}
-		lastindex = find_index(s1, set, 1);
-		result = malloc(lastindex - firstindex + 2);
-		if (!result)
-			return (NULL);
-		ft_strlcpy(result, (s1 + firstindex), (lastindex - firstindex + 2));
-		return (result);
+		temp_s1++;
+		len--;
 	}
-	return (NULL);
+	new_str = (char *)malloc(len + 1);
+	if (!new_str)
+		return (0);
+	final_len = len;
+	while (len--)
+		*new_str++ = *temp_s1++;
+	*new_str = '\0';
+	return (new_str - final_len);
 }

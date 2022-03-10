@@ -23,7 +23,7 @@ $(NAME): $(SRC)
 	$(CC) $(CFLAGS) $(SRC) -o $(NAME)
 
 debug: $(SRC)
-	$(CC) -g -o a.out $(SRC) -pthread
+	$(CC) -g -o a.out $(SRC)
 
 bonus: all
 

@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 10:58:36 by aserdyuk          #+#    #+#             */
-/*   Updated: 2022/02/03 16:30:14 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/02/10 09:20:22 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,67 +56,72 @@ char	**copyvar(char	**envp)
 	return (ret);
 }
 
-int	main(int argc, char **argv, char *envp[])
+int	g_flag[2] = {1, 0};
+
+void	prepare_exec_readline(int *saved_streams, char **line)
 {
 	char	*prompt;
+
+	catch_signal(SIGINT, handle_signal);
+	catch_signal(SIGQUIT, handle_signal);
+	saved_streams[0] = dup(0);
+	saved_streams[1] = dup(1);
+	saved_streams[2] = dup(2);
+	prompt = get_prompt();
+	if (!(g_flag[0] && g_flag[1]))
+	{
+		g_flag[0] = 1;
+		line[0] = readline((const char *) prompt);
+	}
+	else
+	{
+		g_flag[0] = 0;
+		line[0] = readline("");
+	}
+	g_flag[1] = 0;
+	free(prompt);
+}
+
+void	cleanup(int *saved_streams, char *line, t_data *parsed)
+{
+	dup2(saved_streams[0], 0);
+	dup2(saved_streams[1], 1);
+	dup2(saved_streams[2], 2);
+	close(saved_streams[0]);
+	close(saved_streams[1]);
+	close(saved_streams[2]);
+	free(line);
+	if (parsed->paths != NULL)
+		free_arr(parsed->paths);
+	initvals(parsed, 1);
+	if (!access("temp_file123", F_OK))
+		unlink("temp_file123");
+}
+
+int	main(int argc, char **argv, char *envp[])
+{
 	char	*line;
 	t_data	parsed;
-	pid_t	pid;
-	int		wstatus;
-	int		i;
-	struct termios	standard;
-	int saved_stdin;
-	int saved_stdout;
-//	int		j;
+	int		saved_streams[3];
 
-//	set_term_vars(&standard);
-	i = -1;
-	initvals(&parsed, 0);
+	if (argc != 1 || argv[0] == 0)
+		exit (1);
 	parsed.envp = copyvar(envp);
+	initvals(&parsed, 0);
 	while (1)
 	{
-		catch_signal(SIGINT, handle_signal);
-		saved_stdin = dup(0);
-		saved_stdout = dup(1);
-		prompt = get_prompt();
-		line = readline((const char *) prompt);
+		prepare_exec_readline(saved_streams, &line);
 		if (!line)
-			exit(0);
-		add_history(line);
-		line = expand_variables(line, parsed.envp);
-		parse(&parsed, line);
-//		printf("srcin: %d, srcout: %d, pipes: %d, namein: %s, nameout: %s, "
-//			   "limiter: %s, \n", parsed.srcin, parsed.srcout, parsed.pipes,
-//			   parsed.namein, parsed.nameout, parsed.limiter);
-//		j = -1;
-//		while (parsed.commands[++j] != 0)
-//			printf("command %d: %s\n", j, parsed.commands[j]);
-//		pid = fork();
-//		if (pid == -1)
-//			return (1);
-//		if (!pid)
-		execute_line(&parsed);
-		if (parsed.srcin)
-			dup2(saved_stdin, 0);
-//		if (parsed.srcout)
-		dup2(saved_stdout, 1);
-		close(saved_stdin);
-		close(saved_stdout);
-//			execute_line(parsed, envp);
-//		else
-//		{
-//			wait(&wstatus);
-//			if (WEXITSTATUS(wstatus) == 2)
-//			{
-//				free(prompt);
-//				free(line);
-//				return (0);
-//			}
-//		}
-		free(prompt);
-		free(line);
-		initvals(&parsed, 1);
+			clean_exit(&parsed, 0, 0);
+		if (*line != 0)
+		{
+			add_history(line);
+			line = expand_variables(line, &parsed);
+			parse(&parsed, line);
+			execute_line(&parsed);
+			while (wait(0) != -1)
+				;
+		}
+		cleanup(saved_streams, line, &parsed);
 	}
-//	tcsetattr(0, TCSANOW, &standard);
-	return (0);
 }

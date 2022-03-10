@@ -3,35 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: aserdyuk <aserdyuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/19 10:08:34 by sbienias          #+#    #+#             */
-/*   Updated: 2021/05/19 10:08:34 by sbienias         ###   ########.fr       */
+/*   Created: 2021/05/20 16:06:47 by aserdyuk          #+#    #+#             */
+/*   Updated: 2021/06/05 16:39:09 by aserdyuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+/*
+** first loop: if size > len(src), src will be copied completely into dst and  
+** n > 0; if size = len(src), src will be copied completely into dst, except of
+** termination 0, and n = 0; if size < len(src), src will not be completely 
+** copied into dst and n = 0. We subtract 1 from n before loop to account for 
+** termination 0.
+** second loop: if the dst is not terminated (n = 0), we terminate it and loop
+** over the rest of the src, to get it length.
+*/
+
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	size_t	strlen;
-	size_t	srclen;
+	const char		*s;
+	size_t			n;
 
-	strlen = 0;
-	srclen = ft_strlen(src);
-	if (size == 0)
-		return (srclen);
-	while (*(src + strlen) != '\0' && strlen < size - 1)
+	s = src;
+	n = size;
+	if (n != 0)
 	{
-		*(dst + strlen) = *(src + strlen);
-		strlen++;
+		n--;
+		while (n != 0)
+		{
+			*dst++ = *s;
+			n--;
+			if (*s == '\0')
+				break ;
+			s++;
+		}
 	}
-	if (strlen <= size)
+	if (n == 0)
 	{
-		*(dst + strlen) = '\0';
+		if (size != 0)
+			*dst = '\0';
+		while (*s != '\0')
+			s++;
 	}
-	size = strlen;
-	if (srclen > strlen)
-		return (srclen);
-	return (size);
+	return (s - src);
 }

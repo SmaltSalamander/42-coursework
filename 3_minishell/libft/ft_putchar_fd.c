@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: aserdyuk <aserdyuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/20 12:30:38 by sbienias          #+#    #+#             */
-/*   Updated: 2021/05/20 12:30:38 by sbienias         ###   ########.fr       */
+/*   Created: 2021/05/16 15:06:08 by aserdyuk          #+#    #+#             */
+/*   Updated: 2021/05/17 22:20:35 by aserdyuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: aserdyuk <aserdyuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/25 09:11:22 by sbienias          #+#    #+#             */
-/*   Updated: 2021/05/25 09:11:22 by sbienias         ###   ########.fr       */
+/*   Created: 2021/05/25 11:25:29 by aserdyuk          #+#    #+#             */
+/*   Updated: 2021/05/26 14:03:06 by aserdyuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,10 @@
 
 t_list	*ft_lstnew(void *content)
 {
-	t_list	*newlist;
+	t_list	*ls;
 
-	newlist = malloc(sizeof(t_list));
-	if (newlist)
-	{
-		newlist -> content = content;
-		newlist -> next = NULL;
-	}
-	return (newlist);
+	ls = malloc(sizeof(t_list));
+	ls -> content = content;
+	ls -> next = NULL;
+	return (ls);
 }

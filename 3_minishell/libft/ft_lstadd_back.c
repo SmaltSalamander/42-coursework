@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: aserdyuk <aserdyuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/25 09:11:04 by sbienias          #+#    #+#             */
-/*   Updated: 2021/05/25 09:11:04 by sbienias         ###   ########.fr       */
+/*   Created: 2021/05/27 16:11:57 by aserdyuk          #+#    #+#             */
+/*   Updated: 2021/05/29 11:52:56 by aserdyuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,11 @@
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_list	*lastel;
-
-	if (!new)
-		return ;
-	if (!(*lst))
-		*lst = new;
-	else
+	if (lst && new)
 	{
-		lastel = ft_lstlast(*lst);
-		lastel->next = new;
+		if (*lst == NULL)
+			*lst = new;
+		else
+			ft_lstlast(*lst)-> next = new;
 	}
 }

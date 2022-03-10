@@ -6,105 +6,120 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 19:45:35 by aserdyuk          #+#    #+#             */
-/*   Updated: 2022/02/02 18:16:57 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/02/16 15:27:09 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-int	ft_specials(t_data *data, char	**line, int *elecount, int *isclosed)
+int	ft_handle_quotes(char **line, int *close, char c, t_data *data)
 {
-	if (**line == '<')
-		ft_handle_input(data, line, **line);
-	else if (**line == '>')
-		ft_handle_output(data, line, **line);
-	else if (**line == '|')
-		data->pipes = data->pipes + 1;
-	else if (**line == '\'')
-		return (find_if_closed(*line, isclosed));
-	return (0);
-}
-
-void	syntax_error_check(t_data *data)
-{
-	int	sum;
-	int	i;
-	int	j;
-
-	if (data->srcout > 2)
-		i = 0;
-	else
-		i = data->srcout;
-	if (data->srcin > 2)
-		j = 0;
-	else
-		j = data->srcin;
-	sum = i + j;
-	if (i > 0 && j > 0 || data->pipes > 1)
+	if (!find_if_closed(*line, close, c))
 	{
-		printf("syntax error\n");
-		return ;
+		data->quote *= -1;
+		return (1);
+	}
+	else
+	{
+		(*line)--;
+		return (0);
 	}
 }
 
-void	check_flags(char	**tmp, char	*c, t_data *data, int *count)
+int	ft_specials(t_data *data, char	**line, int *close)
+{
+	char	c;
+
+	c = **line;
+	if (!c)
+		return (1);
+	(*line)++;
+	if ((c == '\"' || c == '\'') && (c == *close || !*close))
+		return (ft_handle_quotes(line, close, c, data));
+	else if (data->quote == 1)
+		return (flag_handling(c, data, line));
+	else
+	{
+		(*line)--;
+		return (0);
+	}
+}
+
+int	check_flags(char	**tmp, char	*c, t_data *data, char ***arr)
 {
 	syntax_error_check(data);
-	if (data->srcin == 1 || data->srcin == 2)
-		input_output(c, data, 0);
-	else if (data->srcout == 1 || data->srcout == 2)
-		input_output(c, data, 1);
-	else if (data->pipes == 1)
+	if (data->quote == 1)
 	{
-		*tmp = cleanoff_trailing_whitespace(*tmp);
-		data->commands = add_to_array(*tmp, data->commands, count);
-		*tmp = ft_calloc(1, 1);
-		data->pipes = 0;
-		(*count)++;
-		*tmp = append_char(*tmp, *c);
+		if (data->srcin == 1 || data->srcin == 2)
+			input_output(c, data, 0);
+		else if (data->srcout == 1 || data->srcout == 2)
+			input_output(c, data, 1);
+		else if (data->srcerr == 1 || data->srcerr == 2)
+			handle_errout(c, data);
+		else if (data->pipes == 1)
+		{
+			add_element(tmp, arr, &(data->count), 1);
+			data->commands = add_to_command(*arr, data);
+			*arr = NULL;
+			(data->count) = 0;
+			data->pipes = 0;
+			*tmp = append_char(*tmp, *c);
+		}
+		else
+			*tmp = append_char(*tmp, *c);
 	}
 	else
 		*tmp = append_char(*tmp, *c);
+	return (1);
 }
 
-void	restore_flags(t_data *data, int	pipes)
+void	restore_flags(t_data *data, int pipes)
 {
 	if (data->namein || data->limiter)
+	{
+		if (data->namein)
+			data->namein = cleanoff_trailing_whitespace(data->namein);
 		data->srcin -= 2;
+	}
 	if (data->nameout)
+	{
+		if (data->nameout)
+			data->nameout = cleanoff_trailing_whitespace(data->nameout);
 		data->srcout -= 2;
+	}
+	if (data->nameerr)
+	{
+		if (data->nameerr)
+			data->nameerr = cleanoff_trailing_whitespace(data->nameerr);
+		data->srcerr -= 2;
+	}
 	data->pipes = pipes;
 }
 
-void	parse(t_data *data, char	*line)
+void	parse(t_data *data, char	*str)
 {
 	char	*tmp;
-	int		elecount;
-	char	*cpy;
+	char	**arr;
 	int		quotes;
-	int		status;
 
-	elecount = 0;
 	quotes = 0;
-	status = 0;
-	cpy = line;
+	arr = NULL;
 	tmp = ft_calloc(1, 1);
-	while (*cpy)
+	while (*str)
 	{
-		while (*cpy == ' ')
-			cpy++;
-		if (ft_spec_char(*cpy))
-			status = ft_specials(data, &cpy, &elecount, &quotes);
-		else
-		{
-			check_flags(&tmp, cpy, data, &elecount);
-			if (cpy[1] == ' ')
-				tmp = append_char(tmp, cpy[1]);
-		}
-		cpy++;
+		if (data->quote == 1 && *tmp && (str[-1] == '\"' || str[-1] == '\''))
+			add_element(&tmp, &arr, &(data->count), 2);
+		while (data->quote == 1 && *str == ' ')
+			str++;
+		if (ft_specials(data, &str, &quotes))
+			continue ;
+		check_flags(&tmp, str, data, &arr);
+		if (data->quote == 1 && *tmp && (str[1] == ' ' || ft_spec_char(str[1])))
+			add_element(&tmp, &arr, &(data->count), 1);
+		if (*str)
+			str++;
 	}
-	tmp = cleanoff_trailing_whitespace(tmp);
-	data->commands = add_to_array(tmp, data->commands, &elecount);
-	restore_flags(data, elecount);
+	add_element(&tmp, &arr, &(data->count), 0);
+	data->commands = add_to_command(arr, data);
+	restore_flags(data, arr_length(data->commands) - 1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: aserdyuk <aserdyuk@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/19 10:21:46 by sbienias          #+#    #+#             */
-/*   Updated: 2021/05/19 10:21:46 by sbienias         ###   ########.fr       */
+/*   Created: 2021/05/22 18:47:21 by aserdyuk          #+#    #+#             */
+/*   Updated: 2021/06/05 17:58:12 by aserdyuk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,26 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*substr;
-	size_t	counter;
-	size_t	strlen;
+	char	*p;
+	char	*new_str;
+	char	*temp;
 
-	if (s == NULL)
-		return (NULL);
-	strlen = ft_strlen(s);
-	counter = 0;
-	if (start >= strlen)
-		len = 0;
-	else if ((start + len) > strlen)
-		len = strlen - start;
-	substr = malloc(len + 1);
-	if (substr != NULL)
+	new_str = malloc(len + 1);
+	if (!new_str)
+		return (0);
+	temp = new_str;
+	*new_str = '\0';
+	p = (char *) s;
+	if (*p == '\0')
+		return (new_str);
+	while (start--)
+		if (*++p == '\0')
+			return (new_str);
+	while ((*p != '\0') && (len > 0))
 	{
-		while (counter < len && *(s + start + counter) != '\0')
-		{
-			*(substr + counter) = *(s + start + counter);
-			counter++;
-		}
-		*(substr + counter) = '\0';
+		*temp++ = *p++;
+		len--;
 	}
-	return (substr);
+	*temp = '\0';
+	return (new_str);
 }
