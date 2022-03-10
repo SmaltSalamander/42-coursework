@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 12:01:45 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/07 19:34:29 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/10 11:51:13 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,7 @@ void	print_request(t_philo *phil, int type)
 		pthread_mutex_unlock(phil->printflag);
 		return ;
 	}
-	if (type == 0)
-		printf("%05ld %d is eating\n", time, phil->nbr);
-	else if (type == 1)
+	if (type == 1)
 		printf("%05ld %d is sleeping\n", time, phil->nbr);
 	else if (type == 2)
 	{
@@ -47,6 +45,7 @@ void	print_request(t_philo *phil, int type)
 	{
 		printf("%05ld %d has taken a fork\n", time, phil->nbr);
 		printf("%05ld %d has taken a fork\n", time, phil->nbr);
+		printf("%05ld %d is eating\n", time, phil->nbr);
 	}
 	pthread_mutex_unlock(phil->printflag);
 }

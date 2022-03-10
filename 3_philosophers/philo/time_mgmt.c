@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   time_mgmt.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:41:09 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/04 12:39:33 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/10 11:52:06 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	set_timers(t_philo *phil, char **argv)
 	phil->timersleep = ft_atoi(argv[4]) * 1000;
 }
 
+//Change time based on num of philos
 void	ft_usleep(long time)
 {
 	long			pres;

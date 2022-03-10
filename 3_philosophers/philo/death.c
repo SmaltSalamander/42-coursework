@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   death.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/04 12:39:08 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/04 12:43:06 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/10 11:50:18 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,15 @@ int	check_for_death(t_philo *phils, int num)
 
 int	has_starved(t_philo	*phil)
 {
-	long	time;
+	long	t;
 	int		status;
 
-	time = format_time(*phil->time);
+	t = format_time(*phil->time);
 	pthread_mutex_lock(&(*phil->dead));
 	status = 0;
 	if (*phil->death)
 		status = 1;
-	if (!*phil->death && ((time - phil->lastmeal) >= phil->timerdeath / 1000))
+	else if (!*phil->death && ((t - phil->lastmeal) >= phil->timerdeath / 1000 + 2))
 	{
 		print_request(phil, 2);
 		status = 1;

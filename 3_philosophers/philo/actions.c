@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:35:43 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/07 18:41:54 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/10 11:52:34 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ void	try_eating(t_philo	*phil, int *state)
 		print_request(phil, 4);
 		pthread_mutex_lock(&(*phil->dead));
 		phil->lastmeal = format_time(*phil->time);
-		print_request(phil, 0);
 		pthread_mutex_unlock(&(*phil->dead));
 		ft_usleep(phil->timerfood);
 		pthread_mutex_lock(&(*phil->access));
