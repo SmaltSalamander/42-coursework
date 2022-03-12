@@ -12,9 +12,9 @@
 
 CC = c++
 
-SRC = phonebook.cpp phonebook.class.cpp
+SRC = Phonebook.cpp Contact.cpp main.cpp
 
-CFLAGS = -Wall -Werror -Wextra -std=c++98
+CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
 NAME = phonebook
 
 all: $(NAME)
