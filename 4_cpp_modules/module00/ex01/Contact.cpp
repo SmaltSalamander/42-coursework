@@ -6,11 +6,12 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 16:00:11 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/12 21:23:48 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/13 12:30:47 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
+#include <iomanip>
 
 Contact::Contact(void)
 {
@@ -24,6 +25,8 @@ Contact::~Contact(void)
 
 void Contact::SetVals()
 {
+	std::string	newlinecatch;
+
 	std::cout << "Enter contact:" << std::endl;
 	std::cout << "First name: ";
 	std::cin >> this->firstname;
@@ -35,6 +38,7 @@ void Contact::SetVals()
 	std::cin >> this->phonenum;
 	std::cout << "Darkest secret: ";
 	std::cin >> this->secret;
+	std::getline(std::cin, newlinecatch);
 }
 
 void Contact::PrintOut(void)
@@ -54,8 +58,18 @@ void Contact::PrintOut(void)
 
 void	Contact::DisplayRow(int index)
 {
-	std::cout << index << "|";
-	std::cout << this->firstname << "|";
-	std::cout << this->lastname << "|";
-	std::cout << this->nickname << std::endl;
+	std::cout << std::setw(10) << index << "|";
+	if (this->firstname.length() < 11)
+		std::cout << std::setw(10) << std::string(10 - this->firstname.length(), ' ') << this->firstname << "|";
+	else
+		std::cout << std::setw(10) << this->firstname.substr(0, 9) << "." << "|";
+	if (this->lastname.length() < 11)
+		std::cout << std::setw(10) << std::string(10 - this->firstname.length(), ' ') << this->lastname << "|";
+	else
+		std::cout << std::setw(10) << this->lastname.substr(0, 9) << "." << "|";
+	if (this->nickname.length() < 11)
+		std::cout << std::setw(10) << std::string(10 - this->firstname.length(), ' ') << this->nickname;
+	else
+		std::cout << std::setw(10) << this->nickname.substr(0, 9) << ".";
+	std::cout << std::endl;
 }
