@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 22:22:57 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/15 14:49:43 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/15 14:54:21 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,9 +131,11 @@ void	Account::displayStatus( void ) const
 
 void	Account::_displayTimestamp( void )
 {
-	const time_t	pres = time(0);
-	tm				*ltm = localtime(&pres);
+	time_t	pres;
+	tm				*ltm;
 
+	pres = time(0);
+	ltm = localtime(&pres);
 	std::cout << "[";
 	std::cout << 1900 + ltm->tm_year;
 	std::cout << std::setfill('0') << std::setw(2) << 1 + ltm->tm_mon;
