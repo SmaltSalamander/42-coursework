@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:27:53 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/13 11:56:59 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/13 14:18:07 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(void)
 		else if (str == "EXIT")
 			std::exit(0);
 		else
-			std::cout << "Wrong input" << std::endl;
+			std::cout << "Wrong input; Type ADD, SEARCH or EXIT" << std::endl;
 		str.clear();
 		std::cin.clear();
 	}

@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 16:00:11 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/13 12:30:47 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/14 22:20:08 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,51 +25,98 @@ Contact::~Contact(void)
 
 void Contact::SetVals()
 {
-	std::string	newlinecatch;
+	std::string	str;
 
 	std::cout << "Enter contact:" << std::endl;
 	std::cout << "First name: ";
-	std::cin >> this->firstname;
+	std::cin >> str;
+	setFirstname(str);
 	std::cout << "Last name: ";
-	std::cin >> this->lastname;
+	std::cin >> str;
+	setLastname(str);
 	std::cout << "Nickname: ";
-	std::cin >> this->nickname;
+	std::cin >> str;
+	setNickname(str);
 	std::cout << "Phone number: ";
-	std::cin >> this->phonenum;
+	std::cin >> str;
+	setPhonenum(str);
 	std::cout << "Darkest secret: ";
-	std::cin >> this->secret;
-	std::getline(std::cin, newlinecatch);
+	std::cin >> str;
+	setSecret(str);
+	std::getline(std::cin, str);
 }
 
 void Contact::PrintOut(void)
 {
 	std::cout << "First name: ";
-	std::cout << this->firstname << std::endl;
+	std::cout << getFirstname() << std::endl;
 	std::cout << "Last name: ";
-	std::cout << this->lastname << std::endl;
+	std::cout << getLastname() << std::endl;
 	std::cout << "Nickname: ";
-	std::cout << this->nickname << std::endl;
+	std::cout << getNickname() << std::endl;
 	std::cout << "Phone number: ";
-	std::cout << this->phonenum << std::endl;
+	std::cout << getPhonenum() << std::endl;
 	std::cout << "Darkest secret: ";
-	std::cout << this->secret << std::endl;
+	std::cout << getSecret() << std::endl;
 	std::cin.clear();
 }
 
 void	Contact::DisplayRow(int index)
 {
 	std::cout << std::setw(10) << index << "|";
-	if (this->firstname.length() < 11)
-		std::cout << std::setw(10) << std::string(10 - this->firstname.length(), ' ') << this->firstname << "|";
+	if (getFirstname().length() < 11)
+		std::cout << std::setw(10) << std::string(10 - getFirstname().length(), ' ') << getFirstname() << "|";
 	else
-		std::cout << std::setw(10) << this->firstname.substr(0, 9) << "." << "|";
-	if (this->lastname.length() < 11)
-		std::cout << std::setw(10) << std::string(10 - this->firstname.length(), ' ') << this->lastname << "|";
+		std::cout << std::setw(10) << getFirstname().substr(0, 9) << "." << "|";
+	if (getLastname().length() < 11)
+		std::cout << std::setw(10) << std::string(10 - getFirstname().length(), ' ') << getLastname() << "|";
 	else
-		std::cout << std::setw(10) << this->lastname.substr(0, 9) << "." << "|";
-	if (this->nickname.length() < 11)
-		std::cout << std::setw(10) << std::string(10 - this->firstname.length(), ' ') << this->nickname;
+		std::cout << std::setw(10) << getLastname().substr(0, 9) << "." << "|";
+	if (getNickname().length() < 11)
+		std::cout << std::setw(10) << std::string(10 - getFirstname().length(), ' ') << getNickname();
 	else
-		std::cout << std::setw(10) << this->nickname.substr(0, 9) << ".";
+		std::cout << std::setw(10) << getNickname().substr(0, 9) << ".";
 	std::cout << std::endl;
+}
+
+std::string Contact::getFirstname() const
+{
+	return (this->_firstname);
+}
+std::string Contact::getLastname() const
+{
+	return (this->_lastname);
+}
+std::string Contact::getNickname() const
+{
+	return (this->_nickname);
+}
+std::string Contact::getPhonenum() const
+{
+	return (this->_phonenum);
+}
+std::string Contact::getSecret() const
+{
+	return (this->_secret);
+}
+
+void	Contact::setFirstname(std::string str)
+{
+	this->_firstname = str;
+}
+void	Contact::setLastname(std::string str)
+{
+	this->_lastname = str;
+}
+void	Contact::setNickname(std::string str)
+{
+	this->_nickname = str;
+}
+void	Contact::setPhonenum(std::string str)
+{
+	this->_phonenum = str;
+}
+void	Contact::setSecret(std::string str)
+{
+	this->_secret = str;
 }
