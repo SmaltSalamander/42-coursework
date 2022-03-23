@@ -6,12 +6,12 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:43:30 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/23 20:39:48 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/23 21:19:12 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_H
-# define ZOMBIE_H
+#ifndef WEAPON_H
+# define WEAPON_H
 #include <iostream>
 #include <string>
 using std::string;

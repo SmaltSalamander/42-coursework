@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanA.cpp                                         :+:      :+:    :+:   */
+/*   HumanB.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/23 20:56:25 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/23 21:26:53 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Weapon.hpp"
+#include "HumanB.hpp"
 
-Weapon::Weapon(string type)
+HumanB::HumanB(string name)
 {
-	_type = type;
+	_name = name;
 	return ;
 }
 
-Weapon::~Weapon(void)
+HumanB::~HumanB(void)
 {
+
 }
 
-void	Weapon::setType(string name)
+void	HumanB::setWeapon(Weapon &name);
 {
-	this->_type = name;
+	this->_weapon = &name;
 }
 
-string	Weapon::getType(void)
+void	HumanB::attack()
 {
-	return (this->_type);
 }

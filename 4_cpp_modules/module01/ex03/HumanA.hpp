@@ -6,12 +6,12 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:43:30 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/23 20:52:41 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/23 21:28:06 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_H
-# define ZOMBIE_H
+#ifndef HUMANA_H
+# define HUMANA_H
 #include <iostream>
 #include <string>
 #include "Weapon.hpp"
@@ -22,11 +22,11 @@ class	HumanA
 
 private:
 	string _name;
-	Weapon::Weapon _weapon;
+	Weapon &_weapon;
 public:
-	HumanA(string name, Weapon weapon);
+	HumanA(string name, Weapon &weapon);
 	~HumanA(void);
-	void	setWeapon(Weapon name);
+	void	setWeapon(Weapon &name);
 	void	attack();
 };
 

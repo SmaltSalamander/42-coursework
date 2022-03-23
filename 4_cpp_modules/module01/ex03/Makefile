@@ -12,7 +12,7 @@
 
 CC = c++
 
-SRC = main.cpp
+SRC = main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
 
 CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
 NAME = zombie

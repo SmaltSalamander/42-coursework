@@ -6,28 +6,29 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/23 20:56:25 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/23 21:26:26 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Weapon.hpp"
+#include "HumanA.hpp"
 
-Weapon::Weapon(string type)
+HumanA::HumanA(string name, Weapon &weapon)
 {
-	_type = type;
+	_name = name;
+	&_weapon = weapon;
 	return ;
 }
 
-Weapon::~Weapon(void)
+HumanA::~HumanA(void)
 {
 }
 
-void	Weapon::setType(string name)
+void	HumanA::setWeapon(Weapon name);
 {
-	this->_type = name;
+	this->_weapon = name;
 }
 
-string	Weapon::getType(void)
+void	HumanA::attack()
 {
-	return (this->_type);
+
 }
