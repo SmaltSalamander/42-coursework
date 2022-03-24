@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:27:53 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/24 15:20:53 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/24 15:21:59 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	main(void)
 		else
 			break ;
 	}
-	zombies = zombies->zombieHorde(N, "Joe");
+	zombies = zombieHorde(N, "Joe");
 	for (int i = 0; i < N; i++)
 		zombies[i].announce();
 
