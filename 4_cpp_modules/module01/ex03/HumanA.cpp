@@ -1,22 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   zombieHorde.cpp                                    :+:      :+:    :+:   */
+/*   HumanA.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/15 15:07:55 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/24 15:19:20 by sbienias         ###   ########.fr       */
+/*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
+/*   Updated: 2022/03/23 21:26:26 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "HumanA.hpp"
 
-Zombie* Zombie::zombieHorde( int N, std::string name )
+HumanA::HumanA(string name, Weapon &weapon)
 {
-	Zombie *newzombie = new Zombie[N];
+	_name = name;
+	&_weapon = weapon;
+	return ;
+}
 
-	for (int i = 0; i < N; i++)
-		newzombie[i].setName(name);
-	return (newzombie);
+HumanA::~HumanA(void)
+{
+}
+
+void	HumanA::setWeapon(Weapon name);
+{
+	this->_weapon = name;
+}
+
+void	HumanA::attack()
+{
+
 }

@@ -3,38 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:27:53 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/24 15:20:53 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/23 20:53:04 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+#include "Weapon.hpp"
+#include "HumanA.hpp"
+#include "HumanB.hpp"
 using std::string;
 #include <cstdlib>
 
-int	main(void)
+int main()
 {
-	Zombie *zombies = NULL;
-	int		N;
-
-	while (1)
 	{
-		std::cout << "Enter the number of zombies: ";
-		std::cin >> N;
-		if (std::cin.fail() || N < 1)
-		{
-			std::cout << "Please enter a positive number" << std::endl;
-			std::cin.clear();
-		}
-		else
-			break ;
+		Weapon club = Weapon("crude spiked club");
+		HumanA bob("Bob", club);
+		bob.attack();
+		club.setType("some other type of club");
+		bob.attack();
 	}
-	zombies = zombies->zombieHorde(N, "Joe");
-	for (int i = 0; i < N; i++)
-		zombies[i].announce();
-
-	delete [] zombies;
+	{
+		Weapon club = Weapon("crude spiked club");
+		HumanB jim("Jim");
+		jim.setWeapon(club);
+		jim.attack();
+		club.setType("some other type of club");
+		jim.attack();
+	}
 	return (0);
 }
