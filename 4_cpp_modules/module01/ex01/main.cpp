@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:27:53 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/15 15:25:41 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/20 17:17:11 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,25 @@ using std::string;
 
 int	main(void)
 {
-	Zombie zombie;
+	Zombie *zombies = NULL;
+	int		N;
 
-	zombie.setName("Joe");
-	zombie.announce();
+	while (1)
+	{
+		std::cout << "Enter the number of zombies: ";
+		std::cin >> N;
+		if (std::cin.fail() || N < 1)
+		{
+			std::cout << "Please enter a positive number" << std::endl;
+			std::cin.clear();
+		}
+		else
+			break ;
+	}
+	zombies = zombies->zombieHorde(N, "Joe");
+	for (int i = 0; i < N; i++)
+		zombies[i].announce();
+
+	delete [] zombies;
 	return (0);
 }

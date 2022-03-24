@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:43:30 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/15 15:45:25 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/18 14:24:21 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ public:
 	void	setName(string name);
 	string	getName(void);
 	void	announce(void);
-	Zombie* zombieHorde( int N, std::string name )
+	Zombie* zombieHorde(int N, std::string name);
 };
 
 #endif
