@@ -6,15 +6,14 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/23 21:26:53 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/24 20:44:32 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "HumanB.hpp"
 
-HumanB::HumanB(string name)
+HumanB::HumanB(string name) : _name(name), _weapon(NULL)
 {
-	_name = name;
 	return ;
 }
 
@@ -23,11 +22,15 @@ HumanB::~HumanB(void)
 
 }
 
-void	HumanB::setWeapon(Weapon &name);
+void	HumanB::setWeapon(Weapon &name)
 {
 	this->_weapon = &name;
 }
 
 void	HumanB::attack()
 {
+	if (this->_weapon)
+		std::cout << this->_name << " attacks with their " << this->_weapon->getType() << std::endl;
+	else
+		std::cout << this->_name << " attacks with no weapon" << std::endl;
 }
