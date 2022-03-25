@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/25 19:07:58 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/25 19:53:41 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ public:
 	Fixed(void);
 	~Fixed(void);
     Fixed(const Fixed &ptr);
-    //overload Fixed &operator=(Fixed const &right);
+    Fixed &operator=(Fixed const &right);
 	int getRawBits( void ) const;
     void setRawBits( int const raw );
 };

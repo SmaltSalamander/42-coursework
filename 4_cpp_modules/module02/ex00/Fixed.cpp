@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/25 19:06:58 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/25 19:58:42 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ Fixed::Fixed(const Fixed &ptr)
 {
 	std::cout << "Copy constructor called" << std::endl;
 	*this = ptr;
+}
+
+Fixed &Fixed::operator=(Fixed const &right)
+{
+	std::cout << "Copy assignment operator called" << std::endl;
 }
 
 int Fixed::getRawBits( void ) const
