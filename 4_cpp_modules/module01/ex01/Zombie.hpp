@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Zombie.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:43:30 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/24 15:18:51 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/25 17:08:59 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,16 @@
 # define ZOMBIE_H
 #include <iostream>
 #include <string>
-using std::string;
-
 class	Zombie
 {
 
 private:
-	string _name;
+	std::string _name;
 public:
 	Zombie(void);
 	~Zombie(void);
-	void	setName(string name);
-	string	getName(void);
+	void	setName(std::string name);
+	std::string	getName(void);
 	void	announce(void);
 };
 

@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/25 16:44:37 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/25 16:50:02 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	Harl::complain(string level)
 	while (i < 4)
 	{
 		if (level == actions[i])
-			(this->*Table[i])();
+			return ((this->*Table[i])());
 		i++;
 	}
 }

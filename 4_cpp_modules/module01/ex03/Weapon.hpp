@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:43:30 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/23 21:19:12 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/25 17:05:44 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,17 @@
 # define WEAPON_H
 #include <iostream>
 #include <string>
-using std::string;
 
 class	Weapon
 {
 
 private:
-	string _type;
+	std::string _type;
 public:
-	Weapon(string	weapon);
+	Weapon(std::string	weapon);
 	~Weapon(void);
-	void			setType(string name);
-	const string	getType(void);
+	void			setType(std::string name);
+	const std::string	getType(void);
 };
 
 #endif

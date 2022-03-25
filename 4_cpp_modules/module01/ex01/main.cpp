@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:27:53 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/24 15:21:59 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/25 17:09:10 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
-using std::string;
 #include <cstdlib>
 
 int	main(void)

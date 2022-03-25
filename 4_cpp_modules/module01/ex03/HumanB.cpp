@@ -6,13 +6,13 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/24 20:44:32 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/25 17:07:27 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "HumanB.hpp"
 
-HumanB::HumanB(string name) : _name(name), _weapon(NULL)
+HumanB::HumanB(std::string name) : _name(name), _weapon(NULL)
 {
 	return ;
 }

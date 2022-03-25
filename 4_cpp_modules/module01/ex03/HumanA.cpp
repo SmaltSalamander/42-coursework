@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/24 20:31:35 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/25 17:07:47 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <cstdlib>
 #include <iostream>
 
-HumanA::HumanA(string name, Weapon &weapon) : _name(name), _weapon(weapon)
+HumanA::HumanA(std::string name, Weapon &weapon) : _name(name), _weapon(weapon)
 {
 }
 

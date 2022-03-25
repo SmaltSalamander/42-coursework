@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:43:30 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/24 20:45:09 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/25 17:07:43 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,15 @@
 #include <iostream>
 #include <string>
 #include "Weapon.hpp"
-using std::string;
 
 class	HumanA
 {
 
 private:
-	string _name;
+	std::string _name;
 	Weapon &_weapon;
 public:
-	HumanA(string name, Weapon &weapon);
+	HumanA(std::string name, Weapon &weapon);
 	~HumanA(void);
 	void	setWeapon(Weapon &name);
 	void	attack();

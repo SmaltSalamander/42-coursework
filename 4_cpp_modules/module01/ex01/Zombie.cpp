@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Zombie.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/15 15:26:26 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/25 17:09:25 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	Zombie::announce(void)
 	std::cout << getName() << ": BraiiiiiiinnnzzzZ..." << std::endl;
 }
 
-void	Zombie::setName(string name)
+void	Zombie::setName(std::string name)
 {
 	this->_name = name;
 }
 
-string	Zombie::getName(void)
+std::string	Zombie::getName(void)
 {
 	return (this->_name);
 }
