@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/25 16:51:22 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/25 17:11:07 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <iostream>
 #include <cstdlib>
 #include <string>
-using std::string;
 
 class	Harl
 {
@@ -28,7 +27,7 @@ private:
 public:
 	Harl(void);
 	~Harl(void);
-	void			filter(string level);
+	void			filter(std::string level);
 };
 
 #endif

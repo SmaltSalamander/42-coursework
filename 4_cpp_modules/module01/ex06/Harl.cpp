@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/25 17:00:14 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/25 17:11:29 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void    Harl::error(void)
 	std::cout << "You done goofed up, this is an error" << std::endl;
 }
 
-void	Harl::filter(string level)
+void	Harl::filter(std::string level)
 {
 	std::string actions[4] = {"DEBUG", "INFO", "WARNING", "ERROR"};
 	int	i;
