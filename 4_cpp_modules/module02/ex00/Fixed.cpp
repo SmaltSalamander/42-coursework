@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/25 19:58:42 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/26 14:16:05 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ Fixed::Fixed(const Fixed &ptr)
 
 Fixed &Fixed::operator=(Fixed const &right)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
+	std::cout << "Overload assignment operator called" << std::endl;
+	this->_fixednum = right.getRawBits();
+	return (*this);
 }
 
 int Fixed::getRawBits( void ) const
