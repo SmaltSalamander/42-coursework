@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:27:53 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/24 21:40:57 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/25 13:55:39 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ using	std::fstream;
 int main()
 {
 	fstream	fd;
-	fstream	dest;
+	std::ofstream	dest;
 	string	filename;
 	string	s1;
 	string	s2;
-	string	test;
+	string	line;
+	size_t	i;
 	while (true)
 	{
 		std::cout << "Filename: ";
@@ -40,22 +41,22 @@ int main()
 			std::cin.clear();
 		}
 	}
-	fd.open(filename);
+	fd.open(filename.c_str());
 	if (!fd.is_open())
 		return (1);
-	dest.open(filename + ".replace");
+	string replace = filename + ".replace";
+	dest.open(replace.c_str());
 	if (!fd.is_open())
 		return (1);
-	size_t	i;
-	while (getline(fd, test))
+	while (getline(fd, line))
 	{
-		i = test.find(s1);
-		// std::cout << s1.length();
+		i = line.find(s1);
 		if (i != std::string::npos)
 		{
-			
-			std::cout << test.substr(i, s1.length());
+			line.erase(i, s1.length());
+			line.insert(i, s2);
 		}
+		dest << line << std::endl;
 	}
 	return (0);
 }
