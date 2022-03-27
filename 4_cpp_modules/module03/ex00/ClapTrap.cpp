@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/27 17:10:49 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/27 19:13:14 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ ClapTrap &ClapTrap::operator=(ClapTrap const &right)
 
 void ClapTrap::attack(const std::string& target)
 {
+	if (this->_hp <= 0 || this->_energ <= 0)
+		return ;
 	std::cout << "ClapTrap " << this->_name << " attacks " << target << ", causing " << this->_attdmg << " points of damage!" << std::endl;
+	this->_energ -= 1;
 }
 	
 void ClapTrap::takeDamage(unsigned int amount)
@@ -52,6 +55,9 @@ void ClapTrap::takeDamage(unsigned int amount)
 	
 void ClapTrap::beRepaired(unsigned int amount)
 {
+	if (this->_hp <= 0 || this->_energ <= 0)
+		return ;
 	this->_hp += amount;
 	std::cout << "ClapTrap " << this->_name << " was repaired for " << amount << " health points!" << std::endl;
+	this->_energ -= 1;
 }
