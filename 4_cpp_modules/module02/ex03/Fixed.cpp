@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/26 21:02:59 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/27 14:15:36 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,3 +197,4 @@ std::ostream &operator<<(std::ostream &outstrobj, Fixed const &right)
 	outstrobj << right.toFloat();
 	return (outstrobj);
 }
+

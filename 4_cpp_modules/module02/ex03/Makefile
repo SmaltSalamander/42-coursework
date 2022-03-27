@@ -12,7 +12,7 @@
 
 CC = c++
 
-SRC = main.cpp Fixed.cpp
+SRC = main.cpp Fixed.cpp Point.cpp bsp.cpp
 
 CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
 NAME = fixednum
