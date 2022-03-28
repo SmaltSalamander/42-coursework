@@ -6,12 +6,12 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/09 12:13:45 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/09 14:03:33 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/28 10:26:15 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <string.h>
+#include <string>
 
 int main(int argc, char	**argv)
 {
