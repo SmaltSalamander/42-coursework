@@ -6,18 +6,17 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:27:53 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/13 14:18:07 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/28 10:27:02 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Phonebook.hpp"
-using std::string;
 #include <cstdlib>
 
 int	main(void)
 {
 	PhoneBook 	phonebook;
-	string		str;
+	std::string		str;
 
 	std::cout << "Welcome to the PhoneBook, please enter ADD, SEARCH or EXIT to proceed" << std::endl;
 	while (true)
