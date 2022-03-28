@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/12 16:00:11 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/14 22:20:08 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/28 11:44:07 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,20 @@ void Contact::SetVals()
 
 	std::cout << "Enter contact:" << std::endl;
 	std::cout << "First name: ";
-	std::cin >> str;
+	std::getline(std::cin, str);
 	setFirstname(str);
 	std::cout << "Last name: ";
-	std::cin >> str;
+	std::getline(std::cin, str);
 	setLastname(str);
 	std::cout << "Nickname: ";
-	std::cin >> str;
+	std::getline(std::cin, str);
 	setNickname(str);
 	std::cout << "Phone number: ";
-	std::cin >> str;
+	std::getline(std::cin, str);
 	setPhonenum(str);
 	std::cout << "Darkest secret: ";
-	std::cin >> str;
-	setSecret(str);
 	std::getline(std::cin, str);
+	setSecret(str);
 }
 
 void Contact::PrintOut(void)
@@ -63,19 +62,19 @@ void Contact::PrintOut(void)
 
 void	Contact::DisplayRow(int index)
 {
-	std::cout << std::setw(10) << index << "|";
+	std::cout << std::setw(10) << index + "|";
 	if (getFirstname().length() < 11)
-		std::cout << std::setw(10) << std::string(10 - getFirstname().length(), ' ') << getFirstname() << "|";
+		std::cout << std::setw(10) << std::string(10 - getFirstname().length(), ' ') + getFirstname() + "|";
 	else
-		std::cout << std::setw(10) << getFirstname().substr(0, 9) << "." << "|";
+		std::cout << std::setw(10) << getFirstname().substr(0, 9) + "." + "|";
 	if (getLastname().length() < 11)
-		std::cout << std::setw(10) << std::string(10 - getFirstname().length(), ' ') << getLastname() << "|";
+		std::cout << std::setw(10) << std::string(10 - getLastname().length(), ' ') + getLastname() + "|";
 	else
-		std::cout << std::setw(10) << getLastname().substr(0, 9) << "." << "|";
+		std::cout << std::setw(10) << getLastname().substr(0, 9) + "." + "|";
 	if (getNickname().length() < 11)
-		std::cout << std::setw(10) << std::string(10 - getFirstname().length(), ' ') << getNickname();
+		std::cout << std::setw(10) << std::string(10 - getNickname().length(), ' ') + getNickname();
 	else
-		std::cout << std::setw(10) << getNickname().substr(0, 9) << ".";
+		std::cout << std::setw(10) << getNickname().substr(0, 9) + ".";
 	std::cout << std::endl;
 }
 
