@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/27 19:04:17 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/28 17:20:07 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@
 class	ClapTrap
 {
 
-private:
+protected:
     std::string     _name;
     int             _hp;
     int             _energ;
     unsigned int    _attdmg;
 public:
+	ClapTrap(void);
 	ClapTrap(std::string name);
 	~ClapTrap(void);
     ClapTrap(const ClapTrap &ptr);

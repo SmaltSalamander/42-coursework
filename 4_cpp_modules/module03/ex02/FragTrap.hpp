@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/27 19:49:06 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/28 17:19:32 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ class	FragTrap : public ClapTrap
 
 private:
 
-public:
+public:	
+    FragTrap(void);
 	FragTrap(std::string name);
 	~FragTrap(void);
     FragTrap(const FragTrap &ptr);

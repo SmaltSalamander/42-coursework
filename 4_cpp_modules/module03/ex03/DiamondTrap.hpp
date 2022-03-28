@@ -1,42 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   DiamondTrap.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/09 12:13:45 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/26 21:08:49 by sbienias         ###   ########.fr       */
+/*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
+/*   Updated: 2022/03/28 17:49:36 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef DIAMONDTRAP_H
+# define DIAMONDTRAP_H
 #include <iostream>
+#include <cstdlib>
 #include <string>
+#include "FragTrap.hpp"
+#include "ScavTrap.hpp"
 
-int main(int argc, char	**argv)
+class	DiamondTrap : virtual public FragTrap, virtual public ScavTrap
 {
-	int	counter;
-	int i;
 
-	counter = 1;
-	if (argc == 1)
-	{
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
-		return (0);
-	}
-	while (counter < argc)
-	{
-		i = 0;
-		while (argv[counter][i])
-		{
-			if (isalpha(argv[counter][i]))
-				std::cout << (char) toupper(argv[counter][i]);
-			else
-				std::cout << argv[counter][i];
-			i++;
-		}
-		counter++;
-	}
-	std::cout << std::endl;
-	return (0);
-}
+private:
+    std::string _name;
+public:
+	DiamondTrap(void);
+	DiamondTrap(std::string name);
+	~DiamondTrap(void);
+    DiamondTrap(const DiamondTrap &ptr);
+    DiamondTrap &operator=(DiamondTrap const &right);
+    using ScavTrap::attack;
+    void  whoAmI();
+};
+
+#endif
