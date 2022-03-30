@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Account.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/14 22:22:57 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/15 14:54:21 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/30 15:13:57 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ Account::Account( int initial_deposit )
 	_accountIndex = _nbAccounts++;
 	this->_amount = initial_deposit;
 	this->_totalNbDeposits = 0;
-	this->_totalAmount = this->_amount;
+	this->_totalAmount += initial_deposit;
 	this->_totalNbWithdrawals = 0;
 	this->_totalNbDeposits = 0;
 
