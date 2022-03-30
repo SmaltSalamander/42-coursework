@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/28 17:21:54 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/30 16:45:36 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 FragTrap::FragTrap(void)
 {
-	std::cout << "Default constructor called" << std::endl;
+	std::cout << "Frag's Default constructor called" << std::endl;
 	this->_name = "Nameless";
 	_hp = 100;
 	_energ = 100;
@@ -23,7 +23,7 @@ FragTrap::FragTrap(void)
 
 FragTrap::FragTrap(std::string name)
 {
-	std::cout << "Scav's Default constructor called" << std::endl;
+	std::cout << "Frag's Default constructor called" << std::endl;
 	_name = name;
 	_hp = 100;
 	_energ = 100;
@@ -32,7 +32,7 @@ FragTrap::FragTrap(std::string name)
 
 FragTrap::~FragTrap(void)
 {
-	std::cout << "Scav's Destructor called" << std::endl;
+	std::cout << "Frag's Destructor called" << std::endl;
 }
 
 FragTrap::FragTrap(const FragTrap &ptr)
@@ -51,4 +51,14 @@ FragTrap &FragTrap::operator=(FragTrap const &right)
 void FragTrap::highFivesGuys()
 {
 	std::cout << "Heeeeey, high fives~!" << std::endl;
+}
+
+void    FragTrap::setHitPoints()
+{
+	_hp = 100;
+}
+
+void    FragTrap::setAttackDamage()
+{
+	_attdmg = 30;
 }

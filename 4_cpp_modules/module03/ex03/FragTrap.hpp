@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/28 17:37:01 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/30 16:33:45 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <string>
 #include "ClapTrap.hpp"
 
-class	FragTrap : public ClapTrap
+class	FragTrap : virtual public ClapTrap
 {
 
 private:

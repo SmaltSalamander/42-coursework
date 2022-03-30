@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/28 17:49:39 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/30 16:43:37 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,27 @@
 
 DiamondTrap::DiamondTrap(void)
 {
-	std::cout << "Default constructor called" << std::endl;
+	std::cout << "Diamond's Default constructor called" << std::endl;
 	this->_name = "Nameless";
-	FragTrap::_hp;
-	ScavTrap::_energ;
-	ScavTrap::_attdmg;
+	this->ClapTrap::_name = "Nameless_clap_name";
+	this->FragTrap::setHitPoints();
+	this->ScavTrap::setEnergyPoints();
+	this->FragTrap::setAttackDamage();
 }
 
 DiamondTrap::DiamondTrap(std::string name)
 {
-	std::cout << "Scav's Default constructor called" << std::endl;
+	std::cout << "Diamond's Default constructor called" << std::endl;
 	this->_name = name;
 	this->ClapTrap::_name = name + "_clap_name";
-	this->FragTrap(setAttDmg);
-	ScavTrap::_energ;
-	ScavTrap::_attdmg;
+	this->FragTrap::setHitPoints();
+	this->ScavTrap::setEnergyPoints();
+	this->FragTrap::setAttackDamage();
 }
 
 DiamondTrap::~DiamondTrap(void)
 {
-	std::cout << "Scav's Destructor called" << std::endl;
+	std::cout << "Diamond's Destructor called" << std::endl;
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap &ptr)
@@ -47,4 +48,14 @@ DiamondTrap &DiamondTrap::operator=(DiamondTrap const &right)
 	std::cout << "Overload assignment operator called" << std::endl;
 	this->_name = right._name;
 	return (*this);
+}
+
+void DiamondTrap::attack(const std::string& target)
+{
+	this->ScavTrap::attack(target);
+}
+
+void  DiamondTrap::whoAmI()
+{
+	std::cout << "My name is " << this->_name << ", my clap name is " << this->ClapTrap::_name << std::endl;
 }

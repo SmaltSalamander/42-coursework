@@ -14,7 +14,7 @@ CC = c++
 
 SRC = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 
-CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
+CFLAGS = -Wall -Werror -Wextra -std=c++98 -g -Wshadow
 NAME = diamondtrap
 
 all: $(NAME)

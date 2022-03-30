@@ -6,19 +6,20 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/28 17:49:36 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/30 16:33:41 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DIAMONDTRAP_H
-# define DIAMONDTRAP_H
+#ifndef DIAMONDTRAP_HPP
+# define DIAMONDTRAP_HPP
 #include <iostream>
 #include <cstdlib>
 #include <string>
 #include "FragTrap.hpp"
 #include "ScavTrap.hpp"
+// #include "ClapTrap.hpp"
 
-class	DiamondTrap : virtual public FragTrap, virtual public ScavTrap
+class	DiamondTrap : public FragTrap, public ScavTrap
 {
 
 private:
@@ -29,7 +30,7 @@ public:
 	~DiamondTrap(void);
     DiamondTrap(const DiamondTrap &ptr);
     DiamondTrap &operator=(DiamondTrap const &right);
-    using ScavTrap::attack;
+    void attack(const std::string& target);
     void  whoAmI();
 };
 

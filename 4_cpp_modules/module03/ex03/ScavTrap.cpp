@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/28 17:25:34 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/30 16:46:03 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 ScavTrap::ScavTrap(void)
 {
-	std::cout << "Default constructor called" << std::endl;
+	std::cout << "Scav's Default constructor called" << std::endl;
 	this->_name = "Nameless";
 	_hp = 100;
 	_energ = 50;
@@ -51,4 +51,9 @@ ScavTrap &ScavTrap::operator=(ScavTrap const &right)
 void ScavTrap::guardGate()
 {
 	std::cout << "ScavTrap " << this->_name << " is in Gate keeper mode now!" << std::endl;
+}
+
+void    ScavTrap::setEnergyPoints()
+{
+	_energ = 50;
 }
