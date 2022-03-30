@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   putimg.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 16:38:34 by sbienias          #+#    #+#             */
-/*   Updated: 2021/10/09 21:52:11 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/26 14:39:57 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 void	*set_p_direction(t_window *mlx, int dir)
 {
-	if (dir == 119)
+	if (dir == UP)
 	{
 		(*mlx).img.img = mlx_xpm_file_to_image((*mlx).mlx, "./img/wolf8.xpm", \
 		&((*mlx).img.width), &((*mlx).img.height));
 	}
-	else if (dir == 97)
+	else if (dir == DOWN)
 	{
 		(*mlx).img.img = mlx_xpm_file_to_image((*mlx).mlx, "./img/wolf4.xpm", \
 		&((*mlx).img.width), &((*mlx).img.height));
 	}
-	else if (dir == 115)
+	else if (dir == LEFT)
 	{
 		(*mlx).img.img = mlx_xpm_file_to_image((*mlx).mlx, "./img/wolf2.xpm", \
 		&((*mlx).img.width), &((*mlx).img.height));

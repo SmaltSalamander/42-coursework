@@ -6,11 +6,20 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/27 19:29:38 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/28 17:25:17 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
+
+ScavTrap::ScavTrap(void)
+{
+	std::cout << "Default constructor called" << std::endl;
+	this->_name = "Nameless";
+	_hp = 100;
+	_energ = 50;
+	_attdmg = 20;
+}
 
 ScavTrap::ScavTrap(std::string name)
 {

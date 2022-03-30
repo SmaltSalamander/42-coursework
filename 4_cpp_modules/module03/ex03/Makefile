@@ -12,10 +12,10 @@
 
 CC = c++
 
-SRC = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
+SRC = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 
-CFLAGS = -Wall -Werror -Wextra -std=c++98 -Wshadow
-NAME = fragtrap
+CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
+NAME = diamondtrap
 
 all: $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/27 19:22:26 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/28 17:22:06 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ class	ScavTrap : public ClapTrap
 private:
 
 public:
+	ScavTrap(void);
 	ScavTrap(std::string name);
 	~ScavTrap(void);
     ScavTrap(const ScavTrap &ptr);

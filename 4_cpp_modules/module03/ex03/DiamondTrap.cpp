@@ -1,54 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScavTrap.cpp                                       :+:      :+:    :+:   */
+/*   DiamondTrap.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/28 17:22:29 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/28 17:49:39 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScavTrap.hpp"
+#include "DiamondTrap.hpp"
 
-ScavTrap::ScavTrap(void)
+DiamondTrap::DiamondTrap(void)
 {
 	std::cout << "Default constructor called" << std::endl;
 	this->_name = "Nameless";
-	_hp = 100;
-	_energ = 50;
-	_attdmg = 20;
+	FragTrap::_hp;
+	ScavTrap::_energ;
+	ScavTrap::_attdmg;
 }
 
-ScavTrap::ScavTrap(std::string name)
+DiamondTrap::DiamondTrap(std::string name)
 {
 	std::cout << "Scav's Default constructor called" << std::endl;
-	_name = name;
-	_hp = 100;
-	_energ = 50;
-	_attdmg = 20;
+	this->_name = name;
+	this->ClapTrap::_name = name + "_clap_name";
+	this->FragTrap(setAttDmg);
+	ScavTrap::_energ;
+	ScavTrap::_attdmg;
 }
 
-ScavTrap::~ScavTrap(void)
+DiamondTrap::~DiamondTrap(void)
 {
 	std::cout << "Scav's Destructor called" << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap &ptr)
+DiamondTrap::DiamondTrap(const DiamondTrap &ptr)
 {
 	std::cout << "Copy constructor called" << std::endl;
 	*this = ptr;
 }
 
-ScavTrap &ScavTrap::operator=(ScavTrap const &right)
+DiamondTrap &DiamondTrap::operator=(DiamondTrap const &right)
 {
 	std::cout << "Overload assignment operator called" << std::endl;
 	this->_name = right._name;
 	return (*this);
-}
-
-void ScavTrap::guardGate()
-{
-	std::cout << "ScavTrap " << this->_name << " is in Gate keeper mode now!" << std::endl;
 }
