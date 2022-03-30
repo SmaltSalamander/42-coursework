@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/30 18:08:38 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/30 18:12:32 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 Animal::Animal(void)
 {
+	type = "Animal";
 }
 
 Animal::Animal(std::string name)
@@ -39,12 +40,12 @@ Animal &Animal::operator=(Animal const &right)
 	return (*this);
 }
 
-void    Animal::makeSound() 
+void    Animal::makeSound() const
 {
-	std::cout << this->type << "whines";	
+	std::cout << this->type << "whines" << std::endl;	
 }
 
-std::string     Animal::getType()
+std::string     Animal::getType() const
 {
 	return (type);
 }
