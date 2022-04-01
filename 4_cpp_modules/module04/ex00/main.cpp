@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:27:53 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/30 18:13:18 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/31 09:47:07 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include "Animal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
+#include "WrongAnimal.hpp"
+#include "WrongCat.hpp"
 
 int main()
 {
@@ -29,5 +31,20 @@ int main()
 	delete meta;
 	delete i;
 	delete j;
+	const Animal* a = new Animal();
+	const Dog* b = new Dog();
+	const Cat* c = new Cat();
+	std::cout << b->getType() << " " << std::endl;
+	std::cout << c->getType() << " " << std::endl;
+	b->makeSound(); //will output the cat sound!
+	c->makeSound();
+	a->makeSound();
+	delete a;
+	delete b;
+	delete c;
+	const WrongAnimal* z = new WrongCat();
+	std::cout << z->getType() << " " << std::endl;
+	z->makeSound();
+	delete z;
 	return 0;
 }

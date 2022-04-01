@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/30 18:12:32 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/01 19:34:34 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 Animal::Animal(void)
 {
+	std::cout << "Animal Constructor called" << std::endl;
 	type = "Animal";
 }
 
-Animal::Animal(std::string name)
-{
-	type = name;
-}
+// Animal::Animal(std::string name)
+// {
+// 	type = name;
+// }
 
 Animal::~Animal(void)
 {
@@ -42,7 +43,7 @@ Animal &Animal::operator=(Animal const &right)
 
 void    Animal::makeSound() const
 {
-	std::cout << this->type << "whines" << std::endl;	
+	std::cout << this->type << " cries" << std::endl;	
 }
 
 std::string     Animal::getType() const

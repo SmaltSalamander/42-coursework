@@ -1,52 +1,57 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.cpp                                            :+:      :+:    :+:   */
+/*   WrongAnimal.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/31 09:39:01 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/31 09:42:46 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Dog.hpp"
+#include "WrongAnimal.hpp"
 
-Dog::Dog(void)
+WrongAnimal::WrongAnimal(void)
 {
-	std::cout << "Dog Constructor called" << std::endl;
-	type = "Dog";
+	std::cout << "WrongAnimal Constructor called" << std::endl;
+	type = "WrongAnimal";
 }
 
-// Dog::Dog(std::string name)
+// WrongAnimal::WrongAnimal(std::string name)
 // {
 // 	type = name;
 // }
 
-Dog::~Dog(void)
+WrongAnimal::~WrongAnimal(void)
 {
-	std::cout << "Dog Destructor called" << std::endl;
+	std::cout << "WrongAnimal Destructor called" << std::endl;
 }
 
-Dog::Dog(const Dog &ptr)
+WrongAnimal::WrongAnimal(const WrongAnimal &ptr)
 {
-	std::cout << "Dog's copy constructor called" << std::endl;
+	std::cout << "WrongAnimal's copy constructor called" << std::endl;
 	*this = ptr;
 }
 
-Dog &Dog::operator=(Dog const &right)
+WrongAnimal &WrongAnimal::operator=(WrongAnimal const &right)
 {
 	std::cout << "Overload assignment operator called" << std::endl;
 	this->type = right.type;
 	return (*this);
 }
 
-void    Dog::makeSound() const
+void    WrongAnimal::makeSound() const
 {
-	std::cout << this->type << " barks" << std::endl;	
+	std::cout << this->type << " cries" << std::endl;	
 }
 
-// std::ostream &operator<<(std::ostream &outstrobj, Dog const &right)
+std::string     WrongAnimal::getType() const
+{
+	return (type);
+}
+
+// std::ostream &operator<<(std::ostream &outstrobj, WrongAnimal const &right)
 // {
 // 	outstrobj << right.type;
 // 	return (outstrobj);

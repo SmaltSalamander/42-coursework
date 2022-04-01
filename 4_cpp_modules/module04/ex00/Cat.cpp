@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/30 18:12:11 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/31 09:39:05 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 Cat::Cat(void)
 {
+	std::cout << "Cat Constructor called" << std::endl;
 	type = "Cat";
 }
 
-Cat::Cat(std::string name)
-{
-	type = name;
-}
+// Cat::Cat(std::string name)
+// {
+// 	type = name;
+// }
 
 Cat::~Cat(void)
 {
@@ -42,7 +43,7 @@ Cat &Cat::operator=(Cat const &right)
 
 void    Cat::makeSound() const
 {
-	std::cout << this->type << "meows" << std::endl;	
+	std::cout << this->type << " meows" << std::endl;	
 }
 
 // std::ostream &operator<<(std::ostream &outstrobj, Cat const &right)

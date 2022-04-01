@@ -12,7 +12,7 @@
 
 CC = c++
 
-SRC = main.cpp Animal.cpp Dog.cpp Cat.cpp
+SRC = main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp
 
 CFLAGS = -Wall -Werror -Wextra -std=c++98 -g -Wshadow
 NAME = animals

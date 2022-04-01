@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/30 18:06:25 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/31 09:43:54 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,9 @@ class	Cat : public Animal
 {
 
 private:
-    std::string _name;
 public:
 	Cat(void);
-	Cat(std::string name);
+	// Cat(std::string name);
 	~Cat(void);
     Cat(const Cat &ptr);
     Cat &operator=(Cat const &right);

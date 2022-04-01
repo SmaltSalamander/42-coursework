@@ -1,52 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.cpp                                            :+:      :+:    :+:   */
+/*   WrongCat.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/31 09:39:01 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/31 09:42:55 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Dog.hpp"
+#include "WrongCat.hpp"
 
-Dog::Dog(void)
+WrongCat::WrongCat(void)
 {
-	std::cout << "Dog Constructor called" << std::endl;
-	type = "Dog";
+	std::cout << "WrongCat Constructor called" << std::endl;
+	type = "WrongCat";
 }
 
-// Dog::Dog(std::string name)
+// WrongCat::WrongCat(std::string name)
 // {
 // 	type = name;
 // }
 
-Dog::~Dog(void)
+WrongCat::~WrongCat(void)
 {
-	std::cout << "Dog Destructor called" << std::endl;
+	std::cout << "WrongCat Destructor called" << std::endl;
 }
 
-Dog::Dog(const Dog &ptr)
+WrongCat::WrongCat(const WrongCat &ptr)
 {
-	std::cout << "Dog's copy constructor called" << std::endl;
+	std::cout << "WrongCat's copy constructor called" << std::endl;
 	*this = ptr;
 }
 
-Dog &Dog::operator=(Dog const &right)
+WrongCat &WrongCat::operator=(WrongCat const &right)
 {
 	std::cout << "Overload assignment operator called" << std::endl;
 	this->type = right.type;
 	return (*this);
 }
 
-void    Dog::makeSound() const
+void    WrongCat::makeSound() const
 {
-	std::cout << this->type << " barks" << std::endl;	
+	std::cout << this->type << " meows" << std::endl;	
 }
 
-// std::ostream &operator<<(std::ostream &outstrobj, Dog const &right)
+// std::ostream &operator<<(std::ostream &outstrobj, WrongCat const &right)
 // {
 // 	outstrobj << right.type;
 // 	return (outstrobj);

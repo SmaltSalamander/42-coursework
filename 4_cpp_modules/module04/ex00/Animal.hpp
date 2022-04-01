@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/30 18:10:31 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/31 09:38:50 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ protected:
     std::string type;
 public:
     Animal(void);
-	Animal(std::string name);
-	~Animal(void);
+	// Animal(std::string name);
+	virtual ~Animal(void);
     Animal(const Animal &ptr);
     Animal &operator=(Animal const &right);
     std::string     getType() const;
