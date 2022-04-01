@@ -1,31 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Brain.hpp                                          :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/31 15:41:51 by sbienias         ###   ########.fr       */
+/*   Created: 2022/03/11 10:27:53 by sbienias          #+#    #+#             */
+/*   Updated: 2022/03/31 17:19:41 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BRAIN_HPP
-# define BRAIN_HPP
-#include <iostream>
 #include <cstdlib>
-#include <string>
+#include <iostream>
+#include "Brain.hpp"
 
-class	Brain
+int main()
 {
-
-protected:
-    std::string *ideas;
-public:
-    Brain(void);
-	~Brain(void);
-    Brain(const Brain &ptr);
-    Brain &operator=(Brain const &right);
-};
-
-#endif
+	const Brain brain;
+	return (0);
+}
