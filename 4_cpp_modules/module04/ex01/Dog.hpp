@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Brain.hpp                                          :+:      :+:    :+:   */
+/*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/02 12:08:25 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/02 12:33:32 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BRAIN_HPP
-# define BRAIN_HPP
+#ifndef DOG_HPP
+# define DOG_HPP
 #include <iostream>
 #include <cstdlib>
 #include <string>
+#include "Animal.hpp"
+#include "Brain.hpp"
 
-class	Brain
+class	Dog : public Animal, public Brain
 {
 
-protected:
-    std::string *ideas;
+private:
+    Brain   *_brain;
 public:
-    Brain(void);
-	~Brain(void);
-    Brain(const Brain &ptr);
-    Brain &operator=(Brain const &right);
-    void    setIdea(int index, std::string idea);
-    std::string getIdea(int index);
-
+	Dog(void);
+	// Dog(std::string name);
+	~Dog(void);
+    Dog(const Dog &ptr);
+    Dog &operator=(Dog const &right);
+    void    makeSound() const;
+    void    makeIdea(int index, std::string idea);
+    std::string seeIdea(int index);
 };
 
 #endif

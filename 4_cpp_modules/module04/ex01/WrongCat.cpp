@@ -1,52 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Brain.cpp                                         :+:      :+:    :+:   */
+/*   WrongCat.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/30 18:12:32 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/31 09:42:55 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Brain.hpp"
+#include "WrongCat.hpp"
 
-Brain::Brain(void)
+WrongCat::WrongCat(void)
 {
-	std::cout << "Brain Constructor called" << std::endl;
-	this->ideas = new std::string[100]; 
+	std::cout << "WrongCat Constructor called" << std::endl;
+	type = "WrongCat";
 }
 
-Brain::~Brain(void)
+// WrongCat::WrongCat(std::string name)
+// {
+// 	type = name;
+// }
+
+WrongCat::~WrongCat(void)
 {
-	std::cout << "Brain Destructor called" << std::endl;
-	delete [] ideas;
+	std::cout << "WrongCat Destructor called" << std::endl;
 }
 
-Brain::Brain(const Brain &ptr)
+WrongCat::WrongCat(const WrongCat &ptr)
 {
-	std::cout << "Brain's copy constructor called" << std::endl;
+	std::cout << "WrongCat's copy constructor called" << std::endl;
 	*this = ptr;
 }
 
-Brain &Brain::operator=(Brain const &right)
+WrongCat &WrongCat::operator=(WrongCat const &right)
 {
 	std::cout << "Overload assignment operator called" << std::endl;
-	int	i = 0;
-	while (i < 100)
-	{
-		this->ideas[i] = right.ideas[i];
-	}
+	this->type = right.type;
 	return (*this);
 }
 
-void    Brain::setIdea(int index, std::string idea)
+void    WrongCat::makeSound() const
 {
-	this->ideas[index] = idea;
+	std::cout << this->type << " meows" << std::endl;	
 }
 
-std::string Brain::getIdea(int index)
-{
-	return (this->ideas[index]);
-}
+// std::ostream &operator<<(std::ostream &outstrobj, WrongCat const &right)
+// {
+// 	outstrobj << right.type;
+// 	return (outstrobj);
+// }
