@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Character.hpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/11 10:27:53 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/04 21:16:09 by sbienias         ###   ########.fr       */
+/*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
+/*   Updated: 2022/04/06 11:41:09 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cstdlib>
+#ifndef ICHARACTER_HPP
+# define ICHARACTER_HPP
 #include <iostream>
-#include "AMateria.hpp"
+#include <cstdlib>
+#include <string>
 #include "ICharacter.hpp"
 
-int main()
+class Character : public ICharacter
 {
-	const ICharacter  *d = new AMateria();
-	// const Animal animal = new Animal();
-	delete d;
-	return (0);
-}
+private:
+	AMateria	_inv[4];
+public:
+    Character();
+    ~Character() {};
+    std::string const & getName() const = 0;
+    void equip(AMateria* m) = 0;
+    void unequip(int idx) = 0;
+    void use(int idx, ICharacter& target) = 0;
+};
+
+#endif
