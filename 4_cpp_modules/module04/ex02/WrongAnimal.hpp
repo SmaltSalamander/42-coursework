@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/31 09:42:29 by sbienias         ###   ########.fr       */
+/*   Created: 2022/04/06 15:06:24 by sbienias          #+#    #+#             */
+/*   Updated: 2022/04/06 15:06:26 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

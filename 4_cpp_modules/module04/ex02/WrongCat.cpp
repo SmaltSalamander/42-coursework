@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   WrongCat.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/31 09:42:55 by sbienias         ###   ########.fr       */
+/*   Created: 2022/04/06 15:06:17 by sbienias          #+#    #+#             */
+/*   Updated: 2022/04/06 15:06:20 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
