@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/04 21:08:13 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/06 19:36:28 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@
 #include <string>
 #include "AMateria.hpp"
 
+class AMateria;
+
 class ICharacter
 {
 public:
     ICharacter();
-    virtual ~ICharacter() {};
+    virtual ~ICharacter();
     virtual std::string const & getName() const = 0;
     virtual void equip(AMateria* m) = 0;
     virtual void unequip(int idx) = 0;

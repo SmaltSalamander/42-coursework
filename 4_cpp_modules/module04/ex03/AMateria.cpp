@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 15:05:56 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/06 15:06:01 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/06 19:20:48 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 AMateria::AMateria(void)
 {
 	std::cout << "AMateria Constructor called" << std::endl;
+	this->type = "default";
+}
+
+AMateria::AMateria(std::string const &type)
+{
+	std::cout << "AMateria Constructor called" << std::endl;
+	this->type = type;
 }
 
 AMateria::~AMateria(void)
@@ -31,13 +38,9 @@ AMateria::AMateria(const AMateria &ptr)
 AMateria &AMateria::operator=(AMateria const &right)
 {
 	std::cout << "Overload assignment operator called" << std::endl;
-	this->type = right.type;
+	if (this != &right)
+		this->type = right.type;
 	return (*this);
-}
-
-void    AMateria::makeSound() const
-{
-	std::cout << this->type << " cries" << std::endl;	
 }
 
 std::string const &  AMateria::getType() const

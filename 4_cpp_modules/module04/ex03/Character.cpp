@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 15:05:45 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/06 15:05:48 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/06 20:00:00 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,24 +42,8 @@ Character &Character::operator=(Character const &right)
 	{
 		if (this->_inv[i] != NULL)
 			delete this->_inv[i];
-		if (right->_inv[i])
-			this->_inv[i] = right->_inv[i].clone();
+		if (right._inv[i])
+			this->_inv[i] = right._inv[i]->clone();
 	}
 	return (*this);
 }
-
-void    Character::makeSound() const
-{
-	std::cout << this->type << " cries" << std::endl;	
-}
-
-std::string const &  Character::getType() const
-{
-	return (type);
-}
-
-// std::ostream &operator<<(std::ostream &outstrobj, Character const &right)
-// {
-// 	outstrobj << right.type;
-// 	return (outstrobj);
-// }

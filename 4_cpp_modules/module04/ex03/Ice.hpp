@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/06 13:41:01 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/06 19:31:35 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,13 @@ class	Ice : public AMateria
 {
 
 protected:
-    const std::string &type;
 public:
 	Ice(void);
     Ice(std::string const & type);
 	~Ice(void);
     Ice(const Ice &ptr);
     Ice &operator=(Ice const &right);
-	Ice* clone();
+	Ice* clone() const;
 	void use(ICharacter& target);
 };
 

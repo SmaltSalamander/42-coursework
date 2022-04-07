@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/04 21:08:37 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/06 19:32:50 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@
 #include <string>
 #include "ICharacter.hpp"
 
+class   ICharacter;
+
 class	AMateria
 {
-
 protected:
-    const std::string &type;
+    std::string type;
 public:
     AMateria(void);
     AMateria(std::string const &type);

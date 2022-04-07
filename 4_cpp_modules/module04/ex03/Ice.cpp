@@ -6,19 +6,21 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/06 15:04:48 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/06 19:32:24 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Ice.hpp"
 
-Ice::Ice(std::string const & type) : AMateria(type)
+Ice::Ice(std::string const & type)
 {
+	this->type = type;
 	std::cout << "Ice Constructor called" << std::endl;
 }
 
-Ice::Ice(void) : AMateria("ice")
+Ice::Ice(void)
 {
+	this->type = "ice";
 	std::cout << "Ice Constructor called" << std::endl;
 }
 
