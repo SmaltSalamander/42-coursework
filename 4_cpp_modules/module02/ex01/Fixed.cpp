@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/26 15:33:43 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/07 14:54:36 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ Fixed::Fixed(const Fixed &ptr)
 
 Fixed &Fixed::operator=(Fixed const &right)
 {
-	std::cout << "Overload assignment operator called" << std::endl;
+	std::cout << "Copy assignment operator called" << std::endl;
 	this->_fixednum = right.getRawBits();
 	return (*this);
 }

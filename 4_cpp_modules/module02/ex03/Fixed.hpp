@@ -3,18 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/27 14:14:55 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/11 12:15:24 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FIXED_H
-# define FIXED_H
+#ifndef FIXED_HPP
+# define FIXED_HPP
 #include <iostream>
 #include <cstdlib>
 #include <string>
+#include <cmath>
 
 class	Fixed
 {

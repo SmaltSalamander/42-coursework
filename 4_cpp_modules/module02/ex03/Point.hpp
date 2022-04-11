@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   Point.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/27 16:13:48 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/08 18:04:58 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef POINT_H
-# define POINT_H
+#ifndef POINT_HPP
+# define POINT_HPP
 #include <iostream>
 #include <cstdlib>
 #include <string>
@@ -34,8 +34,6 @@ public:
     // void   setX(Fixed);
     // void   setY(Fixed);
 };
-
-bool bsp( Point const a, Point const b, Point const c, Point const point);
 
 std::ostream &operator<<(std::ostream &outstrobj, Point const &right);
 

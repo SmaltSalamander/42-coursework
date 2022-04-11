@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Bureaucrat.cpp                                         :+:      :+:    :+:   */
+/*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/30 18:12:32 by sbienias         ###   ########.fr       */
+/*   Created: 2022/04/06 15:04:56 by sbienias          #+#    #+#             */
+/*   Updated: 2022/04/06 15:05:15 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // Constructors/Destructors/Operators
 
-Bureaucrat::Bureaucrat(void) : _name("Nameless")
+Bureaucrat::Bureaucrat(void) : _name(" ")
 {
 	std::cout << "Bureaucrat Constructor called" << std::endl;
 }

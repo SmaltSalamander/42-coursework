@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/26 21:02:59 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/08 17:11:27 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,37 @@
 
 Fixed::Fixed()
 {
-	// std::cout << "Default constructor called" << std::endl;
+	std::cout << "Default constructor called" << std::endl;
 	this->_fixednum = 0;
 }
 
 Fixed::Fixed(const int num)
 {
-	// std::cout << "Int constructor called" << std::endl;
+	std::cout << "Int constructor called" << std::endl;
 	this->_fixednum = num << _fracBitsNum;
 }
 
 Fixed::Fixed(const float num)
 {
-	// std::cout << "Float constructor called" << std::endl;
+	std::cout << "Float constructor called" << std::endl;
 	this->_fixednum = roundf(num  * (1 << _fracBitsNum));
 }
 
 Fixed::~Fixed(void)
 {
-	// std::cout << "Destructor called" << std::endl;
+	std::cout << "Destructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed &ptr)
 {
-	// std::cout << "Copy constructor called" << std::endl;
+	std::cout << "Copy constructor called" << std::endl;
 	*this = ptr;
 }
 
 Fixed &Fixed::operator=(Fixed const &right)
 {
-	// std::cout << "Overload assignment operator called" << std::endl;
-	this->_fixednum = right.getRawBits();
+	std::cout << "Overload assignment operator called" << std::endl;
+	this->_fixednum = right._fixednum;
 	return (*this);
 }
 
@@ -113,6 +113,8 @@ bool  Fixed::operator!=(const Fixed &rhs) const
 }
 //
 
+//Incremetations/decrementations
+
 Fixed &Fixed::operator++(void)
 {
 	this->_fixednum += 1;
@@ -138,6 +140,8 @@ Fixed Fixed::operator--(int)
 	operator--();
 	return (tmp);
 }
+
+//
 
 int Fixed::getRawBits( void ) const
 {
