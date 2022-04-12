@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Dog.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/31 09:39:01 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/12 11:40:37 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ Dog::~Dog(void)
 	std::cout << "Dog Destructor called" << std::endl;
 }
 
-Dog::Dog(const Dog &ptr)
+Dog::Dog(const Dog &ptr) : Animal::Animal(ptr)
 {
 	std::cout << "Dog's copy constructor called" << std::endl;
 	*this = ptr;
