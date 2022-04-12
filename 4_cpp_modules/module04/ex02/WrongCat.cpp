@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 15:06:17 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/06 15:06:20 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/12 11:43:55 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ WrongCat::~WrongCat(void)
 	std::cout << "WrongCat Destructor called" << std::endl;
 }
 
-WrongCat::WrongCat(const WrongCat &ptr)
+WrongCat::WrongCat(const WrongCat &ptr) : WrongAnimal::WrongAnimal(ptr)
 {
 	std::cout << "WrongCat's copy constructor called" << std::endl;
 	*this = ptr;

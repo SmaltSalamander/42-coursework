@@ -1,41 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Ice.cpp                                            :+:      :+:    :+:   */
+/*   Cure.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/12 13:56:40 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/12 13:57:07 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Ice.hpp"
+#include "Cure.hpp"
 
-Ice::Ice(std::string const & atype)
+Cure::Cure(std::string const & atype)
 {
 	this->type = atype;
-	std::cout << "Ice Constructor called" << std::endl;
+	std::cout << "Cure Constructor called" << std::endl;
 }
 
-Ice::Ice(void)
+Cure::Cure(void)
 {
-	this->type = "ice";
-	std::cout << "Ice Constructor called" << std::endl;
+	this->type = "Cure";
+	std::cout << "Cure Constructor called" << std::endl;
 }
 
-Ice::~Ice(void)
+Cure::~Cure(void)
 {
-	std::cout << "Ice Destructor called" << std::endl;
+	std::cout << "Cure Destructor called" << std::endl;
 }
 
-Ice::Ice(const Ice &ptr) : AMateria::AMateria(ptr)
+Cure::Cure(const Cure &ptr) : AMateria::AMateria(ptr)
 {
-	std::cout << "Ice's copy constructor called" << std::endl;
+	std::cout << "Cure's copy constructor called" << std::endl;
 	*this = ptr;
 }
 
-Ice &Ice::operator=(Ice const &right)
+Cure &Cure::operator=(Cure const &right)
 {
 	std::cout << "Overload assignment operator called" << std::endl;
 	if (this != &right)
@@ -43,18 +43,18 @@ Ice &Ice::operator=(Ice const &right)
 	return (*this);
 }
 
-Ice* Ice::clone() const
+Cure* Cure::clone() const
 {
-	Ice *ret = new Ice(this->getType());
+	Cure *ret = new Cure(this->getType());
 	return (ret);
 }
 
-void Ice::use(ICharacter& target)
+void Cure::use(ICharacter& target)
 {
-	std::cout << "* shoots an ice bolt at " << target.getName() << " *" << std::endl;
+	std::cout << "* heals " << target.getName() << "’s wounds *" << std::endl;
 }
 
-// std::ostream &operator<<(std::ostream &outstrobj, Ice const &right)
+// std::ostream &operator<<(std::ostream &outstrobj, Cure const &right)
 // {
 // 	outstrobj << right._type;
 // 	return (outstrobj);

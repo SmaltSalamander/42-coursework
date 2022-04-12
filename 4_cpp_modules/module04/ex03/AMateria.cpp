@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 15:05:56 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/06 19:20:48 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/12 12:46:33 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ AMateria::AMateria(void)
 	this->type = "default";
 }
 
-AMateria::AMateria(std::string const &type)
+AMateria::AMateria(std::string const &atype)
 {
 	std::cout << "AMateria Constructor called" << std::endl;
-	this->type = type;
+	this->type = atype;
 }
 
 AMateria::~AMateria(void)

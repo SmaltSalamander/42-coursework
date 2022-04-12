@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/02 12:35:36 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/12 11:43:41 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ Cat::~Cat(void)
 	delete _brain;
 }
 
-Cat::Cat(const Cat &ptr)
+Cat::Cat(const Cat &ptr) : Animal::Animal(ptr), Brain::Brain(ptr)
 {
 	std::cout << "Cat's copy constructor called" << std::endl;
 	*this = ptr;

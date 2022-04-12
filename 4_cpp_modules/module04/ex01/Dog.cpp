@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Dog.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/02 12:34:53 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/12 11:42:54 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ Dog::~Dog(void)
 	delete _brain;
 }
 
-Dog::Dog(const Dog &ptr)
+Dog::Dog(const Dog &ptr) : Animal::Animal(ptr), Brain::Brain(ptr)
 {
 	std::cout << "Dog's copy constructor called" << std::endl;
 	*this = ptr;
