@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 15:05:45 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/06 20:00:00 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/13 15:16:39 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,31 @@ Character &Character::operator=(Character const &right)
 			this->_inv[i] = right._inv[i]->clone();
 	}
 	return (*this);
+}
+
+std::string const & Character::getName() const
+{
+	return (_name);
+}
+
+void 	Character::equip(AMateria* m)
+{
+	int	i = 0;
+
+	while (_inv[i])
+		i++;
+	if (i == 4)
+		return ;
+	_inv[i] = m;
+}
+
+void	 Character::unequip(int idx)
+{
+	delete _inv[idx];
+	_inv[idx] = 0;
+}
+
+void	 Character::use(int idx, ICharacter& target)
+{
+	_inv[idx]->use(target);
 }

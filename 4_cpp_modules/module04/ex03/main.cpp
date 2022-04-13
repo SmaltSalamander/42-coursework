@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:27:53 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/06 21:07:04 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/13 18:49:39 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 #include <iostream>
 #include "AMateria.hpp"
 #include "Character.hpp"
+#include "Cure.hpp"
+#include "Ice.hpp"
 
 int main()
 {
-	// const ICharacter  *c = new Character();
-	// // const Animal animal = new Animal();
-	// delete c;
+	Ice ice();
+
 	return (0);
 }
