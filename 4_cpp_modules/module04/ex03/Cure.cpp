@@ -6,21 +6,21 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/13 15:00:13 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/20 23:12:23 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cure.hpp"
 
-Cure::Cure(std::string const & atype)
-{
-	this->type = atype;
-	std::cout << "Cure Constructor called" << std::endl;
-}
+// Cure::Cure(std::string const & atype)
+// {
+// 	this->type = atype;
+// 	std::cout << "Cure Constructor called" << std::endl;
+// }
 
 Cure::Cure(void)
 {
-	this->type = "Cure";
+	this->type = "cure";
 	std::cout << "Cure Constructor called" << std::endl;
 }
 
@@ -45,7 +45,7 @@ Cure &Cure::operator=(Cure const &right)
 
 Cure* Cure::clone() const
 {
-	Cure *ret = new Cure(this->getType());
+	Cure *ret = new Cure;
 	return (ret);
 }
 

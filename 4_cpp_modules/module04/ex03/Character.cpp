@@ -6,13 +6,20 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 15:05:45 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/13 15:16:39 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/21 14:29:29 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Character.hpp"
 
-Character::Character(void)
+Character::Character(void) : _name("Noname")
+{
+	std::cout << "Character Constructor called" << std::endl;
+	for (int i = 0; i < 4; i++)
+		_inv[i] = NULL;
+}
+
+Character::Character(std::string name) : _name(name)
 {
 	std::cout << "Character Constructor called" << std::endl;
 	for (int i = 0; i < 4; i++)
@@ -57,20 +64,26 @@ void 	Character::equip(AMateria* m)
 {
 	int	i = 0;
 
-	while (_inv[i])
+	while (i < 4 && _inv[i] != NULL)
 		i++;
 	if (i == 4)
+	{
+		delete m;
 		return ;
+	}
 	_inv[i] = m;
+	std::cout << "The character picked up a materia!" << std::endl;
 }
 
 void	 Character::unequip(int idx)
 {
-	delete _inv[idx];
+	if (_inv[idx] == 0)
+		return ;
 	_inv[idx] = 0;
 }
 
 void	 Character::use(int idx, ICharacter& target)
 {
-	_inv[idx]->use(target);
+	if (_inv[idx])
+		_inv[idx]->use(target);
 }

@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/13 15:15:45 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/20 22:40:43 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ private:
 	AMateria	*_inv[4];
 public:
     Character();
+	Character(std::string name);
     ~Character();
     Character(const Character &ptr);
     Character &operator=(Character const &right);

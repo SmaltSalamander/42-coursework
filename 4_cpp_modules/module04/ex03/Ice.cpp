@@ -6,17 +6,17 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/12 13:56:40 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/20 23:12:39 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Ice.hpp"
 
-Ice::Ice(std::string const & atype)
-{
-	this->type = atype;
-	std::cout << "Ice Constructor called" << std::endl;
-}
+// Ice::Ice(std::string const & atype)
+// {
+// 	this->type = atype;
+// 	std::cout << "Ice Constructor called" << std::endl;
+// }
 
 Ice::Ice(void)
 {
@@ -45,7 +45,7 @@ Ice &Ice::operator=(Ice const &right)
 
 Ice* Ice::clone() const
 {
-	Ice *ret = new Ice(this->getType());
+	Ice *ret = new Ice;
 	return (ret);
 }
 
