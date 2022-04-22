@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/21 15:23:12 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/22 14:33:01 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <string>
+#include "Form.hpp"
 
 # define BLANK "\e[0m"
 # define BLACK "\033[0;30m"
@@ -26,6 +27,8 @@
 # define CY "\033[0;36m"
 # define WH "\033[0;37m"
 # define D "\033[0m"
+
+class Form;
 
 class	Bureaucrat
 {
@@ -44,6 +47,7 @@ public:
 	void	increaseGrade(void);
 	void	decreaseGrade(int amount);
 	void	decreaseGrade(void);
+	void	signForm(Form &form);
 	class GradeTooHighException : public std::exception
 	{
 	public:

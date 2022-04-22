@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 15:04:56 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/21 15:25:01 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/22 14:35:33 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ Bureaucrat::Bureaucrat(const Bureaucrat &ptr) : _name(ptr._name)
 
 Bureaucrat &Bureaucrat::operator=(Bureaucrat const &right)
 {
-	std::cout << "Overload assignment operator called" << std::endl;
+	std::cout << "Bureaucrat's overload assignment operator called" << std::endl;
 	this->_grade = right._grade;
 	return (*this);
 }
@@ -107,4 +107,18 @@ void	Bureaucrat::increaseGrade(int amount)
 		throw (Bureaucrat::GradeTooHighException());
 	else
 		this->_grade -= amount;
+}
+
+void	Bureaucrat::signForm(Form &form)
+{
+	try
+	{
+		form.beSigned(*this);
+		std::cout << this->_name << " signed " << form.getName() << std::endl;
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << this->_name << " couldn't sign " << form.getName() <<
+		" because " << e.what() << std::endl;
+	}
 }
