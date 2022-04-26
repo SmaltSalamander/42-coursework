@@ -14,13 +14,13 @@
 
 // Constructors/Destructors/Operators
 
-Form::Form(void) : _name(" "), _signed(false), _reqGradeSign(150), _reqGradeExec(150)
+Form::Form(void) : _name(" "), _signed(false), _reqGradeSign(150), _reqGradeExec(150), _target("")
 {
 	std::cout << "Form Constructor called" << std::endl;
 }
 
-Form::Form(const std::string name, int gradeSign, int gradeExec) : _name(name),
-_signed(false), _reqGradeSign(gradeSign), _reqGradeExec(gradeExec)
+Form::Form(std::string target, const std::string name, int gradeSign, int gradeExec) : _name(name),
+_signed(false), _reqGradeSign(gradeSign), _reqGradeExec(gradeExec), _target(target)
 {
 	std::cout << "Form Constructor called" << std::endl;
 	if (gradeSign > 150 || gradeExec > 150)
@@ -38,13 +38,13 @@ Form::Form(const Form &ptr) : _name(ptr._name), _reqGradeSign(ptr._reqGradeSign)
 _reqGradeExec(ptr._reqGradeExec)
 {
 	std::cout << "Form's copy constructor called" << std::endl;
-	*this = ptr;
 }
 
 Form &Form::operator=(Form const &right)
 {
 	std::cout << "Form's overload assignment operator called" << std::endl;
-	*this = right;
+	this->_signed = right._signed;
+	this->_target = right._target;
 	return (*this);
 }
 
@@ -93,6 +93,11 @@ int			Form::getSignGrade(void) const
 int			Form::getExecGrade(void) const
 {
 	return (this->_reqGradeExec);
+}
+
+std::string			Form::getTarget(void) const
+{
+	return (this->_target);
 }
 
 bool		Form::isSigned(void) const

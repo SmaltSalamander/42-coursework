@@ -14,13 +14,13 @@
 
 // Constructors/Destructors/Operators
 
-RobotomyRequestForm::RobotomyRequestForm(void) : Form("RobotomyRequestForm", 72, 45)
+RobotomyRequestForm::RobotomyRequestForm(void) : Form(" ", "RobotomyRequestForm", 72, 45)
 {
 	std::cout << "RobotomyRequestForm Constructor called" << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const std::string target) : 
-Form("RobotomyRequestForm", 72, 45), _target(target)
+RobotomyRequestForm::RobotomyRequestForm(std::string target) : 
+Form(target, "RobotomyRequestForm", 72, 45)
 {
 	std::cout << "RobotomyRequestForm Constructor called" << std::endl;
 }
@@ -39,13 +39,27 @@ RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &ptr) : Form:
 RobotomyRequestForm &RobotomyRequestForm::operator=(RobotomyRequestForm const &right)
 {
 	std::cout << "RobotomyRequestForm's overload assignment operator called" << std::endl;
-	*this = right;
+	this->getTarget() = right.getTarget();
 	return (*this);
 }
 
 void		RobotomyRequestForm::execute(Bureaucrat const & executor) const
 {
-	std::cout << "a" << executor.getName();
+	try
+	{
+		Form::execute(executor);
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << "Executor " << executor.getName() << " wasn't qualified: " << e.what() << std::endl;
+		return ;
+	}
+	std::cout << "WRRRRRRRYYYYYYY" << std::endl;
+	std::srand(std::time(0));
+	if (std::rand() % 100 < 50)
+		std::cout << "SUCCESS! The Robotomy on " << this->getTarget() << "succeded!" << std::endl;
+	else
+		std::cout << "The Robotomy on " << this->getTarget() << "failed" << std::endl;
 }
 
 std::ostream &operator<<(std::ostream &outstrobj, RobotomyRequestForm const &right)

@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/22 15:29:56 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/26 21:04:48 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 class	ShrubberyCreationForm : public Form
 {
 private:
-	std::string		_target;
 public:
     ShrubberyCreationForm(void);
 	ShrubberyCreationForm(const std::string target);

@@ -14,13 +14,13 @@
 
 // Constructors/Destructors/Operators
 
-ShrubberyCreationForm::ShrubberyCreationForm(void) : Form("ShrubberyCreationForm", 145, 137)
+ShrubberyCreationForm::ShrubberyCreationForm(void) : Form("", "ShrubberyCreationForm", 145, 137)
 {
 	std::cout << "ShrubberyCreationForm Constructor called" << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string target) : 
-Form("ShrubberyCreationForm", 145, 137), _target(target)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : 
+Form(target, "ShrubberyCreationForm", 145, 137)
 {
 	std::cout << "ShrubberyCreationForm Constructor called" << std::endl;
 }
@@ -39,13 +39,21 @@ ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &ptr) :
 ShrubberyCreationForm &ShrubberyCreationForm::operator=(ShrubberyCreationForm const &right)
 {
 	std::cout << "ShrubberyCreationForm's overload assignment operator called" << std::endl;
-	*this = right;
+	this->getTarget() = right.getTarget();
 	return (*this);
 }
 
 void		ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 {
-	Form::execute(executor);
+	try
+	{
+		Form::execute(executor);
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << "Executor " << executor.getName() << " wasn't qualified: " << e.what() << std::endl;
+		return ;
+	}
 	
 }
 
