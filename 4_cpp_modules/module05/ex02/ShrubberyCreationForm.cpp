@@ -54,7 +54,26 @@ void		ShrubberyCreationForm::execute(Bureaucrat const & executor) const
 		std::cout << "Executor " << executor.getName() << " wasn't qualified: " << e.what() << std::endl;
 		return ;
 	}
-	
+	std::ofstream	dest;
+	std::string replace = this->getTarget() + "_shrubbery";
+	dest.open(replace.c_str());
+	if (!dest.is_open())
+		return ;
+	dest <<
+	"         &&& &&  & &&                          &&& &&  & &&" << std::endl <<
+	"	    && &\\/&\\|& ()|/ @, &&               && &\\/&\\|& ()|/ @, &&" << std::endl <<
+	"      &\\/(/&/&||/& /_/)_&/_&               &\\/(/&/&||/& /_/)_&/_&" << std::endl <<
+	"   &() \\/&|()|/&\\/ '%\" & ()            &() \\/&|()|/&\\/ '%\" & ()" << std::endl <<
+	"  &_\\_&&_\\ |& |&&/&__%_/_& &&         &_\\_&&_\\ |& |&&/&__%_/_& &&" << std::endl <<
+	"&&   && & &| &| /& & % ()& /&&        &&   && & &| &| /& & % ()& /&&" << std::endl <<
+	" ()&_---()&\\&\\|&&-&&--%---()~        ()&_---()&\\&\\|&&-&&--%---()~" << std::endl <<
+	"     &&     \\|||                          &&     \\|||" << std::endl <<
+	"             |||                                  |||" << std::endl <<
+	"             |||                                  |||" << std::endl <<
+	"             |||                                  |||" << std::endl <<
+	"       , -=-~  .-^- _                       , -=-~  .-^- _" << std::endl;
+	dest.close();
+	std::cout << "Shrubberies at " << this->getTarget() << " have been placed" << std::endl;
 }
 
 std::ostream &operator<<(std::ostream &outstrobj, ShrubberyCreationForm const &right)

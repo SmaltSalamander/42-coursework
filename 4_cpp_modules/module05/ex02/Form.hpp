@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/26 21:11:49 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/27 13:08:48 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ public:
 	int					getSignGrade(void) const;
 	int					getExecGrade(void) const;
 	std::string			getTarget(void) const;
+	void				setTarget(std::string target);
 	bool				isSigned(void) const;
 	void				beSigned(Bureaucrat &p);
 	virtual void		execute(Bureaucrat const & executor) const;

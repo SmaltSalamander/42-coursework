@@ -100,6 +100,11 @@ std::string			Form::getTarget(void) const
 	return (this->_target);
 }
 
+void				Form::setTarget(std::string target)
+{
+	this->_target = target;
+}
+
 bool		Form::isSigned(void) const
 {
 	return (this->_signed);

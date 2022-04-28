@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/26 21:04:48 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/27 13:47:17 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <cstdlib>
 #include <string>
 #include "Form.hpp"
+#include <fstream>
 
 class	ShrubberyCreationForm : public Form
 {
