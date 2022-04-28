@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:27:53 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/28 21:03:41 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/28 21:10:35 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,13 @@ int main()
 	another = a.makeForm("presidential pardon", "Joe");
 	delete test;
 	delete another;
+	try
+	{
+		another = a.makeForm("shrubbery robotomy", "Joe");
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
 	return (0);
 }
