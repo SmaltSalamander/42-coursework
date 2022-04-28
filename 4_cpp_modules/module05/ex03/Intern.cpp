@@ -14,7 +14,7 @@
 
 // Constructors/Destructors/Operators
 
-Intern::Intern(void) : _name(" ")
+Intern::Intern(void)
 {
 	std::cout << "Intern Constructor called" << std::endl;
 }
@@ -24,7 +24,7 @@ Intern::~Intern(void)
 	std::cout << "Intern Destructor called" << std::endl;
 }
 
-Intern::Intern(const Intern &ptr) : _name(ptr._name)
+Intern::Intern(const Intern &ptr)
 {
 	std::cout << "Intern's copy constructor called" << std::endl;
 	*this = ptr;
@@ -33,30 +33,61 @@ Intern::Intern(const Intern &ptr) : _name(ptr._name)
 Intern &Intern::operator=(Intern const &right)
 {
 	std::cout << "Intern's overload assignment operator called" << std::endl;
-	this->_grade = right._grade;
+	(void)right;
 	return (*this);
 }
 
 // Methods
+Form	*Intern::makeShrubbery(std::string target)
+{
+	ShrubberyCreationForm	*res = new ShrubberyCreationForm(target);
+	return (res);
+}
+
+Form	*Intern::makeRobotomy(std::string target)
+{
+	RobotomyRequestForm	*res = new RobotomyRequestForm(target);
+	return (res);
+}
+
+Form	*Intern::makePardon(std::string target)
+{
+	PresidentialPardonForm	*res = new PresidentialPardonForm(target);
+	return (res);
+}
 
 Form	*Intern::makeForm(std::string formName, std::string target)
 {
 	Form	*res;
 	int		i = 0;
+	int		a = 0;
 	int		selected;
-	std::string	keyWords = {"shrubbery", "robotomy", "pardon"};
-	Form	
-
-	for (int a = 0; a < 3; a++)
+	std::string	keyWords[3] = {"shrubbery", "robotomy", "pardon"};
+	Form	*(Intern::*Table[3])(std::string) =
 	{
-		if (formName.find(keyWords[a]))
+		&Intern::makeShrubbery,
+		&Intern::makeRobotomy,
+		&Intern::makePardon,
+	};
+
+	while (a < 3)
+	{
+		if (formName.find(keyWords[a]) != std::string::npos)
 		{
 			selected = a;
 			i++;
 		}
+		a++;
 	}
-	if (a == 3 || i > 1)
+	if (i != 1)
 		throw (FormNameWrong());
-	std::cout << "Intern creates " << res->getName();
+	res = (this->*Table[selected])(target);
+	std::cout << "Intern creates " << res->getName() << std::endl;
 	return (res);
 }
+
+const char *Intern::FormNameWrong::what(void) const throw()
+{
+	return ("The form matching the phrase has not been found!");
+}
+

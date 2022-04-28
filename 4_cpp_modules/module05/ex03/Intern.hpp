@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/28 14:56:32 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/28 15:47:03 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 #include <iostream>
 #include <cstdlib>
 #include <string>
-#include "Form.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 class Form;
 
@@ -29,6 +31,9 @@ public:
     Intern &operator=(Intern const &right);
 	const std::string getName(void) const;
 	Form	*makeForm(std::string formName, std::string target);
+	Form	*makeShrubbery(std::string target);
+	Form	*makeRobotomy(std::string target);
+	Form	*makePardon(std::string target);
 	class FormNameWrong : public std::exception
 	{
 	public:

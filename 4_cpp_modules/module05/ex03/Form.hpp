@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/27 13:08:48 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/28 15:47:10 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ private:
 public:
     Form(void);
 	Form(std::string target, const std::string name, int gradeSign, int gradeExec);
-	~Form(void);
+	virtual ~Form(void);
     Form(const Form &ptr);
     Form &operator=(Form const &right);
 	const std::string	getName(void) const;

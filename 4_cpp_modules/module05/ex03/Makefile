@@ -13,7 +13,7 @@
 CC = c++
 
 SRC = main.cpp Bureaucrat.cpp Form.cpp ShrubberyCreationForm.cpp \
-RobotomyRequestForm.cpp PresidentialPardonForm.cpp
+RobotomyRequestForm.cpp PresidentialPardonForm.cpp Intern.cpp
 
 CFLAGS = -Wall -Werror -Wextra -std=c++98 -g -Wshadow
 NAME = bureaucrat
