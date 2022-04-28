@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PresidentialPardonForm.hpp                          :+:      :+:    :+:   */
+/*   RobotomyRequestForm.hpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,26 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRESIDENTIALPARDONFORM_HPP
-# define PRESIDENTIALPARDONFORM_HPP
+#ifndef ROBOTOMYREQUESTFORM_HPP
+# define ROBOTOMYREQUESTFORM_HPP
 #include <iostream>
 #include <cstdlib>
 #include <string>
 #include <ctime>
 #include "Form.hpp"
 
-class	PresidentialPardonForm : public Form
+class	RobotomyRequestForm : public Form
 {
 private:
 public:
-    PresidentialPardonForm(void);
-	PresidentialPardonForm(std::string target);
-	~PresidentialPardonForm(void);
-    PresidentialPardonForm(const PresidentialPardonForm &ptr);
-    PresidentialPardonForm &operator=(PresidentialPardonForm const &right);
+    RobotomyRequestForm(void);
+	RobotomyRequestForm(std::string target);
+	~RobotomyRequestForm(void);
+    RobotomyRequestForm(const RobotomyRequestForm &ptr);
+    RobotomyRequestForm &operator=(RobotomyRequestForm const &right);
 	void		execute(Bureaucrat const & executor) const;
 };
 
-std::ostream &operator<<(std::ostream &outstrobj, PresidentialPardonForm const &right);
+std::ostream &operator<<(std::ostream &outstrobj, RobotomyRequestForm const &right);
 
 #endif

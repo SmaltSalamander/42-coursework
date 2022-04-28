@@ -1,35 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PresidentialPardonForm.hpp                          :+:      :+:    :+:   */
+/*   Intern.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/22 15:29:56 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/28 14:56:32 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRESIDENTIALPARDONFORM_HPP
-# define PRESIDENTIALPARDONFORM_HPP
+#ifndef INTERN_HPP
+# define INTERN_HPP
 #include <iostream>
 #include <cstdlib>
 #include <string>
-#include <ctime>
 #include "Form.hpp"
 
-class	PresidentialPardonForm : public Form
+class Form;
+
+class	Intern
 {
 private:
 public:
-    PresidentialPardonForm(void);
-	PresidentialPardonForm(std::string target);
-	~PresidentialPardonForm(void);
-    PresidentialPardonForm(const PresidentialPardonForm &ptr);
-    PresidentialPardonForm &operator=(PresidentialPardonForm const &right);
-	void		execute(Bureaucrat const & executor) const;
-};
+    Intern(void);
+	~Intern(void);
+    Intern(const Intern &ptr);
+    Intern &operator=(Intern const &right);
+	const std::string getName(void) const;
+	Form	*makeForm(std::string formName, std::string target);
+	class FormNameWrong : public std::exception
+	{
+	public:
+		const char *what() const throw();
+	};
 
-std::ostream &operator<<(std::ostream &outstrobj, PresidentialPardonForm const &right);
+};
 
 #endif
