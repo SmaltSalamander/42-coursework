@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:27:53 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/28 21:10:35 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/28 21:14:09 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int main()
 	delete another;
 	try
 	{
-		another = a.makeForm("shrubbery robotomy", "Joe");
+		another = a.makeForm("shrubbery robotomy", "Plant enthusiast");
 	}
 	catch (const std::exception& e)
 	{
