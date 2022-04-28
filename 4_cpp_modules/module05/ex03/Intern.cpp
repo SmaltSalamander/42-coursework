@@ -90,4 +90,3 @@ const char *Intern::FormNameWrong::what(void) const throw()
 {
 	return ("The form matching the phrase has not been found!");
 }
-
