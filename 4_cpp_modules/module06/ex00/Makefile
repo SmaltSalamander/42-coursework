@@ -20,7 +20,7 @@ NAME = conversion
 all: $(NAME)
 
 $(NAME): $(SRC) 
-	$(CC) $(CFLAGS) $(SRC) -o $(NAME)
+	$(CC) -g $(CFLAGS) $(SRC) -o $(NAME)
 
 debug: $(SRC)
 	$(CC) -g -o a.out $(SRC)
