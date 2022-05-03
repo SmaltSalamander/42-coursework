@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:27:53 by sbienias          #+#    #+#             */
-/*   Updated: 2022/05/02 16:59:37 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/03 11:14:12 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,17 @@ int	checkForPseudos(std::string str)
 	}
 	else if (!str.compare("inff") || !str.compare("+inff"))
 	{
-
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: " << inff << "f" << std::endl;
+		std::cout << "double: " << inff << std::endl;
 	}
 	else if (!str.compare("nanf"))
 	{
-
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: nanf" << std::endl;
+		std::cout << "double: nan" << std::endl;
 	}
 	else if (!str.compare("-inf"))
 	{
@@ -46,11 +52,17 @@ int	checkForPseudos(std::string str)
 	}
 	else if (!str.compare("inf") || !str.compare("+inf"))
 	{
-
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: " << inf << "f" << std::endl;
+		std::cout << "double: " << inf << std::endl;
 	}
 	else if (!str.compare("nan"))
 	{
-
+		std::cout << "char: impossible" << std::endl;
+		std::cout << "int: impossible" << std::endl;
+		std::cout << "float: nanf" << std::endl;
+		std::cout << "double: nan" << std::endl;
 	}
 	else
 		return (0);
