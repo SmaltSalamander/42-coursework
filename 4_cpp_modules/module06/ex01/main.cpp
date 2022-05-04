@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:27:53 by sbienias          #+#    #+#             */
-/*   Updated: 2022/05/04 13:03:27 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/04 13:58:00 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int main(void)
 	uintptr_t		middle_val;
 	Data			*test;
 	
-	middle_val = data.serialize(&data);
-	test = data.deserialize(middle_val);
+	middle_val = serialize(&data);
+	test = deserialize(middle_val);
 	std::cout << test << " and " << &data << "; Address as unitptr: " << middle_val << std::endl;
 	if (test == &data)
 		std::cout << "Serialization completed succefully" << std::endl;

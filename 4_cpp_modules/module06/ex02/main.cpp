@@ -1,35 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Data.hpp                                           :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/05/04 13:58:43 by sbienias         ###   ########.fr       */
+/*   Created: 2022/03/11 10:27:53 by sbienias          #+#    #+#             */
+/*   Updated: 2022/05/04 16:04:41 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DATA_HPP
-# define DATA_HPP
-#include <iostream>
 #include <cstdlib>
-#include <string>
-#include <stdint.h>
+#include <iostream>
+#include "Base.hpp"
+#include "A.hpp"
+#include "B.hpp"
+#include "C.hpp"
 
-class	Data
+int main(void)
 {
-private:
-    unsigned int 		_value;
-public:
-    Data(void);
-	Data(unsigned int 		value);
-	~Data(void);
-    Data(const Data &ptr);
-    Data &operator=(Data const &right);
-};
+	Base	*test;
+	C		c;
 
-uintptr_t serialize(Data* ptr);
-Data* deserialize(uintptr_t raw);
-
-#endif
+	test = generate();
+	identify(test);
+	identify(c);
+	delete test;
+	return (0);
+}

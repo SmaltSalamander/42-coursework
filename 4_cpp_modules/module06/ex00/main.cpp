@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:27:53 by sbienias          #+#    #+#             */
-/*   Updated: 2022/05/03 11:14:12 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/04 12:00:20 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int main(int argc, char **argv)
 			std::cout << "int: impossible" << std::endl;
 		else
 			std::cout << "int: " << intCheck << std::endl;
-		f = (float) std::atof((char *) argv[1]);
+		f = static_cast<float>(std::atof((char *) argv[1]));
 		std::cout << std::fixed << std::setprecision(1) << "float: " << f << "f" << std::endl;
 		d = std::atof((char *) argv[1]);
 		std::cout << "double: " << d << std::endl;

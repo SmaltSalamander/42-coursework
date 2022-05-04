@@ -1,35 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Data.hpp                                           :+:      :+:    :+:   */
+/*   A.hpp                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/05/04 13:58:43 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/04 14:08:48 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DATA_HPP
-# define DATA_HPP
-#include <iostream>
-#include <cstdlib>
-#include <string>
-#include <stdint.h>
+#ifndef A_HPP
+# define A_HPP
+# include "Base.hpp"
 
-class	Data
+class A : public Base
 {
-private:
-    unsigned int 		_value;
-public:
-    Data(void);
-	Data(unsigned int 		value);
-	~Data(void);
-    Data(const Data &ptr);
-    Data &operator=(Data const &right);
+	
 };
-
-uintptr_t serialize(Data* ptr);
-Data* deserialize(uintptr_t raw);
 
 #endif

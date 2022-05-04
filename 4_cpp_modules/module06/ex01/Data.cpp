@@ -19,7 +19,7 @@ Data::Data(void)
 	std::cout << "Data Constructor called" << std::endl;
 }
 
-Data::Data(uintptr_t value) : _value(value)
+Data::Data(unsigned int value) : _value(value)
 {
 	std::cout << "Data Constructor called" << std::endl;
 }
@@ -41,12 +41,12 @@ Data &Data::operator=(Data const &right)
 	return (*this);
 }
 
-uintptr_t Data::serialize(Data* ptr)
+uintptr_t serialize(Data* ptr)
 {
 	return (reinterpret_cast<uintptr_t>(ptr));
 }
 
-Data* Data::deserialize(uintptr_t raw)
+Data* deserialize(uintptr_t raw)
 {
 	return (reinterpret_cast<Data *>(raw));
 }
