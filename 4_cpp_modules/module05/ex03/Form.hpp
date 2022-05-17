@@ -6,12 +6,12 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/28 15:47:10 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/03 11:20:21 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FORM_HPP
-# define FORM_HPP
+#ifndef DATA_HPP
+# define DATA_HPP
 #include <iostream>
 #include <cstdlib>
 #include <string>

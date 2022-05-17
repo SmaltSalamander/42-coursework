@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:27:53 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/25 13:55:39 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/27 13:12:54 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int main()
 		return (1);
 	string replace = filename + ".replace";
 	dest.open(replace.c_str());
-	if (!fd.is_open())
+	if (!dest.is_open())
 		return (1);
 	while (getline(fd, line))
 	{
