@@ -23,23 +23,42 @@ template <typename T>
 class	MutantStack : public std::stack<T>
 {
 public:
-	MutantStack(void);
-	MutantStack(unsigned int storage);
-	~MutantStack(void);
-    MutantStack(const MutantStack &ptr);
-    MutantStack<T> &operator=(MutantStack const &right);
-
-	std::stack<T>::iterator	begin()
+	MutantStack(void)
 	{
-		return (std::stack<T>::begin());
+		std::cout << "MutantStack Constructor called" << std::endl;
 	}
-	std::stack<T>::iterator	end()
+	//MutantStack(unsigned int storage);
+	~MutantStack()
 	{
-		return (std::stack<T>::end());
+		std::cout << "MutantStack Destructor called" << std::endl;
+	}
+    MutantStack(const MutantStack<T> &ptr)
+	{
+		std::cout << "MutantStack's copy constructor called" << std::endl;
+		*this = ptr;
+	}
+    MutantStack<T> &operator=(MutantStack<T> const &right)
+	{
+		std::cout << "MutantStack's overload assignment operator called" << std::endl;
+		return (*this);
+	}
+
+	typedef typename std::stack<T>::container_type::iterator iterator;
+	iterator	begin()
+	{
+		return (std::stack<T>::c.begin());
+	}
+	iterator	end()
+	{
+		return (std::stack<T>::c.end());
 	}
 };
 
 template <typename T>
-std::ostream &operator<<(std::ostream &outstrobj, MutantStack<T> const &right);
+std::ostream &operator<<(std::ostream &outstrobj, MutantStack<T> const &right)
+{
+	outstrobj << right.top();
+	return (outstrobj);
+}
 
 #endif

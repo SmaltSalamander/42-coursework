@@ -12,7 +12,7 @@
 
 CC = c++
 
-SRC = main.cpp MutantStack.cpp
+SRC = main.cpp
 
 CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
 NAME = containers
