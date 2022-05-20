@@ -16,21 +16,23 @@ SRC = main.c utils.c
 
 #BONUS =
 
-OBJS = $(SRC:.c=.o)
+OBJS = $(SRC:%.c=%.o)
 OBJSBONUS = $(BONUS:.c=.o)
 TEST = test.c
 CFLAGS = -Wall -Werror -Wextra
 NAME = pipex
 LIBFTPATH = ./libft
 LIBRARY = libft.a
+HEADER		=	pipex.h
 
 all: $(LIBRARY) $(NAME)
 
 $(LIBRARY):
 	make -C $(LIBFTPATH)
 
-$(NAME): $(SRC) 
-	$(CC) -g $(CFLAGS) $(SRC) -L $(LIBFTPATH) -lft -o $(NAME)
+$(NAME): $(OBJS) 
+	$(CC) $(CFLAGS) $(OBJS) $(HEADER) -L $(LIBFTPATH)/$(LIBRARY) -lft -o $(NAME)
+#$(CC) -g $(CFLAGS) $(OBJS) -L $(LIBFTPATH) -lft -o $(NAME)
 
 debug: $(SRC) $(TEST) $(LIBRARY)
 	$(CC) -g -o a.out $(CFLAGS) $(TEST) $(SRC) $(NAME)

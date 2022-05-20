@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   putimg.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 16:38:34 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/26 14:39:57 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/03/31 19:22:27 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ void	put_sprite_in_win(char type, t_window *mlx, int *crds, int dir)
 	}
 	else if (type == 'C')
 	{
+		(*mlx).img.img = mlx_xpm_file_to_image((*mlx).mlx, "./img/bg.xpm", \
+		&((*mlx).img.width), &((*mlx).img.height));
+		mlx_put_image_to_window((*mlx).mlx, (*mlx).win, (*mlx).img.img, \
+		*crds, crds[1]);
+		mlx_destroy_image((*mlx).mlx, (*mlx).img.img);
 		(*mlx).img.img = mlx_xpm_file_to_image((*mlx).mlx, \
 		"./img/collect.xpm", &((*mlx).img.width), &((*mlx).img.height));
 	}
