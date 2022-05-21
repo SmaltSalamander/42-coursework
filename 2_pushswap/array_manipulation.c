@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 13:29:48 by sbienias          #+#    #+#             */
-/*   Updated: 2021/09/13 13:32:29 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/21 18:16:25 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	error_check_atoi(char *string, int *arrelement)
 		free(resultcopy);
 		return (numberlen);
 	}
+	free(resultcopy);
 	return (-1);
 }
 
@@ -37,7 +38,10 @@ int	ft_add_to_array(char *string, t_list **array)
 	number = malloc(sizeof(int));
 	error = error_check_atoi(string, number);
 	if (error == -1)
+	{
+		free(number);
 		return (1);
+	}
 	element = ft_lstnew((int *) number);
 	ft_lstadd_back(array, element);
 	return (0);
