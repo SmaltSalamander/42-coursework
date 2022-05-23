@@ -1,14 +1,19 @@
-FROM debian:10.10
+FROM alpine:3.15.3
 
-RUN apt-get update
-RUN apt-get install -y mariadb-server
+LABEL maintainer "sbienias <sbienias@student.42wolfsburg.de>"
+RUN apk update && apk upgrade
+RUN apk add openrc
+RUN apk add mariadb mariadb-client
+RUN mkdir -p /run/mysqld
+
+COPY ./my.cnf /etc/mysql/
+COPY ./initsql.sql /tmp/initsql.sql
+COPY ./setupmariadb.sh /tmp/
+
+RUN chmod 775 /tmp/setupmariadb.sh
+
+RUN mkdir /run/openrc && touch /run/openrc/softlevel
 
 EXPOSE 3306
 
-LABEL version="1.0"
-LABEL description="MariaDB Server"
-
-HEALTHCHECK --start-period=5m \
-  CMD mariadb -e 'SELECT @@datadir;' || exit 1
-
-CMD ["mysqld"]
+CMD ["./tmp/setupmariadb.sh"]
