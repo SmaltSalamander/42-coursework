@@ -1,0 +1,21 @@
+services:
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    restart: unless-stopped
+    networks: doc-net
+    volumes:
+    ports: "443:443"
+  mariadb:
+    build: ./mariadb
+    container_name: mariadb
+    restart: unless-stopped
+    networks: doc-net
+    volumes:
+  wordpress:
+    build: ./wordpress
+    container_name: wordpress
+    restart: unless-stopped
+    depends_on: mariadb
+    networks: doc-net
+    volumes:
