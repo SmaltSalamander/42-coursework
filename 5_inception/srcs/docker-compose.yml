@@ -1,21 +1,31 @@
 services:
   nginx:
-    build: ./nginx
+    build: ./requirements/nginx
     container_name: nginx
     restart: unless-stopped
-    networks: doc-net
+    networks: 
+      - doc-net
     volumes:
-    ports: "443:443"
+      - /home/sbienias/data:/data:rw
+    ports: 
+      - "443:443"
   mariadb:
-    build: ./mariadb
+    build: ./requirements/mariadb
     container_name: mariadb
     restart: unless-stopped
-    networks: doc-net
+    networks:
+      - doc-net
     volumes:
+      - /home/sbienias/data:/data:rw
   wordpress:
-    build: ./wordpress
+    build: ./requirements/wordpress
     container_name: wordpress
     restart: unless-stopped
-    depends_on: mariadb
-    networks: doc-net
+    depends_on: 
+      - mariadb
+    networks: 
+      - doc-net
     volumes:
+      - /home/sbienias/data:/data:rw
+networks:
+  doc-net:

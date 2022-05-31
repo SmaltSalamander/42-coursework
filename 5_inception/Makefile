@@ -6,13 +6,15 @@
 #    By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/26 19:26:01 by sbienias          #+#    #+#              #
-#    Updated: 2022/05/26 19:26:19 by sbienias         ###   ########.fr        #
+#    Updated: 2022/05/31 20:10:56 by sbienias         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 include srcs/.env
 export $(shell sed 's/=.*//' srcs/.env)
 
+all:
+	mkdir -p /home/sbienias/data
 up:
 	cd srcs && docker-compose up --build -d --remove-orphans && cd ..
 
@@ -25,6 +27,6 @@ fdown:
 	@rm -rf ~/data
 
 clean:
-	docker-compose down --rmi all
+	cd srcs && docker-compose down --rmi all
 
 .PHONY: up down fdown clean
