@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/12 11:40:37 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/23 09:37:39 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,6 @@ Dog::Dog(void)
 	std::cout << "Dog Constructor called" << std::endl;
 	type = "Dog";
 }
-
-// Dog::Dog(std::string name)
-// {
-// 	type = name;
-// }
 
 Dog::~Dog(void)
 {

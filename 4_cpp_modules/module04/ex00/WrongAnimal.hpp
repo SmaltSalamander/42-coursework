@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/31 09:42:29 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/23 09:37:54 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ protected:
     std::string type;
 public:
     WrongAnimal(void);
-	// Animal(std::string name);
 	~WrongAnimal(void);
     WrongAnimal(const WrongAnimal &ptr);
     WrongAnimal &operator=(WrongAnimal const &right);

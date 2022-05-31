@@ -14,7 +14,7 @@ CC = c++
 
 SRC = main.cpp Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp
 
-CFLAGS = -Wall -Werror -Wextra -std=c++98 -g -Wshadow
+CFLAGS = -Wall -Werror -Wextra -std=c++98
 NAME = animals
 
 all: $(NAME)

@@ -15,7 +15,7 @@
 Brain::Brain(void)
 {
 	std::cout << "Brain Constructor called" << std::endl;
-	this->ideas = new std::string[100]; 
+	this->ideas = new std::string[100](); 
 }
 
 Brain::~Brain(void)

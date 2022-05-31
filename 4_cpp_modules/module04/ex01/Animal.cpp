@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Animal.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/02 12:31:19 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/30 15:38:10 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,6 @@ Animal::Animal(void)
 	std::cout << "Animal Constructor called" << std::endl;
 	type = "Animal";
 }
-
-// Animal::Animal(std::string name)
-// {
-// 	type = name;
-// }
 
 Animal::~Animal(void)
 {
@@ -36,7 +31,7 @@ Animal::Animal(const Animal &ptr)
 
 Animal &Animal::operator=(Animal const &right)
 {
-	std::cout << "Overload assignment operator called" << std::endl;
+	std::cout << "Animal's Overload assignment operator called" << std::endl;
 	this->type = right.type;
 	return (*this);
 }
@@ -50,9 +45,3 @@ std::string     Animal::getType() const
 {
 	return (type);
 }
-
-// std::ostream &operator<<(std::ostream &outstrobj, Animal const &right)
-// {
-// 	outstrobj << right.type;
-// 	return (outstrobj);
-// }

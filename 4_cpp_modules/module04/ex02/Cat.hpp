@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cat.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/02 12:31:41 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/30 10:25:52 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,12 @@
 #include "Animal.hpp"
 #include "Brain.hpp"
 
-class	Cat : public Animal, public Brain
+class	Cat : public Animal
 {
-
 private:
     Brain   *_brain;
 public:
 	Cat(void);
-	// Cat(std::string name);
 	~Cat(void);
     Cat(const Cat &ptr);
     Cat &operator=(Cat const &right);

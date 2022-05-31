@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/02 12:33:32 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/30 10:25:54 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,12 @@
 #include "Animal.hpp"
 #include "Brain.hpp"
 
-class	Dog : public Animal, public Brain
+class	Dog : public Animal
 {
-
 private:
     Brain   *_brain;
 public:
 	Dog(void);
-	// Dog(std::string name);
 	~Dog(void);
     Dog(const Dog &ptr);
     Dog &operator=(Dog const &right);

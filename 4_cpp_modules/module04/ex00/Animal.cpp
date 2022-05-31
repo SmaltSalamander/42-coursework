@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Animal.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/01 19:34:34 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/23 09:37:26 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,6 @@ Animal::Animal(void)
 	std::cout << "Animal Constructor called" << std::endl;
 	type = "Animal";
 }
-
-// Animal::Animal(std::string name)
-// {
-// 	type = name;
-// }
 
 Animal::~Animal(void)
 {
@@ -50,9 +45,3 @@ std::string     Animal::getType() const
 {
 	return (type);
 }
-
-// std::ostream &operator<<(std::ostream &outstrobj, Animal const &right)
-// {
-// 	outstrobj << right.type;
-// 	return (outstrobj);
-// }

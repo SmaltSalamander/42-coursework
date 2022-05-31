@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Dog.hpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/31 09:43:57 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/23 09:38:11 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,8 @@
 
 class	Dog : public Animal
 {
-
-private:
 public:
 	Dog(void);
-	// Dog(std::string name);
 	~Dog(void);
     Dog(const Dog &ptr);
     Dog &operator=(Dog const &right);

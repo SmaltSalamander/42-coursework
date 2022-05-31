@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/12 11:43:34 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/23 10:13:10 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,13 @@ Dog::Dog(void)
 	_brain = new Brain();
 }
 
-// Dog::Dog(std::string name)
-// {
-// 	type = name;
-// }
-
 Dog::~Dog(void)
 {
-	std::cout << "Dog Destructor called" << std::endl;
 	delete _brain;
+	std::cout << "Dog Destructor called" << std::endl;
 }
 
-Dog::Dog(const Dog &ptr) : Animal::Animal(ptr), Brain::Brain(ptr)
+Dog::Dog(const Dog &ptr) : Animal::Animal(ptr)
 {
 	std::cout << "Dog's copy constructor called" << std::endl;
 	*this = ptr;
@@ -57,9 +52,3 @@ std::string Dog::seeIdea(int index)
 {
 	return (this->_brain->getIdea(index));
 }
-
-// std::ostream &operator<<(std::ostream &outstrobj, Dog const &right)
-// {
-// 	outstrobj << right.type;
-// 	return (outstrobj);
-// }

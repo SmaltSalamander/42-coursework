@@ -57,6 +57,7 @@ void MateriaSource::learnMateria(AMateria *type)
 		i++;
 	if (i == 4)
 	{
+		std::cout << "The Materia was not learned" << std::endl;
 		delete type;
 		return ;
 	}

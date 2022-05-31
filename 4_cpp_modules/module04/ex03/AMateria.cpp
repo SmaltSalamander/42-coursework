@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 15:05:56 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/12 12:46:33 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/30 10:26:07 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,3 @@ std::string const &  AMateria::getType() const
 {
 	return (type);
 }
-
-// std::ostream &operator<<(std::ostream &outstrobj, AMateria const &right)
-// {
-// 	outstrobj << right.type;
-// 	return (outstrobj);
-// }

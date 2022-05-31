@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:27:53 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/02 14:51:51 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/23 10:20:22 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,48 @@
 
 int main()
 {
+	const Animal  *x = new Dog();
+	const Animal *z = new Cat();
+	//If uncommented, causes compilation error
+	//const Animal animal = new Animal();
+	delete x;
+	delete z;
 	const Animal  *d = new Dog();
 	const Animal *c = new Cat();
-	// const Animal animal = new Animal();
+	int				size = 6;
+	Dog				dog;
+	Cat				cat;
+
+	Animal *arr[6];
+	for (int i = 0; i < size / 2; i++)
+	{
+		arr[i] = new Dog();
+	}
+	for (int i = size / 2; i < size; i++)
+	{
+		arr[i] = new Cat();
+	}
+	std::cout << GR << "CONSTRUCTION DONE" << std::endl << BLANK;
 	delete d;
 	delete c;
+	std::cout << RED << "DELETED d and c" << std::endl << BLANK;
+	for (int i = 0; i < size; i++)
+	{
+		std::cout << CY << i << std::endl;
+		arr[i]->makeSound();
+		std::cout << BLANK;
+		delete arr[i];
+	}
+	cat.makeIdea(0, "fish");
+	dog.makeIdea(0, "bones");
+	std::cout << YE << cat.getType() << " is thinking of " << cat.seeIdea(0) << std::endl;
+	std::cout << dog.getType() << " is thinking of " << dog.seeIdea(0) << std::endl;
+	std::cout << cat.getType() << " is thinking of " << cat.seeIdea(1) << std::endl << BLANK;
+	{
+		Dog test;
+		test = dog;
+		std::cout << PU << test.getType() << " in separate scope is thinking of " << dog.seeIdea(0) << std::endl;
+	}
+	std::cout << dog.getType() << " is thinking of " << dog.seeIdea(0) << std::endl << BLANK;
 	return (0);
 }

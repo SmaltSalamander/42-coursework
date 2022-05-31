@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/12 11:41:11 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/30 10:25:07 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,6 @@ WrongCat::WrongCat(void)
 	std::cout << "WrongCat Constructor called" << std::endl;
 	type = "WrongCat";
 }
-
-// WrongCat::WrongCat(std::string name)
-// {
-// 	type = name;
-// }
 
 WrongCat::~WrongCat(void)
 {
@@ -45,9 +40,3 @@ void    WrongCat::makeSound() const
 {
 	std::cout << this->type << " meows" << std::endl;	
 }
-
-// std::ostream &operator<<(std::ostream &outstrobj, WrongCat const &right)
-// {
-// 	outstrobj << right.type;
-// 	return (outstrobj);
-// }

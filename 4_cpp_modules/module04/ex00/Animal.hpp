@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Animal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/31 09:38:50 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/23 09:38:17 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,10 @@
 
 class	Animal
 {
-
 protected:
     std::string type;
 public:
     Animal(void);
-	// Animal(std::string name);
 	virtual ~Animal(void);
     Animal(const Animal &ptr);
     Animal &operator=(Animal const &right);

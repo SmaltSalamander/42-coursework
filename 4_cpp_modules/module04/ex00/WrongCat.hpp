@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   WrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/31 09:44:15 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/23 09:38:03 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,8 @@
 
 class	WrongCat : public WrongAnimal
 {
-
-private:
 public:
 	WrongCat(void);
-	// WrongCat(std::string name);
 	~WrongCat(void);
     WrongCat(const WrongCat &ptr);
     WrongCat &operator=(WrongCat const &right);

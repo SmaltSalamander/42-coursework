@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/12 11:40:56 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/23 09:37:30 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,6 @@ Cat::Cat(void)
 	std::cout << "Cat Constructor called" << std::endl;
 	type = "Cat";
 }
-
-// Cat::Cat(std::string name)
-// {
-// 	type = name;
-// }
 
 Cat::~Cat(void)
 {

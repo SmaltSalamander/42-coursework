@@ -14,7 +14,7 @@ CC = c++
 
 SRC = main.cpp AMateria.cpp Ice.cpp Character.cpp Cure.cpp MateriaSource.cpp
 
-CFLAGS = -Wall -Werror -Wextra -std=c++98 -g -Wshadow
+CFLAGS = -Wall -Werror -Wextra -std=c++98
 NAME = materias
 
 all: $(NAME)

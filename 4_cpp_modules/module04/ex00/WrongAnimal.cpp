@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   WrongAnimal.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/31 09:42:46 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/23 10:19:27 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,6 @@ WrongAnimal::WrongAnimal(void)
 	std::cout << "WrongAnimal Constructor called" << std::endl;
 	type = "WrongAnimal";
 }
-
-// WrongAnimal::WrongAnimal(std::string name)
-// {
-// 	type = name;
-// }
 
 WrongAnimal::~WrongAnimal(void)
 {
@@ -50,9 +45,3 @@ std::string     WrongAnimal::getType() const
 {
 	return (type);
 }
-
-// std::ostream &operator<<(std::ostream &outstrobj, WrongAnimal const &right)
-// {
-// 	outstrobj << right.type;
-// 	return (outstrobj);
-// }

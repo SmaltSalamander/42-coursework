@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/12 11:42:54 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/30 15:52:05 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,23 @@ Dog::Dog(void)
 	_brain = new Brain();
 }
 
-// Dog::Dog(std::string name)
-// {
-// 	type = name;
-// }
-
 Dog::~Dog(void)
 {
-	std::cout << "Dog Destructor called" << std::endl;
 	delete _brain;
+	std::cout << "Dog Destructor called" << std::endl;
 }
 
-Dog::Dog(const Dog &ptr) : Animal::Animal(ptr), Brain::Brain(ptr)
+Dog::Dog(const Dog &ptr) : Animal::Animal(ptr)
 {
 	std::cout << "Dog's copy constructor called" << std::endl;
+	this->_brain = new Brain();
 	*this = ptr;
 }
 
 Dog &Dog::operator=(Dog const &right)
 {
-	std::cout << "Overload assignment operator called" << std::endl;
+	std::cout << "Dog Overload assignment operator called" << std::endl;
+	*this->_brain = *right._brain;
 	this->type = right.type;
 	return (*this);
 }
@@ -58,8 +55,7 @@ std::string Dog::seeIdea(int index)
 	return (this->_brain->getIdea(index));
 }
 
-// std::ostream &operator<<(std::ostream &outstrobj, Dog const &right)
-// {
-// 	outstrobj << right.type;
-// 	return (outstrobj);
-// }
+Brain	*Dog::getBrain()
+{
+	return (this->_brain);
+}
