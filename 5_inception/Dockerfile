@@ -1,6 +1,9 @@
-FROM alpine:3.15.3
-RUN apk update && apk add valgrind && mkdir test
-RUN apk add clang && apk add make
-WORKDIR ./test
-ENTRYPOINT make
-ENTRYPOINT ["valgrind"]
+FROM ubuntu
+RUN apt-get update
+RUN apt-get install -y valgrind && apt-get install -y g++ && apt-get install -y make
+#FROM alpine:3.15.3
+# RUN apk update && apk add valgrind
+# RUN apk add g++ && apk add make
+# CMD ["cd /valgrind"]
+#Run it with:
+#docker run -tiv $(pwd):/valgrind valgrind
