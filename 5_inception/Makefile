@@ -6,7 +6,7 @@
 #    By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/26 19:26:01 by sbienias          #+#    #+#              #
-#    Updated: 2022/05/31 20:10:56 by sbienias         ###   ########.fr        #
+#    Updated: 2022/06/01 11:34:28 by sbienias         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,5 +28,9 @@ fdown:
 
 clean:
 	cd srcs && docker-compose down --rmi all
+
+dockercleanup:
+	docker rm -vf $(docker ps -aq)
+	docker rmi -f $(docker images -aq)
 
 .PHONY: up down fdown clean
