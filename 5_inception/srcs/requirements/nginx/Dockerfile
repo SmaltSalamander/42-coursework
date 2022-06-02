@@ -13,7 +13,7 @@ COPY default.conf /etc/nginx/http.d/default.conf
 
 COPY website /usr/share/nginx/html
 
-EXPOSE 443
+EXPOSE 9000
 #Debugging
 #RUN apk add vim
 

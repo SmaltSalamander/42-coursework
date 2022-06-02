@@ -4,9 +4,9 @@ services:
     container_name: nginx
     restart: unless-stopped
     networks: 
-      - doc-net
+      - docker-network
     volumes:
-      - /home/sbienias/data:/data:rw
+      - wordprs:/data/wordpress:rw
     ports: 
       - "443:443"
   mariadb:
@@ -14,18 +14,26 @@ services:
     container_name: mariadb
     restart: unless-stopped
     networks:
-      - doc-net
+      - docker-network
     volumes:
-      - /home/sbienias/data:/data:rw
+      - db:/data/db:rw
   wordpress:
     build: ./requirements/wordpress
     container_name: wordpress
+    ports:
+      - "8000:80"
     restart: unless-stopped
     depends_on: 
       - mariadb
+      - nginx
     networks: 
-      - doc-net
+      - docker-network
     volumes:
-      - /home/sbienias/data:/data:rw
+      - wordprs:/data/wordpress:rw
 networks:
-  doc-net:
+  docker-network: {}
+volumes:
+  db:
+    # external: true
+  wordprs:
+    # external: true

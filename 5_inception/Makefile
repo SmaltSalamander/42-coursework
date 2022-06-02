@@ -6,15 +6,17 @@
 #    By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/26 19:26:01 by sbienias          #+#    #+#              #
-#    Updated: 2022/06/01 11:34:28 by sbienias         ###   ########.fr        #
+#    Updated: 2022/06/02 20:11:44 by sbienias         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 include srcs/.env
 export $(shell sed 's/=.*//' srcs/.env)
 
-all:
-	mkdir -p /home/sbienias/data
+prep:
+	# mkdir -p /Users/sbienias/data/db && mkdir /Users/sbienias/data/wordprs
+	docker volume create --name=db --opt device=/Users/sbienias/data/db --opt type=none
+	docker volume create --name=wordprs --opt device=/Users/sbienias/data/wordprs --opt type=none
 up:
 	cd srcs && docker-compose up --build -d --remove-orphans && cd ..
 
