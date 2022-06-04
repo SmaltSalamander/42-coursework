@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Animal.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/02 14:25:56 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/31 17:44:39 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,3 @@ std::string     Animal::getType() const
 {
 	return (type);
 }
-
-// std::ostream &operator<<(std::ostream &outstrobj, Animal const &right)
-// {
-// 	outstrobj << right.type;
-// 	return (outstrobj);
-// }

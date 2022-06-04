@@ -56,7 +56,7 @@ void		RobotomyRequestForm::execute(Bureaucrat const & executor) const
 	}
 	std::cout << "WRRRRRRRYYYYYYY" << std::endl;
 	std::srand(std::time(0));
-	if (std::rand() % 100 < 50)
+	if (std::rand() % 2 < 1)
 		std::cout << "SUCCESS! The Robotomy on " << this->getTarget() << " succeded!" << std::endl;
 	else
 		std::cout << "The Robotomy on " << this->getTarget() << " failed" << std::endl;

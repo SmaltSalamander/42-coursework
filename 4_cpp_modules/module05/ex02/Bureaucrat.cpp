@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 15:04:56 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/22 14:35:33 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/06/04 12:20:20 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ Bureaucrat::Bureaucrat(const std::string name, int grade) : _name(name), _grade(
 {
 	std::cout << "Bureaucrat Constructor called" << std::endl;
 	if (grade > 150)
-		throw (Bureaucrat::GradeTooHighException());
-	else if (grade < 0)
 		throw (Bureaucrat::GradeTooLowException());
+	else if (grade < 1)
+		throw (Bureaucrat::GradeTooHighException());
 
 }
 
@@ -95,7 +95,7 @@ void	Bureaucrat::decreaseGrade(int amount)
 
 void	Bureaucrat::increaseGrade(void)
 {
-	if (this->_grade - 1 < 0)
+	if (this->_grade - 1 < 1)
 		throw (Bureaucrat::GradeTooHighException());
 	else
 		this->_grade--;
@@ -103,7 +103,7 @@ void	Bureaucrat::increaseGrade(void)
 
 void	Bureaucrat::increaseGrade(int amount)
 {
-	if (this->_grade - amount < 0)
+	if (this->_grade - amount < 1)
 		throw (Bureaucrat::GradeTooHighException());
 	else
 		this->_grade -= amount;
@@ -121,4 +121,18 @@ void	Bureaucrat::signForm(Form &form)
 		std::cout << this->_name << " couldn't sign " << form.getName() <<
 		" because " << e.what() << std::endl;
 	}
+}
+
+void	Bureaucrat::executeForm(Form const &form)
+{
+	try
+	{
+		form.execute(*this);
+	}
+	catch (const std::exception& e)
+	{
+		std::cout << "Executor " << this->_name << " wasn't qualified: " << e.what() << std::endl;
+		return ;
+	}
+	std::cout << this->_name << "executed" << form.getName() << std::endl;
 }

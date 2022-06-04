@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/28 17:20:03 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/13 12:15:57 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,31 @@ ClapTrap &ClapTrap::operator=(ClapTrap const &right)
 	this->_name = right._name;
 	return (*this);
 }
+std::string		ClapTrap::getName()
+{
+	return (this->_name);
+}
+
+unsigned int	ClapTrap::getDmg()
+{
+	return (this->_attdmg);
+}
+
+int				ClapTrap::getHp()
+{
+	return (this->_hp);
+}
+
+int				ClapTrap::getEng()
+{
+	return (this->_energ);
+}
+
+
+void 			ClapTrap::setAttDmg(unsigned int  amount)
+{
+	this->_attdmg = amount;
+}
 
 void ClapTrap::attack(const std::string& target)
 {
@@ -61,8 +86,15 @@ void ClapTrap::attack(const std::string& target)
 	
 void ClapTrap::takeDamage(unsigned int amount)
 {
+	if (this->_hp <= 0)
+	{
+		std::cout << "ClapTrap " << this->_name << " has already been defeated!" << std::endl;
+		return ;
+	}
 	this->_hp -= amount;
 	std::cout << "ClapTrap " << this->_name << " took " << amount << " points of damage!" << std::endl;
+	if (this->_hp <= 0)
+		std::cout << "ClapTrap " << this->_name << " was destroyed!" << std::endl;
 }
 	
 void ClapTrap::beRepaired(unsigned int amount)

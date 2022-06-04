@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/05/23 09:40:59 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/31 17:44:48 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,3 @@ std::string     WrongAnimal::getType() const
 {
 	return (type);
 }
-
-// std::ostream &operator<<(std::ostream &outstrobj, WrongAnimal const &right)
-// {
-// 	outstrobj << right.type;
-// 	return (outstrobj);
-// }

@@ -15,7 +15,7 @@ CC = c++
 SRC = main.cpp Bureaucrat.cpp Form.cpp ShrubberyCreationForm.cpp \
 RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 
-CFLAGS = -Wall -Werror -Wextra -std=c++98 -g -Wshadow
+CFLAGS = -Wall -Werror -Wextra -std=c++98
 NAME = bureaucrat
 
 all: $(NAME)
@@ -34,5 +34,5 @@ clean:
 
 fclean: clean
 	/bin/rm -f $(NAME)
-
+	rm *_shrubbery
 re: fclean all

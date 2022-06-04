@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ClapTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/27 19:27:33 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/13 12:38:34 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,17 @@
 #include <iostream>
 #include <cstdlib>
 #include <string>
+
+# define BLANK "\e[0m"
+# define BLACK "\033[0;30m"
+# define RED "\033[0;31m"
+# define GR "\033[0;32m"
+# define YE "\033[0;33m"
+# define BL "\033[0;34m"
+# define PU "\033[0;35m"
+# define CY "\033[0;36m"
+# define WH "\033[0;37m"
+# define D "\033[0m"
 
 class	ClapTrap
 {
@@ -30,10 +41,14 @@ public:
 	~ClapTrap(void);
     ClapTrap(const ClapTrap &ptr);
     ClapTrap &operator=(ClapTrap const &right);
-    void setAttDmg(unsigned int  amount);
-    void attack(const std::string& target);
-    void takeDamage(unsigned int amount);
-    void beRepaired(unsigned int amount);
+	std::string		getName();
+	unsigned int	getDmg();
+	int				getHp();
+	int				getEng();
+    void 			setAttDmg(unsigned int  amount);
+    void 			attack(const std::string& target);
+    void 			takeDamage(unsigned int amount);
+    void 			beRepaired(unsigned int amount);
 };
 
 #endif

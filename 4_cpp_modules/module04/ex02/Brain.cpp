@@ -21,22 +21,27 @@ Brain::Brain(void)
 Brain::~Brain(void)
 {
 	std::cout << "Brain Destructor called" << std::endl;
-	delete [] ideas;
+	if (ideas)
+		delete [] ideas;
 }
 
 Brain::Brain(const Brain &ptr)
 {
 	std::cout << "Brain's copy constructor called" << std::endl;
+	this->ideas = new std::string[100](); 
 	*this = ptr;
 }
 
 Brain &Brain::operator=(Brain const &right)
 {
-	std::cout << "Overload assignment operator called" << std::endl;
+	std::cout << "Brain's Overload assignment operator called" << std::endl;
 	int	i = 0;
 	while (i < 100)
 	{
+		if (right.ideas[i].length() == 0)
+			break ;
 		this->ideas[i] = right.ideas[i];
+		i++;
 	}
 	return (*this);
 }

@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:27:53 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/07 14:55:18 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/06/03 20:55:09 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int main( void )
 {
 	Fixed a;
 	Fixed const b( 10 );
-	Fixed const c( 42.42f );
+	Fixed const c( 30.16f );
 	Fixed const d( b );
 	a = Fixed( 1234.4321f );
 	std::cout << "a is " << a << std::endl;

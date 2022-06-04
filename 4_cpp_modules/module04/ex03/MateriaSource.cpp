@@ -77,9 +77,3 @@ AMateria* MateriaSource::createMateria(std::string const & type)
 		result = _memory[i]->clone();
 	return (result);
 }
-
-// std::ostream &operator<<(std::ostream &outstrobj, MateriaSource const &right)
-// {
-// 	outstrobj << right.type;
-// 	return (outstrobj);
-// }

@@ -12,15 +12,10 @@
 
 #ifndef PRESIDENTIALPARDONFORM_HPP
 # define PRESIDENTIALPARDONFORM_HPP
-#include <iostream>
-#include <cstdlib>
-#include <string>
-#include <ctime>
 #include "Form.hpp"
 
 class	PresidentialPardonForm : public Form
 {
-private:
 public:
     PresidentialPardonForm(void);
 	PresidentialPardonForm(std::string target);

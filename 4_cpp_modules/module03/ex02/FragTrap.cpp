@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FragTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/28 17:21:54 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/13 13:21:45 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 FragTrap::FragTrap(void)
 {
-	std::cout << "Default constructor called" << std::endl;
+	std::cout << "Frag's Default constructor called" << std::endl;
 	this->_name = "Nameless";
 	_hp = 100;
 	_energ = 100;
@@ -23,7 +23,7 @@ FragTrap::FragTrap(void)
 
 FragTrap::FragTrap(std::string name)
 {
-	std::cout << "Scav's Default constructor called" << std::endl;
+	std::cout << "Frag's Default constructor called" << std::endl;
 	_name = name;
 	_hp = 100;
 	_energ = 100;
@@ -32,12 +32,12 @@ FragTrap::FragTrap(std::string name)
 
 FragTrap::~FragTrap(void)
 {
-	std::cout << "Scav's Destructor called" << std::endl;
+	std::cout << "Frag's Destructor called" << std::endl;
 }
 
-FragTrap::FragTrap(const FragTrap &ptr)
+FragTrap::FragTrap(const FragTrap &ptr) : ClapTrap::ClapTrap(ptr)
 {
-	std::cout << "Copy constructor called" << std::endl;
+	std::cout << "Frag's Copy constructor called" << std::endl;
 	*this = ptr;
 }
 

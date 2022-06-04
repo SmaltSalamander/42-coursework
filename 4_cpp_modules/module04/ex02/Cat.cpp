@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/05/23 10:13:17 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/30 15:54:17 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,14 @@ Cat::~Cat(void)
 Cat::Cat(const Cat &ptr) : Animal::Animal(ptr)
 {
 	std::cout << "Cat's copy constructor called" << std::endl;
+	this->_brain = new Brain();
 	*this = ptr;
 }
 
 Cat &Cat::operator=(Cat const &right)
 {
-	std::cout << "Overload assignment operator called" << std::endl;
+	std::cout << "Cat Overload assignment operator called" << std::endl;
+	*this->_brain = *right._brain;
 	this->type = right.type;
 	return (*this);
 }
@@ -52,9 +54,3 @@ std::string Cat::seeIdea(int index)
 {
 	return (this->_brain->getIdea(index));
 }
-
-// std::ostream &operator<<(std::ostream &outstrobj, Cat const &right)
-// {
-// 	outstrobj << right.type;
-// 	return (outstrobj);
-// }

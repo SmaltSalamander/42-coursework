@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/20 23:12:23 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/31 17:43:57 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,3 @@ void Cure::use(ICharacter& target)
 	std::cout << "* heals " << target.getName() << "’s wounds *" << std::endl;
 }
 
-// std::ostream &operator<<(std::ostream &outstrobj, Cure const &right)
-// {
-// 	outstrobj << right._type;
-// 	return (outstrobj);
-// }

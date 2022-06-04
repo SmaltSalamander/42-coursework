@@ -6,21 +6,17 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/27 13:47:17 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/06/02 11:17:46 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHRUBBERYCREATIONFORM_HPP
 # define SHRUBBERYCREATIONFORM_HPP
-#include <iostream>
-#include <cstdlib>
-#include <string>
 #include "Form.hpp"
 #include <fstream>
 
 class	ShrubberyCreationForm : public Form
 {
-private:
 public:
     ShrubberyCreationForm(void);
 	ShrubberyCreationForm(std::string target);

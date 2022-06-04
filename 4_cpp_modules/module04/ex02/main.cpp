@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/11 10:27:53 by sbienias          #+#    #+#             */
-/*   Updated: 2022/05/23 10:20:22 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/31 18:47:11 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,15 @@ int main()
 	dog.makeIdea(0, "bones");
 	std::cout << YE << cat.getType() << " is thinking of " << cat.seeIdea(0) << std::endl;
 	std::cout << dog.getType() << " is thinking of " << dog.seeIdea(0) << std::endl;
-	std::cout << cat.getType() << " is thinking of " << cat.seeIdea(1) << std::endl << BLANK;
+	std::cout << cat.getType() << " is thinking of " << cat.seeIdea(1) << std::endl << RED;
 	{
 		Dog test;
 		test = dog;
-		std::cout << PU << test.getType() << " in separate scope is thinking of " << dog.seeIdea(0) << std::endl;
+		Dog test1(test);
+		std::cout << PU << test1.getType() << "test1 in separate scope is thinking of " << test1.seeIdea(0) << std::endl;
+		test1.makeIdea(0, "rabbits");
+		std::cout << PU << test.getType() << "test in separate scope is thinking of " << test.seeIdea(0) << std::endl;
 	}
-	std::cout << dog.getType() << " is thinking of " << dog.seeIdea(0) << std::endl << BLANK;
+	std::cout << CY << dog.getType() << " is thinking of " << dog.seeIdea(0) << std::endl << BLANK;
 	return (0);
 }

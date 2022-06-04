@@ -24,9 +24,9 @@ _signed(false), _reqGradeSign(gradeSign), _reqGradeExec(gradeExec), _target(targ
 {
 	std::cout << "Form Constructor called" << std::endl;
 	if (gradeSign > 150 || gradeExec > 150)
-		throw (Form::GradeTooHighException());
-	else if (gradeSign < 0 || gradeExec < 0)
-		throw (Form::GradeTooLowException());
+		throw (Bureaucrat::GradeTooLowException());
+	else if (gradeSign < 1 || gradeExec < 1)
+		throw (Bureaucrat::GradeTooHighException());
 }
 
 Form::~Form(void)
@@ -62,16 +62,6 @@ std::ostream &operator<<(std::ostream &outstrobj, Form const &right)
 }
 
 // Exceptions
-
-const char *Form::GradeTooLowException::what(void) const throw()
-{
-	return ("Grade is too low!");
-}
-
-const char *Form::GradeTooHighException::what(void) const throw()
-{
-	return ("Grade is too high!");
-}
 
 const char *Form::FormNotSignedException::what(void) const throw()
 {
@@ -115,7 +105,7 @@ void		Form::beSigned(Bureaucrat &p)
 	if (p.getGrade() <= this->_reqGradeSign)
 		this->_signed = true;
 	else
-		throw (Form::GradeTooLowException());
+		throw (Bureaucrat::GradeTooLowException());
 }
 
 void		Form::execute(Bureaucrat const & executor) const
@@ -123,5 +113,5 @@ void		Form::execute(Bureaucrat const & executor) const
 	if (this->_signed == false)
 		throw (Form::FormNotSignedException());
 	else if (executor.getGrade() > this->_reqGradeExec)
-		throw (Form::GradeTooLowException());
+		throw (Bureaucrat::GradeTooLowException());
 }

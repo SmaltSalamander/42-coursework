@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/05/23 10:13:10 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/30 15:52:05 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,14 @@ Dog::~Dog(void)
 Dog::Dog(const Dog &ptr) : Animal::Animal(ptr)
 {
 	std::cout << "Dog's copy constructor called" << std::endl;
+	this->_brain = new Brain();
 	*this = ptr;
 }
 
 Dog &Dog::operator=(Dog const &right)
 {
-	std::cout << "Overload assignment operator called" << std::endl;
+	std::cout << "Dog Overload assignment operator called" << std::endl;
+	*this->_brain = *right._brain;
 	this->type = right.type;
 	return (*this);
 }
@@ -51,4 +53,9 @@ void    Dog::makeIdea(int index, std::string idea)
 std::string Dog::seeIdea(int index)
 {
 	return (this->_brain->getIdea(index));
+}
+
+Brain	*Dog::getBrain()
+{
+	return (this->_brain);
 }

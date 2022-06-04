@@ -20,7 +20,7 @@ NAME = materias
 all: $(NAME)
 
 $(NAME): $(SRC) 
-	$(CC) $(CFLAGS) $(SRC) -o $(NAME)
+	$(CC) $(CFLAGS) -g $(SRC) -o $(NAME)
 
 debug: $(SRC)
 	$(CC) -g -o a.out $(SRC)

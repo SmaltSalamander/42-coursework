@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   FragTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/30 16:45:36 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/13 13:39:46 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ FragTrap::~FragTrap(void)
 	std::cout << "Frag's Destructor called" << std::endl;
 }
 
-FragTrap::FragTrap(const FragTrap &ptr)
+FragTrap::FragTrap(const FragTrap &ptr) : ClapTrap::ClapTrap(ptr)
 {
 	std::cout << "Copy constructor called" << std::endl;
 	*this = ptr;

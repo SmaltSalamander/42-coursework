@@ -14,7 +14,7 @@ CC = c++
 
 SRC = main.cpp Bureaucrat.cpp Form.cpp
 
-CFLAGS = -Wall -Werror -Wextra -std=c++98 -g -Wshadow
+CFLAGS = -Wall -Werror -Wextra -std=c++98
 NAME = bureaucrat
 
 all: $(NAME)

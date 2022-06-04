@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/05/30 10:25:54 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/30 15:36:58 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ public:
     void    makeSound() const;
     void    makeIdea(int index, std::string idea);
     std::string seeIdea(int index);
+	Brain	*getBrain();
 };
 
 #endif

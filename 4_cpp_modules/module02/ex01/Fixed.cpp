@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/07 14:54:36 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/06/03 21:11:54 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,5 @@ float Fixed::toFloat( void ) const
 
 int Fixed::toInt( void ) const
 {
-	return (int)(this->toFloat());
+	return (this->_fixednum >> _fracBitsNum);
 }

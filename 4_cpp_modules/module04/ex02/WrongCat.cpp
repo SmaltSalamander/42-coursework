@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/05/23 09:40:54 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/31 17:44:21 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,3 @@ void    WrongCat::makeSound() const
 {
 	std::cout << this->type << " meows" << std::endl;	
 }
-
-// std::ostream &operator<<(std::ostream &outstrobj, WrongCat const &right)
-// {
-// 	outstrobj << right.type;
-// 	return (outstrobj);
-// }

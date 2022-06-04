@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PresidentialPardonForm.cpp              		                       :+:      :+:    :+:   */
+/*   PresidentialPardonForm.cpp                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/06 15:04:56 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/21 15:25:01 by sbienias         ###   ########.fr       */
+/*   Created: 2022/06/02 10:09:41 by sbienias          #+#    #+#             */
+/*   Updated: 2022/06/04 12:04:31 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,7 @@ PresidentialPardonForm &PresidentialPardonForm::operator=(PresidentialPardonForm
 
 void		PresidentialPardonForm::execute(Bureaucrat const & executor) const
 {
-	try
-	{
-		Form::execute(executor);
-	}
-	catch (const std::exception& e)
-	{
-		std::cout << "Executor " << executor.getName() << " wasn't qualified: " << e.what() << std::endl;
-		return ;
-	}
+	Form::execute(executor);
 	std::cout << this->getTarget() << " has been pardoned by Zaphod Beeblebrox." << std::endl;
 }
 

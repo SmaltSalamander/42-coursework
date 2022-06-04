@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/05/23 09:37:39 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/31 17:45:17 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,3 @@ void    Dog::makeSound() const
 {
 	std::cout << this->type << " barks" << std::endl;	
 }
-
-// std::ostream &operator<<(std::ostream &outstrobj, Dog const &right)
-// {
-// 	outstrobj << right.type;
-// 	return (outstrobj);
-// }

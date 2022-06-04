@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 15:05:45 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/21 14:29:29 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/05/31 17:41:39 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,15 @@ Character::~Character(void)
 Character::Character(const Character &ptr)
 {
 	std::cout << "Character's copy constructor called" << std::endl;
+	for (int i = 0; i < 4; i++)
+		_inv[i] = NULL;
 	*this = ptr;
 }
 
 Character &Character::operator=(Character const &right)
 {
-	std::cout << "Overload assignment operator called" << std::endl;
+	std::cout << "Character's overload assignment operator called" << std::endl;
+	this->_name.assign(right._name);
 	for (int i = 0; i < 4; i++)
 	{
 		if (this->_inv[i] != NULL)
@@ -86,4 +89,9 @@ void	 Character::use(int idx, ICharacter& target)
 {
 	if (_inv[idx])
 		_inv[idx]->use(target);
+}
+
+AMateria *Character::retrieveMateria(int idx)
+{
+	return (_inv[idx]);
 }

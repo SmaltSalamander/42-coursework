@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   DiamondTrap.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbienias <sbienias@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/13 15:45:07 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/30 16:43:37 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/04/13 13:41:28 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ DiamondTrap::~DiamondTrap(void)
 	std::cout << "Diamond's Destructor called" << std::endl;
 }
 
-DiamondTrap::DiamondTrap(const DiamondTrap &ptr)
+DiamondTrap::DiamondTrap(const DiamondTrap &ptr) : ClapTrap::ClapTrap(ptr), FragTrap::FragTrap(ptr), ScavTrap::ScavTrap(ptr)
 {
 	std::cout << "Copy constructor called" << std::endl;
 	*this = ptr;

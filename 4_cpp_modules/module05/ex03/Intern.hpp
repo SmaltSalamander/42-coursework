@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/25 16:15:32 by sbienias          #+#    #+#             */
-/*   Updated: 2022/04/28 15:47:03 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/06/02 11:12:38 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ class Form;
 
 class	Intern
 {
-private:
 public:
     Intern(void);
 	~Intern(void);
@@ -39,7 +38,6 @@ public:
 	public:
 		const char *what() const throw();
 	};
-
 };
 
 #endif

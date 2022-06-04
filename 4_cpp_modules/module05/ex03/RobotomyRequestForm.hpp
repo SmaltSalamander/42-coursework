@@ -12,15 +12,11 @@
 
 #ifndef ROBOTOMYREQUESTFORM_HPP
 # define ROBOTOMYREQUESTFORM_HPP
-#include <iostream>
-#include <cstdlib>
-#include <string>
 #include <ctime>
 #include "Form.hpp"
 
 class	RobotomyRequestForm : public Form
 {
-private:
 public:
     RobotomyRequestForm(void);
 	RobotomyRequestForm(std::string target);
