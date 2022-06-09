@@ -3,7 +3,7 @@ FROM alpine:3.15.3
 LABEL maintainer "sbienias <sbienias@student.42wolfsburg.de>"
 RUN apk update && apk upgrade
 RUN apk add openrc && apk add mariadb mariadb-client
-RUN mkdir -p /run/mysqld
+RUN mkdir -p /data/mysqld
 
 COPY ./my.cnf /etc/mysql/
 COPY ./initsql.sql /tmp/initsql.sql

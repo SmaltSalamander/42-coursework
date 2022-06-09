@@ -25,7 +25,6 @@ services:
     restart: unless-stopped
     depends_on: 
       - mariadb
-      - nginx
     networks: 
       - docker-network
     volumes:
