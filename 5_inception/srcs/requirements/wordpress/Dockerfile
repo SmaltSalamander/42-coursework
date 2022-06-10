@@ -6,6 +6,7 @@ RUN apk add php-fpm openrc
 WORKDIR /data/wordpress
 RUN wget http://wordpress.org/latest.tar.gz
 RUN tar -xzvf latest.tar.gz && rm latest.tar.gz
+RUN cp wordpress/wp-config-sample.php wordpress/wp-config.php
 COPY ./tools/wp-config.php /data/wordpress/wordpress
 
 EXPOSE 9000
