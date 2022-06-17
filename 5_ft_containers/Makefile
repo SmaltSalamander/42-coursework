@@ -10,28 +10,38 @@
 #                                                                              #
 # **************************************************************************** #
 
-CC = c++
+CC			= c++
+CFLAGS		= -Wall -Wextra -Werror
+SRCD		= ./srcs/
 
-SRC = main.cpp
+SRC			=	main.cpp
+SRCF		= $(addprefix $(SRCD),$(SRC))
 
-CFLAGS = -Wall -Werror -Wextra -std=c++98 -g
-NAME = containers
+OBJD		= ./objs/
+OBJF		= $(SRCF:$(SRCD)%.c=$(OBJD)%.o)
+BUILD		= $(OBJF:$(OBJD)%.o)
 
-all: $(NAME)
+NAME		= ft_containers
+HEADD		= ./includes/
+HEADF		= vector.hpp
 
-$(NAME): $(SRC) 
-	$(CC) -g $(CFLAGS) $(SRC) -o $(NAME)
 
-debug: $(SRC)
-	$(CC) -g -o a.out $(SRC)
+$(OBJD)%.o: $(SRCD)%.c
+	@mkdir -p $(OBJD)
+	$(CC) $(CFLAGS) -c -o $@ $<
 
-bonus: all
+$(NAME):	${OBJF}
+			$(CC) $(CFLAGS) $(SRCF) -I$(HEADD) -o $(NAME)
+
+all:		${NAME}
 
 clean:
-	/bin/rm -f a.out
+	/bin/rm -f a.out ${OBJD}*.o
 	rm -rf $(NAME).dSYM
 
 fclean: clean
 	/bin/rm -f $(NAME)
 
 re: fclean all
+
+.PHONY:		all clean fclean re
