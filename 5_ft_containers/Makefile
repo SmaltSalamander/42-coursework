@@ -14,7 +14,7 @@ CC			= c++
 CFLAGS		= -Wall -Wextra -Werror
 SRCD		= ./srcs/
 
-SRC			=	main.cpp
+SRC			=	main.cpp vector.tpp
 SRCF		= $(addprefix $(SRCD),$(SRC))
 
 OBJD		= ./objs/

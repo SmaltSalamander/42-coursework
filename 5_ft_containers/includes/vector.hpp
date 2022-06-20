@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 10:01:13 by sbienias          #+#    #+#             */
-/*   Updated: 2022/06/17 09:30:29 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/06/20 18:45:27 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,19 @@ private:
 	size_type		_size;
 	allocator_type	_alloc;
 public:
-	vector()
-	{
-		_ptr = NULL;
-		_size = 0;
-		_alloc = Allocator;
-	}
+	vector();
+    explicit vector(const allocator_type&) : const_reference(allocator_type);
+    explicit vector (size_type n, const value_type& val = value_type(),
+                    const allocator_type& alloc = allocator_type());
+
+
+    template <class InputIterator>
+            vector (InputIterator first, InputIterator last,
+                    const allocator_type& alloc = allocator_type());
+
+    vector (const vector& x);
    // noexcept(std::is_nothrow_default_constructible<allocator_type>::value);
-    // explicit vector(const allocator_type&) : const_reference(allocator_type);
-    // explicit vector(size_type n);
+    explicit vector(size_type n);
     // vector(size_type n, const value_type& value, const allocator_type& = allocator_type());
     // template <class InputIterator>
     //     vector(InputIterator first, InputIterator last, const allocator_type& = allocator_type());
