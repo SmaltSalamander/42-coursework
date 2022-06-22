@@ -6,12 +6,13 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 10:01:13 by sbienias          #+#    #+#             */
-/*   Updated: 2022/06/20 18:44:13 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/06/21 11:59:41 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vector.hpp"
 
+// Constructors
 vector();
 {
     _ptr = NULL;
@@ -20,13 +21,32 @@ vector();
 }
 explicit vector(const allocator_type&) : const_reference(allocator_type);
    // noexcept(std::is_nothrow_default_constructible<allocator_type>::value);
+
 explicit vector(size_type n)
 {
     _size = n;
     _alloc = Allocator;
     _ptr = _alloc.allocate(T * n);
 }
+template <class InputIterator>
+vector (InputIterator first, InputIterator last, const allocator_type& alloc = allocator_type())
+{
+	_alloc = alloc;
+	_ptr = _alloc.allocate(T * std::distance(first, last));
+	iterator iter = _ptr.begin();
+	while (first != last)
+	{
+		iter = *first;
+		++iter;		
+		++first;
+	}
+}
 
+~vector()
+{
+	if (_ptr)
+		_alloc.deallocate(_ptr, _size);
+}
     // vector(size_type n, const value_type& value, const allocator_type& = allocator_type());
     // template <class InputIterator>
     //     vector(InputIterator first, InputIterator last, const allocator_type& = allocator_type());

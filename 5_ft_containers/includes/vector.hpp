@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 10:01:13 by sbienias          #+#    #+#             */
-/*   Updated: 2022/06/20 18:45:27 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/06/21 12:37:04 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,7 @@ public:
     //     noexcept(std::is_nothrow_move_constructible<allocator_type>::value);
     // vector(initializer_list<value_type> il);
     // vector(initializer_list<value_type> il, const allocator_type& a);
-    ~vector()
-	{
-		if (_ptr)
-			_alloc.deallocate(_ptr, _size);
-	}
+
     vector& operator=(const vector& x)
 	{
 		
@@ -91,7 +87,7 @@ public:
     // const_reverse_iterator rbegin()  const noexcept;
     // reverse_iterator       rend() noexcept;
     // const_reverse_iterator rend()    const noexcept;
-
+ 
     // const_iterator         cbegin()  const noexcept;
     // const_iterator         cend()    const noexcept;
     // const_reverse_iterator crbegin() const noexcept;
