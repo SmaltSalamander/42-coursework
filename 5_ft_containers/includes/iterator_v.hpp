@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 11:09:05 by sbienias          #+#    #+#             */
-/*   Updated: 2022/06/22 11:22:26 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/06/23 13:32:27 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,19 @@ class iterator
 private:
 	T		*_adr;
 public:
+    // typedef typename allocator_type::reference       reference;
+    // typedef typename allocator_type::const_reference const_reference;
+
+	// typedef typename allocator_type::pointer        pointer;
+    // typedef typename allocator_type::const_pointer  const_pointer;
+
 	iterator()
 	{
-		this->_adr = &T;
+		this->_adr = NULL;
+	}
+	iterator(T *ptr)
+	{
+		this->_adr = ptr;
 	}
 	~iterator()
 	{
@@ -57,6 +67,10 @@ public:
 		// if (this->_size <= n)
 		// 	throw std::exception();
 		return (this->_adr[n]);
+	}
+	T const &operator*() const
+	{
+		return (*(this->_adr));
 	}
 	//Comparison operators
     bool  operator>(const iterator &rhs) const

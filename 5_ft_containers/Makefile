@@ -14,7 +14,7 @@ CC			= c++
 CFLAGS		= -Wall -Wextra -Werror
 SRCD		= ./srcs/
 
-SRC			=	main.cpp vector.tpp
+SRC			=	main.cpp
 SRCF		= $(addprefix $(SRCD),$(SRC))
 
 OBJD		= ./objs/
@@ -23,14 +23,14 @@ BUILD		= $(OBJF:$(OBJD)%.o)
 
 NAME		= ft_containers
 HEADD		= ./includes/
-HEADF		= vector.hpp
+HEADF		= vector.hpp iterator_v.hpp vector.tpp
 
 
 $(OBJD)%.o: $(SRCD)%.c
 	@mkdir -p $(OBJD)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-$(NAME):	${OBJF}
+$(NAME):	${OBJF} $(addprefix $(HEADD),$(HEADF))
 			$(CC) $(CFLAGS) $(SRCF) -I$(HEADD) -o $(NAME)
 
 all:		${NAME}
