@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 10:01:13 by sbienias          #+#    #+#             */
-/*   Updated: 2022/06/23 13:30:29 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/06/27 11:55:26 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,26 @@ iterator<T>	vector<T, Allocator>::begin()
 }
 
 template <typename T, class Allocator>
+iterator<T>	vector<T, Allocator>:: end() noexcept
+{
+	iterator res(this->_ptr);
+
+	return (res + _size);
+}
+
+template <typename T, class Allocator>
 void vector<T, Allocator>::push_back(const value_type& x)
 {
-	this->_ptr[0] = x; 
+
 }
 
 template <typename T, class Allocator>
 void vector<T, Allocator>::push_back(value_type&& x)
 {
-	this->_ptr[0] = x; 
+	this->_ptr[_size] = x;
+	vector<T, Allocator>	res(_size + 1);
+	res = *this;
+	this = &res;
 }
 
 // explicit vector(const allocator_type&) : const_reference(allocator_type);

@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/08 10:01:13 by sbienias          #+#    #+#             */
-/*   Updated: 2022/06/23 13:30:12 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/06/27 12:03:46 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,11 @@ public:
     typedef typename allocator_type::difference_type difference_type;
     typedef typename allocator_type::size_type       size_type;
 private:
-	pointer			_ptr;
+	pointer			_start;
 	size_type		_size;
 	allocator_type	_alloc;
-	value_type		_val;
+	pointer			_end;
+	
 public:
 	vector();
     explicit vector(const allocator_type& allocator_type) : const_reference(allocator_type)
@@ -53,8 +54,15 @@ public:
 	{
 		_val = val;
 		_alloc = alloc;
-		this->_ptr = _alloc.allocate(n);
-		this->_size = n;
+		this->_start = _alloc.allocate(n);
+		this->_end = this->_start;
+		while (n)
+		{
+			*this->_end = val;
+			++this->_end;
+			n--;
+		}
+		this->_size = this->_end - this->_size;
 	}
 
 
@@ -90,7 +98,7 @@ public:
 
     iterator               begin();
     // const_iterator         begin()   const noexcept;
-    // iterator               end() noexcept;
+    iterator               end() noexcept;
     // const_iterator         end()     const noexcept;
 
     // reverse_iterator       rbegin() noexcept;

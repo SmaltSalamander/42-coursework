@@ -11,7 +11,7 @@
 # **************************************************************************** #
 
 CC			= c++
-CFLAGS		= -Wall -Wextra -Werror
+CFLAGS		= -Wall -Wextra -Werror -g
 SRCD		= ./srcs/
 
 SRC			=	main.cpp
