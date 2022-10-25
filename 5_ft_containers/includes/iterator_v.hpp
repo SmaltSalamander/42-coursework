@@ -5,151 +5,295 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/22 11:09:05 by sbienias          #+#    #+#             */
-/*   Updated: 2022/06/23 13:32:27 by sbienias         ###   ########.fr       */
+/*   Created: 2022/09/05 15:29:20 by sbienias          #+#    #+#             */
+/*   Updated: 2022/10/25 10:46:52 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ITERATOR_V_HPP
-# define ITERATOR_V_HPP
+
+#ifndef ITERATOR_VEC_HPP
+# define ITERATOR_VEC_HPP
 #include <iostream>
 #include <cstdlib>
+#include "iterator.hpp"
+#include "rev_iterator.hpp"
 
 namespace ft
 {
-// template <class Category,              // iterator::iterator_category
-// 		class T,                     // iterator::value_type
-// 		class Distance = ptrdiff_t,  // iterator::difference_type
-// 		class Pointer = T*,          // iterator::pointer
-// 		class Reference = T&         // iterator::reference
-// 		>
-template <class T>
-class iterator
+template <class T, bool is_const>
+class vec_iterator : public iterator<ft::random_access_iterator_tag, T>
 {
-private:
-	T		*_adr;
 public:
-    // typedef typename allocator_type::reference       reference;
-    // typedef typename allocator_type::const_reference const_reference;
+	typedef typename ft::iterator_traits<vec_iterator>::difference_type			difference_type;
+	typedef typename ft::choose<is_const, const T, T>::type						value_type;
+	typedef typename ft::choose<is_const, const T *, T *>::type		   			pointer;
+	typedef typename ft::choose<is_const, const T &, T &>::type		 			reference;
+	typedef typename ft::iterator_traits<vec_iterator>::iterator_category		iterator_category;
 
-	// typedef typename allocator_type::pointer        pointer;
-    // typedef typename allocator_type::const_pointer  const_pointer;
+private:
+	pointer		_adr;
+public:
 
-	iterator()
+	vec_iterator()
 	{
 		this->_adr = NULL;
 	}
-	iterator(T *ptr)
+	vec_iterator(const pointer ptr)
 	{
 		this->_adr = ptr;
 	}
-	~iterator()
+	~vec_iterator()
 	{
-		
 	}
-	iterator(const iterator& x)
+	vec_iterator(const vec_iterator &x)
 	{
 		*this = x;
 	}
-	iterator &operator=(iterator const &right)
+
+	template <bool boole>
+	vec_iterator(const vec_iterator<T, boole> &x)
+	{
+		this->_adr = x.base();
+	}
+	
+	vec_iterator &operator=(const reference right)
 	{
 		this->_adr = right._adr;
 		return (*this);
 	}
-	T &operator[](unsigned int n)
+	
+	template <bool boole>
+	vec_iterator &operator=(const typename vec_iterator<T, boole>::reference right)
 	{
-		// if (this->_size <= n)
-		// 	throw std::exception();
+		this->_adr = right._adr;
+		return (*this);
+	}
+	
+	T &operator[](int n)
+	{
 		return (this->_adr[n]);
 	}
-	T const &operator[](unsigned int n) const
+	T const &operator[](int n) const
 	{
-		// if (this->_size <= n)
-		// 	throw std::exception();
 		return (this->_adr[n]);
 	}
-	T const &operator*() const
+	pointer operator->()
+	{
+		return (this->_adr);
+	}
+	value_type &operator*()
 	{
 		return (*(this->_adr));
 	}
+
 	//Comparison operators
-    bool  operator>(const iterator &rhs) const
+	template <bool boole>
+	bool  operator>(const typename vec_iterator<T, boole>::reference &rhs) const
 	{
 		if (this->_adr > rhs._adr)
 			return (true);
 		return (false);
 	}
-    bool  operator<(const iterator &rhs) const
+	
+	template <bool boole>
+	bool  operator<(const typename vec_iterator<T, boole>::reference &rhs) const
 	{
 		if (this->_adr < rhs._adr)
 			return (true);
 		return (false);
 	}
-    bool  operator>=(const iterator &rhs) const
+	
+	template <bool boole>
+	bool  operator>=(const typename vec_iterator<T, boole>::reference &rhs) const
 	{
 		if (this->_adr >= rhs._adr)
 			return (true);
 		return (false);
 	}
-    bool  operator<=(const iterator &rhs) const
+	
+	template <bool boole>
+	bool  operator<=(const typename vec_iterator<T, boole>::reference &rhs) const
 	{
 		if (this->_adr <= rhs._adr)
 			return (true);
 		return (false);
 	}
-    bool  operator==(const iterator &rhs) const
+
+	template <bool boole>
+	bool  operator==(const typename vec_iterator<T, boole>::reference &rhs) const
 	{
 		if (this->_adr == rhs._adr)
 			return (true);
 		return (false);
 	}
-    bool  operator!=(const iterator &rhs) const
+
+	template <bool boole>
+	bool  operator!=(const vec_iterator<T, boole> &rhs) const
+	{
+		if (this->_adr != rhs.base())
+			return (true);
+		return (false);
+	}
+
+	bool  operator>(const vec_iterator &rhs) const
+	{
+		if (this->_adr > rhs._adr)
+			return (true);
+		return (false);
+	}
+
+	bool  operator<(const vec_iterator &rhs) const
+	{
+		if (this->_adr < rhs._adr)
+			return (true);
+		return (false);
+	}
+	bool  operator>=(const vec_iterator &rhs) const
+	{
+		if (this->_adr >= rhs._adr)
+			return (true);
+		return (false);
+	}
+	bool  operator<=(const vec_iterator &rhs) const
+	{
+		if (this->_adr <= rhs._adr)
+			return (true);
+		return (false);
+	}
+	bool  operator==(const vec_iterator &rhs) const
+	{
+		if (this->_adr == rhs._adr)
+			return (true);
+		return (false);
+	}
+	bool  operator!=(const vec_iterator &rhs) const
 	{
 		if (this->_adr != rhs._adr)
 			return (true);
 		return (false);
 	}
 
-    //Arithmetic operators
-    iterator operator+(const iterator &rhs) const
-	{
-		return (this->_adr + rhs._adr);
-	}
-    iterator operator-(const iterator &rhs) const
+	//Arithmetic operators
+	difference_type operator-(const vec_iterator &rhs) const
 	{
 		return (this->_adr - rhs._adr);
 	}
-	iterator operator+(const int val) const
+	vec_iterator operator+(difference_type val) const
 	{
-		return (this->_adr + (val * sizeof(*_adr)));
+		return (this->_adr + (val));
 	}
-    iterator operator-(const int val) const
+	vec_iterator operator-(difference_type val) const
 	{
-		return (this->_adr - (val * sizeof(*_adr)));
+		return (this->_adr - (val));
 	}
-    //Incrementation/Decrementation operators
-    iterator operator++(int)
+	vec_iterator operator+=(const int val)
 	{
-		iterator temp(*this);
+		this->_adr = this->_adr + (val);
+		return (this->_adr);
+	}
+	vec_iterator operator-=(const int val)
+	{
+		this->_adr = this->_adr - (val);
+		return (this->_adr);
+	}
+	//Incrementation/Decrementation operators
+	vec_iterator operator++(int)
+	{
+		vec_iterator temp(*this);
 		operator++();
 		return (temp);
 	}
-    iterator operator--(int)
+	vec_iterator operator--(int)
 	{
-		iterator temp(*this);
+		vec_iterator temp(*this);
 		operator--();
 		return (temp);
 	}
-    iterator &operator++(void)
+	vec_iterator &operator++(void)
 	{
 		this->_adr += 1;
 		return (*this);
 	}
-    iterator &operator--(void)
+	vec_iterator &operator--(void)
 	{
 		this->_adr -= 1;
 		return (*this);
 	}
+
+// protected:
+	pointer base() const
+	{
+		return (this->_adr);
+	}
 };
+
+
+
+// template <class T, bool is_const>
+// vec_iterator operator+(difference_type val) const
+// {
+// 	return (this->_adr + (val));
+// }
+// Non-member overloads
+template <typename T, bool is_const>
+typename vec_iterator<T, is_const>::pointer
+operator-(typename vec_iterator<T, is_const>::difference_type left, typename vec_iterator<T, is_const>::reference right)
+{
+	return (right.base() - (left));
+}
+
+template <typename T, bool is_const>
+vec_iterator<T, is_const> operator+(typename vec_iterator<T, is_const>::difference_type left, vec_iterator<T, is_const> &right)
+{
+	return (right.base() + (left));
+}
+
+template <typename T, bool is_const, bool is_const2>
+bool  operator==(const vec_iterator<T, is_const> &lhs, const vec_iterator<T, is_const2> &rhs)
+{
+	if (lhs.base() == rhs.base())
+		return (true);
+	return (false);
+}
+
+template <typename T, bool is_const, bool is_const2>
+bool  operator!=(const vec_iterator<T, is_const> &lhs, const vec_iterator<T, is_const2> &rhs)
+{
+	if (lhs.base() != rhs.base())
+		return (true);
+	return (false);
+}
+
+template <typename T, bool is_const, bool is_const2>
+bool  operator>(const vec_iterator<T, is_const> &lhs, const vec_iterator<T, is_const2> &rhs)
+{
+	if (lhs.base() > rhs.base())
+		return (true);
+	return (false);
+}
+
+template <typename T, bool is_const, bool is_const2>
+bool  operator<(const vec_iterator<T, is_const> &lhs, const vec_iterator<T, is_const2> &rhs)
+{
+	if (lhs.base() < rhs.base())
+		return (true);
+	return (false);
+}
+
+template <typename T, bool is_const, bool is_const2>
+bool  operator>=(const vec_iterator<T, is_const> &lhs, const vec_iterator<T, is_const2> &rhs)
+{
+	if (lhs.base() >= rhs.base())
+		return (true);
+	return (false);
+}
+
+template <typename T, bool is_const, bool is_const2>
+bool  operator<=(const vec_iterator<T, is_const> &lhs, const vec_iterator<T, is_const2> &rhs)
+{
+	if (lhs.base() <= rhs.base())
+		return (true);
+	return (false);
+}
 }
 #endif

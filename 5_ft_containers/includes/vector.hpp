@@ -5,16 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/08 10:01:13 by sbienias          #+#    #+#             */
-/*   Updated: 2022/06/27 12:03:46 by sbienias         ###   ########.fr       */
+/*   Created: 2022/09/05 15:30:01 by sbienias          #+#    #+#             */
+/*   Updated: 2022/10/24 16:32:48 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef vector_HPP
-# define vector_HPP
+#ifndef VECTOR_HPP
+# define VECTOR_HPP
 #include <iostream>
 #include <cstdlib>
 #include "iterator_v.hpp"
+#include "features.hpp"
+#include <typeinfo> // typeid for iter cat identification
 
 namespace ft
 {
@@ -22,140 +24,131 @@ template <typename T, class Allocator = std::allocator<T> >
 class vector
 {
 public:
-    typedef T                                        value_type;
-    typedef Allocator                                allocator_type;
-    typedef typename allocator_type::reference       reference;
-    typedef typename allocator_type::const_reference const_reference;
+	typedef T										value_type;
+	typedef Allocator								allocator_type;
+	typedef typename allocator_type::reference	   	reference;
+	typedef typename allocator_type::const_reference const_reference;
 
-	typedef typename allocator_type::pointer        pointer;
-    typedef typename allocator_type::const_pointer  const_pointer;
+	typedef typename allocator_type::pointer		pointer;
+	typedef typename allocator_type::const_pointer  const_pointer;
 
-    typedef ft::iterator<T>                   		iterator;
-    // typedef ft::iterator<>                   		const_iterator;
-	// typedef ft::reverse_iterator<iterator>          reverse_iterator;
-    // typedef ft::reverse_iterator<const_iterator>    const_reverse_iterator;
+	typedef vec_iterator<T, false>						iterator;
+	typedef vec_iterator<T, true>						const_iterator;
+	typedef ft::reverse_iterator<iterator>				reverse_iterator;
+	typedef ft::reverse_iterator<const_iterator>		const_reverse_iterator;
 
-    typedef typename allocator_type::difference_type difference_type;
-    typedef typename allocator_type::size_type       size_type;
+	typedef typename allocator_type::difference_type difference_type;
+	typedef typename allocator_type::size_type	   size_type;
 private:
 	pointer			_start;
 	size_type		_size;
+	size_type		_capacity;
 	allocator_type	_alloc;
 	pointer			_end;
+	value_type	  	_val;   
 	
 public:
+//CONSTRUCTORS
+	// vector(const allocator_type& alloc);
 	vector();
-    explicit vector(const allocator_type& allocator_type) : const_reference(allocator_type)
-	{
-		 
-	}
-    explicit vector (size_type n, const value_type& val = value_type(),
-                    const allocator_type& alloc = allocator_type())
-	{
-		_val = val;
-		_alloc = alloc;
-		this->_start = _alloc.allocate(n);
-		this->_end = this->_start;
-		while (n)
-		{
-			*this->_end = val;
-			++this->_end;
-			n--;
-		}
-		this->_size = this->_end - this->_size;
-	}
+	explicit vector(const allocator_type& allocator_type);
 
+	explicit vector (size_type n, const value_type& val = value_type(),
+			const allocator_type& alloc = allocator_type());
 
-    template <class InputIterator>
-            vector (InputIterator first, InputIterator last,
-                    const allocator_type& alloc = allocator_type());
+	template <class InputIterator>
+			vector (InputIterator first, InputIterator last,
+					const allocator_type& alloc = allocator_type(),
+					typename ft::enable_if<!ft::is_integral<InputIterator>::value>::type* = 0);
 
-    vector (const vector& x);
-   // noexcept(std::is_nothrow_default_constructible<allocator_type>::value);
-    // vector(size_type n, const value_type& value, const allocator_type& = allocator_type());
-    // template <class InputIterator>
-    //     vector(InputIterator first, InputIterator last, const allocator_type& = allocator_type());
-    // vector(const vector& x);
-    // vector(vector&& x)
-    //     noexcept(std::is_nothrow_move_constructible<allocator_type>::value);
-    // vector(initializer_list<value_type> il);
-    // vector(initializer_list<value_type> il, const allocator_type& a);
+	vector (const vector& x);
 
-    // vector& operator=(const vector& x)
-	// {
-		
-	// }
-    // vector& operator=(vector&& x)
-    //     noexcept(
-    //          allocator_type::propagate_on_container_move_assignment::value);
-    // vector& operator=(initializer_list<value_type> il);
-    // template <class InputIterator>
-    //     void assign(InputIterator first, InputIterator last);
-    // void assign(size_type n, const value_type& u);
-    // void assign(initializer_list<value_type> il);
+//DESTRUCTOR
 
-    // allocator_type get_allocator() const noexcept;
+	~vector(void);
 
-    iterator               begin();
-    // const_iterator         begin()   const noexcept;
-    iterator               end() noexcept;
-    // const_iterator         end()     const noexcept;
+//ASSIGNMENT OPERATOR
 
-    // reverse_iterator       rbegin() noexcept;
-    // const_reverse_iterator rbegin()  const noexcept;
-    // reverse_iterator       rend() noexcept;
-    // const_reverse_iterator rend()    const noexcept;
- 
-    // const_iterator         cbegin()  const noexcept;
-    // const_iterator         cend()    const noexcept;
-    // const_reverse_iterator crbegin() const noexcept;
-    // const_reverse_iterator crend()   const noexcept;
+	vector& operator=(const vector& x);
 
-    // size_type size() const noexcept;
-    // size_type max_size() const noexcept;
-    // size_type capacity() const noexcept;
-    // bool empty() const noexcept;
-    // void reserve(size_type n);
-    // void shrink_to_fit() noexcept;
+//ITERATORS
+	iterator begin();
+	const_iterator begin() const;
+	reverse_iterator rbegin();
+	const_reverse_iterator rbegin() const;
+	iterator end();
+	const_iterator end() const;
+	reverse_iterator rend();
+	const_reverse_iterator rend() const;
 
-    // reference       operator[](size_type n);
-    // const_reference operator[](size_type n) const;
-    // reference       at(size_type n);
-    // const_reference at(size_type n) const;
+//CAPACITY
+	size_type size() const;
+	size_type max_size() const;
+	size_type capacity() const;
+	bool empty() const;
+	void reserve (size_type n);
+	void resize (size_type n, value_type val = value_type());
 
-    // reference       front();
-    // const_reference front() const;
-    // reference       back();
-    // const_reference back() const;
+//ELEMENT ACCESS
+	reference operator[] (size_type n);
+	const_reference operator[] (size_type n) const;
+	reference at (size_type n);
+	const_reference at (size_type n) const;
+	reference front();
+	const_reference front() const;
+	reference back();
+	const_reference back() const;
 
-    // value_type*       data() noexcept;
-    // const value_type* data() const noexcept;
+//MODIFIERS
+template <class InputIterator>
+	void		assign (InputIterator first, InputIterator last, typename 
+	ft::enable_if<!ft::is_integral<InputIterator>::value >::type* = 0);
+	void		assign (size_type n, const value_type& val);
+	void		push_back(const value_type &x);
+	void		pop_back();
+	void		swap (vector& x);
+	iterator 	erase (iterator position);
+	iterator 	erase (iterator first, iterator last);
+	iterator	insert (iterator position, const value_type& val);
+	void		insert (iterator position, size_type n, const value_type& val);
+template <class InputIterator>
+	void		insert (iterator position, InputIterator first, InputIterator last, 
+				typename ft::enable_if<!ft::is_integral<InputIterator>::value >::type* = 0);
+	void		clear();
 
-    void push_back(const value_type& x);
-    void push_back(value_type&& x);
-    // void pop_back();
+	// HELPER FUNCTIONS
+	private:
+		void reserve (size_type n, bool flag);
+		void resize (size_type n, bool flag);
+		void internal_resize (size_type n, value_type val = value_type());
+	template <class InputIterator>
+		void resize(size_type n, InputIterator first, InputIterator last);
 
-    // template <class... Args> iterator emplace(const_iterator position, Args&&... args);
-    // iterator insert(const_iterator position, const value_type& x);
-    // iterator insert(const_iterator position, value_type&& x);
-    // iterator insert(const_iterator position, size_type n, const value_type& x);
-    // template <class InputIterator>
-    //     iterator insert(const_iterator position, InputIterator first, InputIterator last);
-    // iterator insert(const_iterator position, initializer_list<value_type> il);
-
-    // iterator erase(const_iterator position);
-    // iterator erase(const_iterator first, const_iterator last);
-
-    // void clear() noexcept;
-
-    // void resize(size_type sz);
-    // void resize(size_type sz, const value_type& c);
-
-    // void swap(vector&)
-    //     noexcept(allocator_traits<allocator_type>::propagate_on_container_swap::value;
-
-    // bool __invariants() const;
 };
+
+	template<class T, class Alloc>
+	bool operator==( const ft::vector<T,Alloc>& lhs, const ft::vector<T,Alloc>& rhs);
+
+	template<class T, class Alloc>
+	bool operator!=( const ft::vector<T,Alloc>& lhs, const ft::vector<T,Alloc>& rhs);
+
+	template<class T, class Alloc>
+	bool operator<( const ft::vector<T,Alloc>& lhs, const ft::vector<T,Alloc>& rhs);
+
+	template<class T, class Alloc>
+	bool operator<=( const ft::vector<T,Alloc>& lhs, const ft::vector<T,Alloc>& rhs);
+
+	template<class T, class Alloc>
+	bool operator>( const ft::vector<T,Alloc>& lhs, const ft::vector<T,Alloc>& rhs);
+
+	template<class T, class Alloc>
+	bool operator>=( const ft::vector<T,Alloc>& lhs, const ft::vector<T,Alloc>& rhs);
+
+	template <class T, class Alloc> void swap (ft::vector<T, Alloc>& lhs, ft::vector<T, Alloc>& rhs)
+	{
+		lhs.swap(rhs);
+	}
 }
+
 #include "vector.tpp"
 #endif

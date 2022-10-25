@@ -27,10 +27,10 @@ LIBRARY = libmlx.a
 UNAME := $(shell uname)
 
 ifeq ($(UNAME), Linux)
-MINILIBXPATH = ./mlx
+MINILIBXPATH = ./mlxlinux
 
 %.o: %.c
-	$(CC) -Wall -Wextra -Werror -I/usr/include -Imlx -O3 -c $< -o $@
+	$(CC) -Wall -Wextra -Werror -I/usr/include -O3 -c $< -o $@
 
 $(NAME): $(SRC)
 	$(CC) $(SRC) $(LIBRARY) -g $(CFLAGS) -L/usr/include/X11/extensions -lX11 -lXext -L $(LIBFTPATH) -lft -o $(NAME)
