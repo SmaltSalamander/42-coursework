@@ -1,0 +1,3 @@
+[submodule "2_so_long/mlxlinux"]
+	path = 2_so_long/mlxlinux
+	url = https://github.com/42Paris/minilibx-linux.git
