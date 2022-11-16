@@ -1,12 +1,9 @@
 FROM debian:buster-slim
 RUN apt-get update && apt-get upgrade -y
-RUN apt-get install -y valgrind g++ make
+RUN apt-get install -y gcc cmake libsfml-dev g++ git libxmu-dev xorg-dev
 #FROM alpine:3.15.3
 # RUN apk update && apk add valgrind
 # RUN apk add g++ && apk add make
 # CMD ["cd /valgrind"]
-#Build with:
-# docker build -t valgrind .
 #Run it with:
 #docker run -tiv $(pwd):/valgrind valgrind
-#cd to ./valgrind to see your files

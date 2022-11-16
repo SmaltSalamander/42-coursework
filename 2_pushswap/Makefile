@@ -48,3 +48,7 @@ fclean: clean
 	/bin/rm -f $(NAME) $(BSNAME)
 
 re: fclean all
+
+docker:
+	cd .. && git submodule update --init --recursive --depth 1
+	cd dockerized_visalizer && docker build -t visalizer .

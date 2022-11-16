@@ -1,3 +1,6 @@
 [submodule "2_so_long/mlxlinux"]
 	path = 2_so_long/mlxlinux
 	url = https://github.com/42Paris/minilibx-linux.git
+[submodule "2_pushswap/dockerized_visualizer/push_swap_visualizer"]
+	path = 2_pushswap/dockerized_visualizer/push_swap_visualizer
+	url = https://github.com/o-reo/push_swap_visualizer
