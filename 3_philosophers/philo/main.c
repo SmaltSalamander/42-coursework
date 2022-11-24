@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/21 12:01:45 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/10 13:51:58 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/11/19 16:03:46 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,12 +70,12 @@ void	cleanup_memory(t_philo *phils, int counter)
 void	monitor_phils(t_philo *phils, char **argv)
 {
 	int	number;
-	int	status;
+	// int	status;
 
-	status = 0;
+	// status = 0;
 	number = ft_atoi(argv[1]);
-	while (!status)
-		status = check_for_death(phils, number);
+	// while (!status)
+	// 	status = check_for_death(phils, number);
 	while (number--)
 	{
 		pthread_join(phils[number].id, NULL);

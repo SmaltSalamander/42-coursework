@@ -6,7 +6,7 @@
 /*   By: sbienias <sbienias@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/02 15:35:43 by sbienias          #+#    #+#             */
-/*   Updated: 2022/03/10 14:00:30 by sbienias         ###   ########.fr       */
+/*   Updated: 2022/11/19 16:01:16 by sbienias         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	*active_phils(void *arg)
 		try_eating(phil, &state);
 		sleep_time(phil, &state);
 	}
-	pthread_exit(NULL);
 	return (NULL);
 }
 

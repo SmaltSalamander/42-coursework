@@ -50,5 +50,6 @@ fclean: clean
 re: fclean all
 
 docker:
-	cd .. && git submodule update --init --recursive --depth 1
-	cd dockerized_visalizer && docker build -t visalizer .
+	git -C .. submodule update --init --recursive --depth 1
+	docker build -t visualizer ./dockerized_visualizer
+	docker run -tiv $$(pwd):/push_swap visualizer
