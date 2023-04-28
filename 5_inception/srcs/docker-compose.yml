@@ -1,38 +1,56 @@
 services:
   nginx:
+    depends_on:
+      - wordpress
     build: ./requirements/nginx
     container_name: nginx
     restart: unless-stopped
     networks: 
-      - docker-network
+      - net-docker
     volumes:
-      - wordprs:/data/wordpress:rw
+      - /home/sbienias/data/v-wordprs:/var/www/html
     ports: 
-      - "443:443"
+      - 443:443
+    links:
+      - wordpress
   mariadb:
     build: ./requirements/mariadb
     container_name: mariadb
     restart: unless-stopped
     networks:
-      - docker-network
+      - net-docker
     volumes:
-      - db:/data/db:rw
+      -  /home/sbienias/data/v-db:/var/lib/mysql:rw
+    env_file:
+      - .env
   wordpress:
     build: ./requirements/wordpress
     container_name: wordpress
-    ports:
-      - "8000:80"
     restart: unless-stopped
     depends_on: 
       - mariadb
-    networks: 
-      - docker-network
+    networks:
+      - net-docker
     volumes:
-      - wordprs:/data/wordpress:rw
+      -  /home/sbienias/data/v-wordprs:/var/www/html
+    env_file:
+      - .env
 networks:
-  docker-network: {}
+  net-docker:
+    driver: bridge
+    name: Docker_network
 volumes:
-  db:
-    # external: true
-  wordprs:
-    # external: true
+  v-db:
+    name: v-db
+    driver: local
+    driver_opts:
+      type: auto
+      o: bind
+      device: /home/sbienias/data/v-db
+  v-wordprs:
+    name: v-wordprs
+    driver: local
+    driver_opts:
+      type: auto
+      o: bind
+      device: /home/sbienias/data/v-wordprs

@@ -38,6 +38,7 @@ int	ft_atoi(const char *nptr)
 		if (*(nptr + counter) == '-')
 		{
 			is_negative *= -1;
+			return (-1);
 		}
 		counter++;
 	}
