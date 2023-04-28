@@ -4,3 +4,12 @@
 [submodule "2_pushswap/dockerized_visualizer/push_swap_visualizer"]
 	path = 2_pushswap/dockerized_visualizer/push_swap_visualizer
 	url = https://github.com/o-reo/push_swap_visualizer
+[submodule "5_ft_irc"]
+	path = 5_ft_irc
+	url = https://github.com/mr-bammby/ft_irc.git
+[submodule "4_cub3d"]
+	path = 4_cub3d
+	url = https://github.com/Yuerino/cub3d.git
+[submodule "6_ft_transcendence"]
+	path = 6_ft_transcendence
+	url = https://github.com/Gundul42/ft_transcendence.git
